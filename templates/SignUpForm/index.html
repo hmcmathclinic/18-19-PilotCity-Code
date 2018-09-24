@@ -37,7 +37,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 	<!-- title -->
 	<h1>
-		<span>V</span>alidator
+		<span>P</span>ilot
+                <span>C</span>ity
 		<span>S</span>ignup
 		<span>F</span>orm
 	</h1>
@@ -67,6 +68,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<input type="password" class="form-control" id="exampleConfirmPassword1" name="name" placeholder="Confirm Password" required data-match="password"
 				    data-match-field="#exampleInputPassword1">
 			</div>
+			<div class="form-check">
+				<fieldset>
+        <label>Are you a </label><br>
+			  <input type="radio" name="user_check" id="radioStudent" value="option1">
+			  <label class="form-check-label" for="radioStudent">
+			  Student?
+			</label><br>
+			  <input type="radio" name="user_check" id="radioTeacher" value="option2">
+			  <label class="form-check-label" for="radioTeacher">
+			  Teacher?
+			</label><br>
+			  <input type="radio" name="user_check" id="radioEmployer" value="option3">
+			  <label class="form-check-label" for="radioEmployer">
+			  Employer?
+			</label><br>
+			</div>
+			</fieldset>
 			<div class="form-group">
 				<label class="checkbox-inline">
 					<input type="checkbox" value="true" required>I agree to the terms and conditions
@@ -79,7 +97,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 	<!-- copyright -->
 	<div class="footer">
-		<p>&copy; 2018 Validator Signup Form. All rights reserved | Design by
+		<p>&copy; 2018 Pilot City Signup Form. All rights reserved | Design by
 			<a href="http://w3layouts.com">W3layouts</a>
 		</p>
 	</div>
