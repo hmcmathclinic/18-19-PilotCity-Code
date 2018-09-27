@@ -219,7 +219,11 @@ img {
 /*end reset*/
 
 body {
-    background: url(../images/1.jpg) no-repeat;
+    background: #9053c7;
+    background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -244,7 +248,7 @@ h1 {
 }
 
 h1 span {
-    color: #0CBF86;
+    color: #470940;
 }
 
 /*-- //title --*/
@@ -276,7 +280,7 @@ h1 span {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border-right: 6px solid #0cbf86;
+    border-right: 6px solid #470940;
     border-radius: 30px;
     box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.27);
 }
@@ -323,7 +327,7 @@ h1 span {
 
 .sub-main-w3 button {
     color: #fff;
-    background: #0CBF86;
+    background: #470940;
     border: none;
     padding: 13px 0;
     margin-top: 30px;
@@ -397,7 +401,7 @@ h1 span {
 }
 
 .footer p a:hover {
-    color: #0CBF86;
+    color: #470940;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -moz-transition: 0.5s all;
