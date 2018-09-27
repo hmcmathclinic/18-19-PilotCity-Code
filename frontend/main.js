@@ -17,7 +17,7 @@ $(function(){
   // deploying the application to a live production environment, change to
   // https://backend-dot-<PROJECT_ID>.appspot.com as specified in the
   // backend's app.yaml file.
-  var backendHostUrl = 'http://silver-osprey-217701.appspot.com';
+  var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
   // var backendHostUrl = 'http://localhost:8081';
 
   // [START gae_python_firenotes_config]
