@@ -1,2 +1,5 @@
 .DS_Store
 /backend/myenv
+lib
+py2
+*.pyc
