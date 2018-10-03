@@ -7,6 +7,10 @@ handlers:
 - url: /.*
   script: main.app
 
+libraries:
+- name: ssl
+  version: latest
+
 env_variables:
   # Replace with your Firebase project ID.
   FIREBASE_PROJECT_ID: 'users-94e00'
