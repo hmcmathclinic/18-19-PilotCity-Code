@@ -126,7 +126,7 @@ $(function(){
     });
   });
 
-  // Save a teacher/employer/student response to the backend
+  // Save a note to the backend
   var saveNoteBtn = $('#add-note');
   saveNoteBtn.click(function(event) {
     event.preventDefault();

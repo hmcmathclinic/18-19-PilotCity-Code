@@ -1,8 +1,6 @@
 <!doctype html>
 <!--
-Copyright 2016 Google Inc. All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
+Madison Hobbs
 -->
 <html>
 <head>
@@ -19,36 +17,18 @@ Licensed under the Apache License, Version 2.0 (the "License");
 <body>
   <div id="logged-out">
     <h1>Firenotes</h1>
-    <h3>Sign in/up with one of the </h3>
+    <h3>Sign in to access your notebook</h3>
     <div id="firebaseui-auth-container"></div>
   </div>
 
-  <center>
   <div id="logged-in">
     <h1>Welcome, <span id="user"></span>!</h1>
-  <div class="form-check">
-			<fieldset id="note-content">
-        <label>Are you a </label><br>
-			  <input type="radio" name="user_check" id="radioStudent" value="option1">
-			  <label class="form-check-label" for="radioStudent">
-      Student?
-			</label><br>
-			  <input type="radio" name="user_check" id="radioTeacher" value="option2">
-			  <label class="form-check-label" for="radioTeacher">
-			  Teacher?
-			</label><br>
-			  <input type="radio" name="user_check" id="radioEmployer" value="option3">
-			  <label class="form-check-label" for="radioEmployer">
-			  Employer?
-			</label><br>
-			</div>
-			</fieldset>
-			<div class="form-group">
-  </div>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfyoVeJDgMLi1_UTXj7dr_HE584GcyH6k_pMsA3_WIzWsIV-g/viewform?embedded=true" width="640" height="2052" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    <h3>Please fill out the form below</h3>
   <div id="form">
     <form action="" method="post">
       <div class="form-group">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfyoVeJDgMLi1_UTXj7dr_HE584GcyH6k_pMsA3_WIzWsIV-g/viewform?embedded=true" width="640" height="2052" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+        <!--textarea id="note-content"></textarea-->
       </div>
       <div class="form-group">
         <button id="add-note">Save form</button>
@@ -56,7 +36,6 @@ Licensed under the Apache License, Version 2.0 (the "License");
       </div>
     </form>
   </div>
-</center>
 
   <div id="notes-container"></div>
   </div>
