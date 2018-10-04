@@ -4,6 +4,8 @@
 	<title>Login V1</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -79,8 +81,20 @@
 		</div>
 	</div>
 
-
-
+	<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyDQGvlRwYOUX_RJ3TmwufHTiQz_rEQ7_u4",
+		authDomain: "sample-658d1.firebaseapp.com",
+		databaseURL: "https://sample-658d1.firebaseio.com",
+		projectId: "sample-658d1",
+		storageBucket: "",
+		messagingSenderId: "983263352470"
+	};
+	firebase.initializeApp(config);
+	</script>
+	
 
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
