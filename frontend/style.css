@@ -231,8 +231,12 @@ body {
     -ms-background-size: cover;
     background-position: center;
     font-size: 100%;
-    font-family: 'Cuprum', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     min-height: 100vh;
+}
+
+p {
+    font-family: "Ubuntu";
 }
 
 /*-- title --*/
