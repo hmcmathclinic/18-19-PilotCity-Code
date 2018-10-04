@@ -131,6 +131,12 @@ $(function(){
   saveNoteBtn.click(function(event) {
     event.preventDefault();
 
+    if(document.getElementById('gender_Male').checked) {  
+      //Male radio button is checked
+    }else if(document.getElementById('gender_Female').checked) {  
+      //Female radio button is checked 
+    }
+
     var noteField = $('#note-content');
     var note = noteField.val();
     noteField.val("");
