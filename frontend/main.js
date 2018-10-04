@@ -17,8 +17,8 @@ $(function(){
   // deploying the application to a live production environment, change to
   // https://backend-dot-<PROJECT_ID>.appspot.com as specified in the
   // backend's app.yaml file.
-  var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
-  // var backendHostUrl = 'http://localhost:8081';
+  //var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
+  var backendHostUrl = 'http://localhost:8081';
 
   // [START gae_python_firenotes_config]
   // Obtain the following from the "Add Firebase to your web app" dialogue
@@ -37,6 +37,7 @@ $(function(){
   var userIdToken = null;
 
   // Firebase log-in
+  
   function configureFirebaseLogin() {
 
     firebase.initializeApp(config);
@@ -127,22 +128,43 @@ $(function(){
   });
 
   // Save a teacher/employer/student response to the backend
-  var saveNoteBtn = $('#add-note');
-  saveNoteBtn.click(function(event) {
+  /*
+  isTeacher = false
+  isEmployer = false
+  isStudent = false
+
+
+  if ($('#radioTeacher').checked()) {
+    isTeacher = true
+  }
+  if ($('#radioEmployer').checked()) {
+    isEmployer = true
+  }
+  if ($('#radioStudent').checked()) {
+    isStudent = true
+  }*/
+
+  
+  $('#save-res').click(function(event) {
     event.preventDefault();
 
-    if(document.getElementById('gender_Male').checked) {  
-      //Male radio button is checked
-    }else if(document.getElementById('gender_Female').checked) {  
-      //Female radio button is checked 
+    if ($('#radioEmployer').prop('checked')) {
+      window.location = 'googleform.html';
     }
 
+    else if ($('#radioTeacher').prop('checked')) {
+      window.location.assign('https://www.google.com');
+    }
+
+  
+    /*
     var noteField = $('#note-content');
     var note = noteField.val();
     noteField.val("");
-
+    
     /* Send note data to backend, storing in database with existing data
     associated with userIdToken */
+    /*
     $.ajax(backendHostUrl + '/notes', {
       headers: {
         'Authorization': 'Bearer ' + userIdToken
@@ -153,8 +175,8 @@ $(function(){
     }).then(function(){
       // Refresh notebook display.
       fetchNotes();
-    });
-
+    }); */
+  
   });
 
   configureFirebaseLogin();
