@@ -4,6 +4,14 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+@font-face {
+
+   font-family: 'Ubuntu' ;
+   src:
+   url('Fonts/Ubuntu-R.ttf')
+   format('truetype');
+
+}
 
 /* reset */
 
@@ -90,8 +98,10 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
+
     font-size: 100%;
-    font: inherit;
+    font-family: 'Ubuntu';
+
     vertical-align: baseline;
 }
 
@@ -246,7 +256,7 @@ h1 {
     color: #fff;
     letter-spacing: 2px;
     text-align: center;
-    font-style: italic;
+    font-style: normal;
     margin: 2vw 1vw 2.5vw;
     font-weight: 600;
 }
@@ -415,6 +425,101 @@ h1 span {
 
 /*-- //copyright --*/
 
+/*-- Buttons --*/
+
+.logoutLblPos{
+
+   position:fixed;
+   right:10px;
+   top:5px;
+}
+
+/*
+krown-button.to-load {
+  overflow: hidden;
+  position: relative; }
+  .krown-button.to-load:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 55px;
+    height: 55px;
+    opacity: 0;
+    transition-delay: 150ms; }
+    .slide[data-background="light"] .krown-button.to-load:after {
+      background: url(images/preloader-light.gif) no-repeat center center transparent; }
+      @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+        .slide[data-background="light"] .krown-button.to-load:after {
+          background-image: url(images/preloader-light_x2.gif);
+          background-size: 30px 30px; } }
+    .slide[data-background="dark"] .krown-button.to-load:after, #posts-container .post .krown-button.to-load:after {
+      background: url(images/preloader-dark.gif) no-repeat center center transparent; }
+      @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+        .slide[data-background="dark"] .krown-button.to-load:after, #posts-container .post .krown-button.to-load:after {
+          background-image: url(images/preloader-dark_x2.gif);
+          background-size: 30px 30px; } }
+  .krown-button.to-load.loading {
+    pointer-events: none; }
+    .slide[data-background="dark"] .krown-button.to-load.loading {
+      background: #fff;
+      color: #1d1d1d; }
+    .slide[data-background="light"] .krown-button.to-load.loading {
+      color: #fff;
+      background: #1d1d1d; }
+    .krown-button.to-load.loading:after {
+      opacity: 1; }
+    .krown-button.to-load.loading span {
+      opacity: 0; }
+*/
+/*
+.button1 {
+	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
+	background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+	background-color:#768d87;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:7px solid #20c931;
+  width: 200px;
+  height: 65px;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:11px 23px;
+
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+  margin-bottom:8px;
+  display: block;
+}
+.button1:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
+	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+	background-color:#6c7c7c;
+}
+.button1:active {
+	position:relative;
+	top:1px;
+}
+*/
+
 /* validate style */
 
 input:not([type="file"]).error,
@@ -440,6 +545,7 @@ div.error-field {
 
 /*--responsive--*/
 
+
 @media(max-width: 1920px) {
     h1 {
         font-size: 3.5vw;
@@ -455,6 +561,7 @@ div.error-field {
         margin: 4vw 1vw 4.5vw;
     }
 }
+
 
 @media(max-width: 667px) {
     .footer p {

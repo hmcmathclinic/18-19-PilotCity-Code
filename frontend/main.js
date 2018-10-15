@@ -37,7 +37,7 @@ $(function(){
   var userIdToken = null;
 
   // Firebase log-in
-  
+
   function configureFirebaseLogin() {
 
     firebase.initializeApp(config);
@@ -144,7 +144,7 @@ $(function(){
     isStudent = true
   }*/
 
-  
+
   $('#save-res').click(function(event) {
     event.preventDefault();
 
@@ -156,12 +156,12 @@ $(function(){
       window.location.assign('https://www.google.com');
     }
 
-  
+
     /*
     var noteField = $('#note-content');
     var note = noteField.val();
     noteField.val("");
-    
+
     /* Send note data to backend, storing in database with existing data
     associated with userIdToken */
     /*
@@ -176,10 +176,10 @@ $(function(){
       // Refresh notebook display.
       fetchNotes();
     }); */
-  
+
   });
 
-  configureFirebaseLogin();
-  configureFirebaseLoginWidget();
+  //configureFirebaseLogin();
+  // configureFirebaseLoginWidget();
 
 });
