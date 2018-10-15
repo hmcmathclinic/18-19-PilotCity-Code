@@ -83,8 +83,6 @@ $(function(){
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID
       ],
       // Terms of service url
@@ -128,32 +126,16 @@ $(function(){
   });
 
   // Save a teacher/employer/student response to the backend
-  /*
-  isTeacher = false
-  isEmployer = false
-  isStudent = false
-
-
-  if ($('#radioTeacher').checked()) {
-    isTeacher = true
-  }
-  if ($('#radioEmployer').checked()) {
-    isEmployer = true
-  }
-  if ($('#radioStudent').checked()) {
-    isStudent = true
-  }*/
-
   
-  $('#save-res').click(function(event) {
-    event.preventDefault();
+    $('#save-res').click(function(event) {
+      event.preventDefault();
 
     if ($('#radioEmployer').prop('checked')) {
-      window.location = 'googleform.html';
+      window.location = 'googleform_employer.html';
     }
 
     else if ($('#radioTeacher').prop('checked')) {
-      window.location.assign('https://www.google.com');
+      window.location = 'googleform_teacher.html';
     }
 
   
