@@ -13,12 +13,18 @@ Licensed under the Apache License, Version 2.0 (the "License");
   <script src="https://www.gstatic.com/firebasejs/ui/live/1.0/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/1.0/firebase-ui-auth.css">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="/main.js"></script>
+  <script src="main.js"></script>
   <title>Employer Survey</title>
 </head>
 <body>
-  <div align="center">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfyoVeJDgMLi1_UTXj7dr_HE584GcyH6k_pMsA3_WIzWsIV-g/viewform?embedded=true" width="800" height="1850" frameborder="0" marginheight="100" marginwidth="0">Loading...</iframe>
+  <form id="sign-out" align="right" method="post">
+    <label class="logoutLblPos">
+      <input type="submit" value="log out">
+    </label>
+  </form>
+
+  <div class="resp-container" align="center">
+    <iframe class="resp-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSfyoVeJDgMLi1_UTXj7dr_HE584GcyH6k_pMsA3_WIzWsIV-g/viewform?embedded=true" allowfullscreen style="overflow:hidden">Loading...</iframe>
   </div>
 </body>
 </html>

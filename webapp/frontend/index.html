@@ -6,9 +6,16 @@ Licensed under the Apache License, Version 2.0 (the "License");
 -->
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/live/1.0/firebase-ui-auth.js"></script>
+  <script src="main.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/1.0/firebase-ui-auth.css">
   <link rel="stylesheet" type="text/css" href="stylePilot.css">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="main.js"></script>
+
   <title>PilotCity</title>
 </head>
 <body>
@@ -17,17 +24,17 @@ Licensed under the Apache License, Version 2.0 (the "License");
     <div id="firebaseui-auth-container"></div>
   </div>
 
-  <form align="right" name="form1" method="post" action="log_out.php">
-  <label class="logoutLblPos">
-  <input name="submit2" type="submit" id="submit2" value="log out">
-  </label>
+  <form id="sign-out" align="right" method="post">
+    <label class="logoutLblPos">
+      <input type="submit" value="log out">
+    </label>
   </form>
 
   <center>
   <div id="logged-in">
     <h1>Welcome, <span id="user"></span>!</h1>
 
-    <a class="krown-button to-load dark" href="googleform.html" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    <a class="krown-button to-load dark" href="googleform_employer.html" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
       <span>
         I am an employer
         <svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="24" height="42" viewBox="0 0 24 42" enable-background="new 0 0 24 42" xml:space="preserve">
@@ -37,7 +44,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
       </span>
     </a>
 
-    <a class="krown-button to-load dark" href="googleform.html" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    <a class="krown-button to-load dark" href="googleform_teacher.html" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
       <span>
         I am a teacher
         <svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="24" height="42" viewBox="0 0 24 42" enable-background="new 0 0 24 42" xml:space="preserve">

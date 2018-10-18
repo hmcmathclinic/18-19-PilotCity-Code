@@ -17,8 +17,8 @@ $(function(){
   // deploying the application to a live production environment, change to
   // https://backend-dot-<PROJECT_ID>.appspot.com as specified in the
   // backend's app.yaml file.
-  //var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
-  var backendHostUrl = 'http://localhost:8081';
+  var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
+  //var backendHostUrl = 'http://localhost:8081';
 
   // [START gae_python_firenotes_config]
   // Obtain the following from the "Add Firebase to your web app" dialogue
@@ -46,6 +46,7 @@ $(function(){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         $('#logged-out').hide();
+
         var name = user.displayName;
 
         /* If the provider gives a display name, use the name for the
@@ -66,6 +67,7 @@ $(function(){
       } else {
         $('#logged-in').hide();
         $('#logged-out').show();
+        $('#sign-out').hide();
 
       }
     // [END gae_python_state_change]
@@ -115,7 +117,7 @@ $(function(){
 
   // Sign out a user
   var signOutBtn =$('#sign-out');
-  signOutBtn.click(function(event) {
+  signOutBtn.submit(function(event) {
     event.preventDefault();
 
     firebase.auth().signOut().then(function() {
@@ -161,7 +163,7 @@ $(function(){
 
   });
 
-  //configureFirebaseLogin();
-  // configureFirebaseLoginWidget();
+  configureFirebaseLogin();
+  configureFirebaseLoginWidget();
 
 });
