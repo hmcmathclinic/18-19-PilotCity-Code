@@ -17,8 +17,8 @@ $(function(){
   // deploying the application to a live production environment, change to
   // https://backend-dot-<PROJECT_ID>.appspot.com as specified in the
   // backend's app.yaml file.
-  //var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
-  var backendHostUrl = 'http://localhost:8081';
+  var backendHostUrl = 'https://backend-dot-silver-osprey-217701.appspot.com';
+  //var backendHostUrl = 'http://localhost:8081';
 
   // [START gae_python_firenotes_config]
   // Obtain the following from the "Add Firebase to your web app" dialogue
@@ -37,7 +37,7 @@ $(function(){
   var userIdToken = null;
 
   // Firebase log-in
-  
+
   function configureFirebaseLogin() {
 
     firebase.initializeApp(config);
@@ -46,6 +46,7 @@ $(function(){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         $('#logged-out').hide();
+
         var name = user.displayName;
 
         /* If the provider gives a display name, use the name for the
@@ -64,6 +65,7 @@ $(function(){
       } else {
         $('#logged-in').hide();
         $('#logged-out').show();
+        $('#sign-out').hide();
 
       }
     // [END gae_python_state_change]
@@ -135,7 +137,7 @@ $(function(){
 
   // Sign out a user
   var signOutBtn =$('#sign-out');
-  signOutBtn.click(function(event) {
+  signOutBtn.submit(function(event) {
     event.preventDefault();
 
     firebase.auth().signOut().then(function() {
@@ -146,7 +148,7 @@ $(function(){
   });
 
   // Save a teacher/employer/student response to the backend
-  
+
     $('#save-res').click(function(event) {
       event.preventDefault();
 
@@ -158,27 +160,6 @@ $(function(){
       window.location = 'googleform_teacher.html';
     }
 
-  
-    /*
-    var noteField = $('#note-content');
-    var note = noteField.val();
-    noteField.val("");
-    
-    /* Send note data to backend, storing in database with existing data
-    associated with userIdToken */
-    
-    $.ajax(backendHostUrl + '/notes', {
-      headers: {
-        'Authorization': 'Bearer ' + userIdToken
-      },
-      method: 'POST',
-      data: JSON.stringify({'message': note}),
-      contentType : 'application/json'
-    }).then(function(){
-      // Refresh notebook display.
-      fetchNotes();
-    }); 
-  
   });
 
   configureFirebaseLogin();
