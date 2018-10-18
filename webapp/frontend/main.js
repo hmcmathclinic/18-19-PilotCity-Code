@@ -129,39 +129,39 @@ $(function(){
 
   // Save a teacher/employer/student response to the backend
 
-    $('#save-res').click(function(event) {
-      event.preventDefault();
-
-    if ($('#radioEmployer').prop('checked')) {
-      window.location = 'googleform_employer.html';
-    }
-
-    else if ($('#radioTeacher').prop('checked')) {
-      window.location = 'googleform_teacher.html';
-    }
-
-
-    /*
-    var noteField = $('#note-content');
-    var note = noteField.val();
-    noteField.val("");
-
-    /* Send note data to backend, storing in database with existing data
-    associated with userIdToken */
-    /*
-    $.ajax(backendHostUrl + '/notes', {
-      headers: {
-        'Authorization': 'Bearer ' + userIdToken
-      },
-      method: 'POST',
-      data: JSON.stringify({'message': note}),
-      contentType : 'application/json'
-    }).then(function(){
-      // Refresh notebook display.
-      fetchNotes();
-    }); */
-
-  });
+  //   $('#save-res').click(function(event) {
+  //     event.preventDefault();
+  //
+  //   if ($('#radioEmployer').prop('checked')) {
+  //     window.location = 'googleform_employer.html';
+  //   }
+  //
+  //   else if ($('#radioTeacher').prop('checked')) {
+  //     window.location = 'googleform_teacher.html';
+  //   }
+  //
+  //
+  //   /*
+  //   var noteField = $('#note-content');
+  //   var note = noteField.val();
+  //   noteField.val("");
+  //
+  //   /* Send note data to backend, storing in database with existing data
+  //   associated with userIdToken */
+  //   /*
+  //   $.ajax(backendHostUrl + '/notes', {
+  //     headers: {
+  //       'Authorization': 'Bearer ' + userIdToken
+  //     },
+  //     method: 'POST',
+  //     data: JSON.stringify({'message': note}),
+  //     contentType : 'application/json'
+  //   }).then(function(){
+  //     // Refresh notebook display.
+  //     fetchNotes();
+  //   }); */
+  //
+  // });
 
   configureFirebaseLogin();
   configureFirebaseLoginWidget();
