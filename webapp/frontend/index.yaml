@@ -14,17 +14,7 @@ indexes:
   ancestor: yes
   properties:
   - name: created
-
-- kind: Note
-  ancestor: yes
-  properties:
-  - name: created
     direction: desc
-
-- kind: UserData
-  ancestor: yes
-  properties:
-  - name: created
 
 - kind: UserData
   ancestor: yes

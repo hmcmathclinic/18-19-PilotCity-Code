@@ -55,9 +55,7 @@ $(function(){
         user.getToken().then(function(idToken) {
           userIdToken = idToken;
 
-          /* Now that the user is authenicated, fetch the notes. */
-          fetchNotes();
-
+          createUserEntryInDb()
           $('#user').text(welcomeName);
           $('#logged-in').show();
 
@@ -92,26 +90,48 @@ $(function(){
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', uiConfig);
   }
-  // [END gae_python_firebase_login]
+  // [END gae_python_firebase_login
 
-  // [START gae_python_fetch_notes]
-  // Fetch notes from the backend.
-  function fetchNotes() {
-    $.ajax(backendHostUrl + '/notes', {
+  function createUserEntryInDb() {
+    $.ajax(backendHostUrl + '/user/data/onboarding', {
       /* Set header for the XMLHttpRequest to get data from the web server
       associated with userIdToken */
       headers: {
         'Authorization': 'Bearer ' + userIdToken
       }
     }).then(function(data){
-      $('#notes-container').empty();
-      // Iterate over user data to display user's notes from database.
-      data.forEach(function(note){
-        $('#notes-container').append($('<p>').text(note.message));
-      });
+      fetchUserData()
     });
   }
-  // [END gae_python_fetch_notes]
+
+  function fetchUserData() {
+    $.ajax(backendHostUrl + '/user/data', {
+      /* Set header for the XMLHttpRequest to get data from the web server
+      associated with userIdToken */
+      headers: {
+        'Authorization': 'Bearer ' + userIdToken
+      }
+    }).then(function(data){
+      console.log(data)
+      console.log("Fetched user data successfully")
+      updateFormCompletionStatus(false)
+    });
+  }
+
+  function updateFormCompletionStatus(status) {
+    $.ajax(backendHostUrl + '/user/data/updateformcompletionstatus', {
+      headers: {
+        'Authorization': 'Bearer ' + userIdToken
+      },
+      method: 'POST',
+      data: JSON.stringify({'completedform': status}),
+      contentType : 'application/json'
+    }).then(function(data){
+      console.log("update form completion status successful")
+      console.log(data)
+    }); 
+  }
+
 
   // Sign out a user
   var signOutBtn =$('#sign-out');
@@ -146,7 +166,7 @@ $(function(){
     
     /* Send note data to backend, storing in database with existing data
     associated with userIdToken */
-    /*
+    
     $.ajax(backendHostUrl + '/notes', {
       headers: {
         'Authorization': 'Bearer ' + userIdToken
@@ -157,7 +177,7 @@ $(function(){
     }).then(function(){
       // Refresh notebook display.
       fetchNotes();
-    }); */
+    }); 
   
   });
 
