@@ -1,0 +1,204 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+@font-face {
+
+    font-family: 'Ubuntu' ;
+    src:
+    url('Fonts/Ubuntu-R.ttf')
+    format('truetype');
+ 
+ }
+ 
+ /* reset */
+ 
+ html,
+ body,
+ div,
+ span,
+ applet,
+ object,
+ iframe,
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6,
+ p,
+ blockquote,
+ pre,
+ a,
+ abbr,
+ acronym,
+ address,
+ big,
+ cite,
+ code,
+ del,
+ dfn,
+ em,
+ img,
+ ins,
+ kbd,
+ q,
+ s,
+ samp,
+ small,
+ strike,
+ strong,
+ sub,
+ sup,
+ tt,
+ var,
+ b,
+ u,
+ i,
+ dl,
+ dt,
+ dd,
+ ol,
+ nav ul,
+ nav li,
+ fieldset,
+ form,
+ label,
+ legend,
+ table,
+ caption,
+ tbody,
+ tfoot,
+ thead,
+ tr,
+ th,
+ td,
+ article,
+ aside,
+ canvas,
+ details,
+ embed,
+ figure,
+ figcaption,
+ footer,
+ header,
+ hgroup,
+ menu,
+ nav,
+ output,
+ ruby,
+ section,
+ summary,
+ time,
+ mark,
+ audio,
+ video {
+     margin: 0;
+     padding: 0;
+     border: 0;
+ 
+     font-size: 100%;
+     font-family: 'Ubuntu';
+ 
+     vertical-align: baseline;
+ }
+ 
+ article,
+ aside,
+ details,
+ figcaption,
+ figure,
+ footer,
+ header,
+ hgroup,
+ menu,
+ nav,
+ section {
+     display: block;
+ }
+ 
+ ol,
+ ul {
+     list-style: none;
+     margin: 0px;
+     padding: 0px;
+ }
+ 
+ blockquote,
+ q {
+     quotes: none;
+ }
+ 
+ blockquote:before,
+ blockquote:after,
+ q:before,
+ q:after {
+     content: '';
+     content: none;
+ }
+ 
+ 
+ body {
+     background-size: cover;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     -ms-background-size: cover;
+     background-position: center;
+     font-size: 100%;
+     font-family: 'Ubuntu', sans-serif;
+     min-height: 100vh;
+ }
+ 
+ p {
+     font-family: "Ubuntu";
+ }
+ 
+ .teacher {
+    background-color: #FFB6C1;
+    border: none;
+    color: white;
+    padding: 32px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+ .employer {
+    background-color: #c796c7;
+    border: none;
+    color: white;
+    padding: 32px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.student {
+    background-color: #71c97d;
+    border: none;
+    color: white;
+    padding: 32px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+ 
+#roundedText {
+     border-radius: 18px;
+     background: #FFB6C1;
+     padding: 20px; 
+     width: 200px;
+     height: 15px;    
+ }
+ 
+ ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+   font-size: 20px;
+ }
+ 
+ 
