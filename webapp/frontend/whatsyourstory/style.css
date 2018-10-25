@@ -6,9 +6,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 @font-face {
 
-   font-family: 'Ubuntu' ;
+   font-family: 'Raleway-Regular' ;
    src:
-   url('Fonts/Ubuntu-R.ttf')
+   url('../DocumentFonts/Raleway-Regular.ttf')
+   format('truetype');
+
+}
+
+@font-face {
+
+   font-family: 'Raleway-Italic' ;
+   src:
+   url('../DocumentFonts/Raleway-Italic.ttf')
    format('truetype');
 
 }
@@ -100,7 +109,7 @@ video {
     border: 0;
 
     font-size: 100%;
-    font-family: 'Ubuntu';
+    font-family: 'Raleway-Regular';
 
     vertical-align: baseline;
 }
@@ -148,44 +157,40 @@ body {
     -ms-background-size: cover;
     background-position: center;
     font-size: 100%;
-    font-family: 'Ubuntu', sans-serif;
     min-height: 100vh;
 }
 
-p {
-    font-family: "Ubuntu";
-}
-
-
-
 .whatsYourStory{
 
-    color:#FFB6C1;
+    color:#eca0be;
     font-size: 50px;
 }
 
+h1 {
+    font-family: 'Raleway-Italic';
+}
+
 .text{
-    color:#D3D3D3;
+    color:#eca0be;
     font-size: 20px;
     padding: 50px;
     margin-left: 175px; 
     margin-right: 175px;
     line-height: 50pt;
-    text-align: -webkit-left;
-
-
-   
+    text-align: -webkit-left;  
+    font-family: 'Raleway-Regular' ;
 }
 
 #roundedText {
     border-radius: 35px;
-    background: #FFB6C1;
+    background: #eca0be;
     padding: 20px; 
     width: 200px;
     height: 1px;    
     font-size: 20px;
     outline-width: 0;
     border: none;
+    font-family: 'Raleway-Italic' ;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
