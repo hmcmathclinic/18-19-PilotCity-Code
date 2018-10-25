@@ -160,19 +160,37 @@ p {
 
 .whatsYourStory{
 
-   color:#FFB6C1;
+    color:#FFB6C1;
     font-size: 50px;
 }
 
+.text{
+    color:#D3D3D3;
+    font-size: 20px;
+    padding: 50px;
+    margin-left: 175px; 
+    margin-right: 175px;
+    line-height: 50pt;
+    text-align: -webkit-left;
+
+
+   
+}
+
 #roundedText {
-    border-radius: 18px;
+    border-radius: 35px;
     background: #FFB6C1;
     padding: 20px; 
     width: 200px;
-    height: 15px;    
+    height: 1px;    
+    font-size: 20px;
+    outline-width: 0;
+    border: none;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-size: 20px;
+  text-align: center;
+  color: #FFFFFF;
 }
 
