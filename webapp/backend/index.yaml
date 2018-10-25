@@ -20,3 +20,14 @@ indexes:
   properties:
   - name: created
     direction: desc
+
+- kind: UserData
+  ancestor: yes
+  properties:
+  - name: created
+
+- kind: UserData
+  ancestor: yes
+  properties:
+  - name: created
+    direction: desc
