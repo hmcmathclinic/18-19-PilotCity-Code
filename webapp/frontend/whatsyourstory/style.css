@@ -171,7 +171,7 @@ h1 {
 }
 
 .text{
-    color:#eca0be;
+    color:#D3D3D3;
     font-size: 20px;
     padding: 50px;
     margin-left: 175px; 
@@ -185,8 +185,6 @@ h1 {
     border-radius: 35px;
     background: #eca0be;
     padding: 20px; 
-    width: 200px;
-    height: 1px;    
     font-size: 20px;
     outline-width: 0;
     border: none;
