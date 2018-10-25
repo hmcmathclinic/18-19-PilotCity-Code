@@ -1,0 +1,219 @@
+%!Adobe-FontList 1.19
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-BoldItalic
+FamilyName:Raleway
+StyleName:Bold Italic
+MenuName:Raleway
+StyleBits:3
+WeightClass:700
+WidthClass:5
+AngleClass:1
+FullName:Raleway Bold Italic
+WritingScript:Roman
+OutlineFileName:\Raleway-BoldItalic.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:148184
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway Bold Italic
+NameArray:0,Win,1,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-ExtraBold
+FamilyName:Raleway
+StyleName:ExtraBold
+MenuName:Raleway ExtraBold
+StyleBits:0
+WeightClass:800
+WidthClass:5
+AngleClass:0
+FullName:Raleway ExtraBold
+WritingScript:Roman
+OutlineFileName:\Raleway-ExtraBold.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:178128
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway ExtraBold
+NameArray:0,Win,1,Raleway ExtraBold
+NameArray:0,Win,16,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-ExtraBoldItalic
+FamilyName:Raleway
+StyleName:ExtraBold Italic
+MenuName:Raleway ExtraBold
+StyleBits:1
+WeightClass:800
+WidthClass:5
+AngleClass:1
+FullName:Raleway ExtraBold Italic
+WritingScript:Roman
+OutlineFileName:\Raleway-ExtraBoldItalic.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:148100
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway ExtraBold Italic
+NameArray:0,Win,1,Raleway ExtraBold
+NameArray:0,Win,16,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway
+FamilyName:Raleway
+StyleName:Regular
+MenuName:Raleway
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Raleway
+WritingScript:Roman
+OutlineFileName:\Raleway-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:130128
+FileModTime:1390879116
+NameArray:0,Mac,18,Raleway
+NameArray:0,Mac,4,Raleway
+NameArray:0,Win,1,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-Light
+FamilyName:Raleway
+StyleName:Light
+MenuName:Raleway Light
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Raleway Light
+WritingScript:Roman
+OutlineFileName:\Raleway-Light.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:182376
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway Light
+NameArray:0,Win,1,Raleway Light
+NameArray:0,Win,16,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-Black
+FamilyName:Raleway
+StyleName:Black
+MenuName:Raleway Black
+StyleBits:0
+WeightClass:900
+WidthClass:5
+AngleClass:0
+FullName:Raleway Black
+WritingScript:Roman
+OutlineFileName:\Raleway-Black.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:180592
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway Black
+NameArray:0,Win,1,Raleway Black
+NameArray:0,Win,16,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:1514100690
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-Italic
+FamilyName:Raleway
+StyleName:Italic
+MenuName:Raleway
+StyleBits:1
+WeightClass:400
+WidthClass:5
+AngleClass:1
+FullName:Raleway Italic
+WritingScript:Roman
+OutlineFileName:\Raleway-Italic.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:145920
+FileModTime:1346976000
+NameArray:0,Mac,4,Raleway Italic
+NameArray:0,Win,1,Raleway
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Raleway-Bold
+FamilyName:Raleway
+StyleName:Bold
+MenuName:Raleway
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Raleway Bold
+WritingScript:Roman
+OutlineFileName:\Raleway-Bold.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:128248
+FileModTime:1390879116
+NameArray:0,Mac,18,Raleway Bold
+NameArray:0,Mac,4,Raleway Bold
+NameArray:0,Win,1,Raleway
+%EndFont
+
