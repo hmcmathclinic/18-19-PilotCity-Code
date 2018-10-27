@@ -9,6 +9,15 @@
 
 @font-face {
 
+   font-family: 'Raleway-ExtraBold' ;
+   src:
+   url('../DocumentFonts/Raleway-ExtraBold.ttf')
+   format('truetype');
+
+}
+
+@font-face {
+
    font-family: 'Raleway-Italic' ;
    src:
    url('../DocumentFonts/Raleway-Italic.ttf')
@@ -21,10 +30,11 @@
     padding: 10px;
     border: 1px dotted #aaaaaa;
     border-radius: 20px 20px 0px 0px;
-    color: #D3D3D3;
-    font-family: 'Raleway-Regular';
+    color: #606060;
+    font-family: 'Raleway-ExtraBold';
     margin:auto;
-
+    display: flex;
+    align-items: center;
 }
 
 #bottom-box {
@@ -50,8 +60,8 @@
 
 }
 
-#describe {
-    padding-left: 0px;
+#searchItem {
+    padding-left: 20px;
     width: 900px;
     border: none;
     height:50px;
@@ -73,6 +83,7 @@
     color: #ffffff;
     text-align: center;
     display: inline-block;
+    word-wrap: break-word;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

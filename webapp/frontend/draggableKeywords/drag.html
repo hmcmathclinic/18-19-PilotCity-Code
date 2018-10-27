@@ -6,53 +6,36 @@
   <script src="main.js"></script>
 </head>
 <body onload="setRandomColor()">
-  <div id="top-box"> Search
-  <input type="text" placeholder="Describe your industry here with keywords" id="describe">  </div>
-
+  <div id="top-box">Search<form id="searchForm" action="javascript:search();"> 
+	  	<div class="input-group"> 
+	  		<input type="text" id="searchItem" class="form-control" placeholder="Describe your industry here with keywords"> 
+	  	</div> 
+	  </form>
+  </div> 
+ 
   <div id="bottom-box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
-  <div id="big-box" ondrop="drop(event)" ondragover="allowDrop(event)">
-  <div class="draggableItem" id="Drones" draggable="true" ondragstart="drag(event,'addDrones')">
-    <span id='addDrones' onclick="add(this.id, this)">  + </span>
-    Drones
-  </div>
-  <div  class="draggableItem" id="Robotics" draggable="true" ondragstart="drag(event,'addRobotics')"> 
-    <span id='addRobotics' onclick="add(this.id, this)">  + </span>
-    Robotics
-  </div>
-  <div class="draggableItem" id="Space" draggable="true" ondragstart="drag(event,'addSpace')"> 
-    <span id='addSpace' onclick="add(this.id, this)">  + </span>
-    Space
-  </div>
-  <div  class="draggableItem" id="Sustainability" draggable="true" ondragstart="drag(event,'addSustainability')"> 
-    <span id='addSustainability' onclick="add(this.id, this)">  + </span>
-    Sustainability
-  </div>
-
-  <div class="draggableItem" id="Artificial Intelligence" draggable="true" ondragstart="drag(event,'addAI')"> 
-    <span id='addAI' onclick="add(this.id, this)">  + </span>
-    Artificial Intelligence
-  </div>
-  <div  class="draggableItem" id="Automotive" draggable="true" ondragstart="drag(event,'addAutomotive')"> 
-    <span id='addAutomotive' onclick="add(this.id, this)">  + </span>
-    Automotive
-  </div>
-  <div class="draggableItem" id="Bioprinting" draggable="true" ondragstart="drag(event,'addBioprinting')"> 
-    <span id='addBioprinting' onclick="add(this.id, this)">  + </span>
-    Bioprinting
-  </div>
-  <div  class="draggableItem" id="Data" draggable="true" ondragstart="drag(event,'addData')"> 
-    <span id='addData' onclick="add(this.id, this)">  + </span>
-    Data
-  </div>
-  <div class="draggableItem" id="Gaming" draggable="true" ondragstart="drag(event,'addGaming')"> 
-    <span id='addGaming' onclick="add(this.id, this)">  + </span>
-    Gaming
-  </div>
-  <div  class="draggableItem" id="Healthcare" draggable="true" ondragstart="drag(event,'addHealthcare')"> 
-    <span id='addHealthcare' onclick="add(this.id, this)">  + </span>
-    Healthcare
-  </div>
+  <div id="big-box">
+  <div class="draggableItem" id="Drones" draggable="false" ondragstart="drag(event,'addDrones')" onclick="add(this, 'addDrones')">
+    <span id='addDrones'>+</span> Drones</div>
+  <div  class="draggableItem" id="Robotics" draggable="false" ondragstart="drag(event,'addRobotics')" onclick="add(this, 'addRobotics')"> 
+    <span id='addRobotics'">+</span>  Robotics</div>
+  <div class="draggableItem" id="Space" draggable="false" ondragstart="drag(event,'addSpace')" onclick="add(this, 'addSpace')"> 
+    <span id='addSpace'>+</span>  Space</div>
+  <div  class="draggableItem" id="Sustainability" draggable="false" ondragstart="drag(event,'addSustainability')" onclick="add(this, 'addSustainability')"> 
+    <span id='addSustainability'>+</span> Sustainability</div>
+  <div class="draggableItem" id="Artificial Intelligence" draggable="false" ondragstart="drag(event,'addArtificialIntelligence')" onclick="add(this, 'addArtificialIntelligence')"> 
+    <span id='addArtificialIntelligence'>+</span>  Artificial Intelligence</div>
+  <div  class="draggableItem" id="Automotive" draggable="false" ondragstart="drag(event,'addAutomotive')" onclick="add(this, 'addAutomotive')"> 
+    <span id='addAutomotive'>+</span> Automotive</div>
+  <div class="draggableItem" id="Bioprinting" draggable="false" ondragstart="drag(event,'addBioprinting')" onclick="add(this, 'addBioprinting')"> 
+    <span id='addBioprinting'>+</span>  Bioprinting</div>
+  <div  class="draggableItem" id="Data" draggable="false" ondragstart="drag(event,'addData')" onclick="add(this, 'addData')"> 
+    <span id='addData'>+</span> Data</div>
+  <div class="draggableItem" id="Gaming" draggable="false" ondragstart="drag(event,'addGaming')" onclick="add(this, 'addGaming')"> 
+    <span id='addGaming'>+</span> Gaming</div>
+  <div  class="draggableItem" id="Healthcare" draggable="false" ondragstart="drag(event,'addHealthcare')" onclick="add(this, 'addHealthcare')"> 
+    <span id='addHealthcare'>+</span> Healthcare</div>
   </div>
 </body>
 </html>
