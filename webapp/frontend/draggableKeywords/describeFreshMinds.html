@@ -5,13 +5,11 @@
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="main_describeFreshMinds.js"></script>
 </head>
-<body onload="setRandomColor()">
-
-
+<body onload="main()">
   <h1> If you had a flock of fresh minds to generate solutions for you,
 what challenge would you ask them to solve? </h1>
-  <div id="top-box"><div id = "describe">Enter Question</div><form id="searchForm" action="javascript:search();"> 
-	  	<div class="input-group"> 
+  <div id="top-box"><div id = "describe">Enter Question</div><form id="searchForm" action="javascript:search();" autocomplete="off"> 
+	  	<div class="autocomplete" style="width:300px;">
 	  		<input type="text" id="searchItem" class="form-control" placeholder="State your challenge in the form of a question here"> 
 	  	</div> 
 	  </form>

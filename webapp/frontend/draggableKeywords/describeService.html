@@ -5,9 +5,9 @@
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="main_describeService.js"></script>
 </head>
-<body onload="setRandomColor()">
-  <div id="top-box"><div id = "describe">Describe your service</div><form id="searchForm" action="javascript:search();"> 
-	  	<div class="input-group"> 
+<body onload="main()">
+  <div id="top-box"><div id = "describe">Describe your service</div><form id="searchForm" action="javascript:search();" autocomplete="off"> 
+	  	<div class="autocomplete" style="width:300px;">
 	  		<input type="text" id="searchItem" class="form-control" placeholder="Example: Metal Fabrication"> 
 	  	</div> 
 	  </form>
