@@ -52,4 +52,3 @@ class StudentUserData(ndb.Model):
     school_name = ndb.StringProperty()
     grade_level = ndb.StringProperty()
 
-
