@@ -148,7 +148,6 @@ q:after {
     content: none;
 }
 
-
 body {
     background-size: cover;
     -webkit-background-size: cover;
@@ -162,24 +161,12 @@ body {
 }
 
 .frontPage{
-
-    color:#ae90b0;
+    color: white;
     font-size: 50px;
 }
 
 h1 {
     font-family: 'Raleway-Regular';
-}
-
-.text{
-    color:#D3D3D3;
-    font-size: 20px;
-    padding: 50px;
-    margin-left: 175px; 
-    margin-right: 175px;
-    line-height: 50pt;
-    text-align: -webkit-left;  
-    font-family: 'Raleway-Regular' ;
 }
 
 #roundedText {
