@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import logging
-from models import UserData, Note
+from models import UserData
 from flask import Flask, jsonify, request
 import flask_cors
 from google.appengine.ext import ndb
