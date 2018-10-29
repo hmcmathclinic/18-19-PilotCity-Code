@@ -9,7 +9,7 @@ class UserDao(abc.ABC):
 
 
     @abc.abstractmethod
-    def create_user(self,user_id):
+    def create_user(self,user_id, new_values):
         pass
 
 

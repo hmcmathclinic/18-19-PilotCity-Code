@@ -13,13 +13,13 @@
 # limitations under the License.
 
 import logging
-from models import UserData
 from flask import Flask, jsonify, request
 import flask_cors
 from google.appengine.ext import ndb
 import google.auth.transport.requests
 import google.oauth2.id_token
 import requests_toolbelt.adapters.appengine
+from user_dao_impl import UserDaoImpl
 
 # Use the App Engine Requests adapter. This makes sure that Requests uses
 # URLFetch.
@@ -28,31 +28,7 @@ HTTP_REQUEST = google.auth.transport.requests.Request()
 
 app = Flask(__name__)
 flask_cors.CORS(app)
-
-# [START gae_python_user_data]
-def query_user_data(user_id):
-    """Fetches all data associated with user_id.
-
-    Notes are ordered them by date created, with most recent note added
-    first.
-    """
-    ancestor_key = ndb.Key(UserData, user_id)
-    query = UserData.query(ancestor=ancestor_key).order(-UserData.created)
-    user_data = query.fetch()
-
-    user_data_dict = None
-    ndb_user_obj = None
-    for datum in user_data:
-        ndb_user_obj = datum
-        user_data_dict = {
-            'user_id':datum.user_id,
-            'has_completed_form': datum.has_completed_form,
-            'created':datum.created
-        }
-        break
-
-    return ndb_user_obj, user_data_dict
-# [END gae_python_query_user_data]
+users_dao = UserDaoImpl()
 
 
 @app.route('/user/data', methods=['GET'])
@@ -63,7 +39,7 @@ def get_user_info():
     if not claims:
         return 'Unauthorized', 401
     # [END gae_python_verify_token]
-    data = query_user_data(claims['sub'])[1]
+    data = users_dao.fetch_user_data(claims['sub'])
     return jsonify(data)
 
 
@@ -74,12 +50,7 @@ def create_entry():
         id_token, HTTP_REQUEST)
     if not claims:
         return 'Unauthorized', 401
-    if not query_user_data(claims['sub'])[1]:
-        data_entry = UserData(
-            parent=ndb.Key(UserData, claims['sub']),
-            has_completed_form=False)
-        data_entry.user_id = claims['sub']
-        data_entry.put()
+    users_dao.create_user(claims['sub'], {})
     return 'OK', 200
 
 
@@ -90,9 +61,9 @@ def has_completed_form():
         id_token, HTTP_REQUEST)
     if not claims:
         return 'Unauthorized', 401
-    user_data = query_user_data(claims['sub'])[0]
-    result = {"status":user_data.has_completed_form}
-    return jsonify(result)
+    # user_data = query_user_data(claims['sub'])[0]
+    # result = {"status":user_data.has_completed_form}
+    # return jsonify(result)
 
 
 @app.route('/user/data/updateformcompletionstatus', methods=['POST', 'PUT'])
@@ -103,13 +74,13 @@ def update_form_status():
     if not claims:
         return 'Unauthorized', 401
     # [START gae_python_create_entity]
-    data =  request.get_json()
-    query_result =query_user_data(claims['sub'])
-    user_data = query_result[0]
-    user_data.has_completed_form = data['completedform']
-    user_data.put()
-    query_result[1]["has_completed_form"] = data['completedform']
-    return jsonify(query_result[1])
+    # data =  request.get_json()
+    # query_result =query_user_data(claims['sub'])
+    # user_data = query_result[0]
+    # user_data.has_completed_form = data['completedform']
+    # user_data.put()
+    # query_result[1]["has_completed_form"] = data['completedform']
+    # return jsonify(query_result[1])
 
 
 @app.errorhandler(500)
