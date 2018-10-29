@@ -7,6 +7,7 @@ class Address(ndb.Model):
     city = ndb.StringProperty()
     is_headquarters = ndb.BooleanProperty()
 
+
 class Course(ndb.Model):
     course_name = ndb.StringProperty()
     room_number = ndb.IntegerProperty()
