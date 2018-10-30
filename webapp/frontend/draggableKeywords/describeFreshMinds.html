@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style_describeFreshMinds.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="main_describeFreshMinds.js"></script>
+</head>
+<body onload="main()">
+  <h1> If you had a flock of fresh minds to generate solutions for you,
+what challenge would you ask them to solve? </h1>
+  <div id="top-box"><div id = "describe">Enter Question</div><form id="searchForm" action="javascript:search();" autocomplete="off"> 
+	  	<div class="autocomplete" style="width:300px;">
+	  		<input type="text" id="searchItem" class="form-control" placeholder="State your challenge in the form of a question here"> 
+	  	</div> 
+	  </form>
+  </div> 
+ 
+  <div id="bottom-box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+  <div id="big-box">
+  <div class="draggableItem" id="Could You Create A New Internet Of Things Application For Your Local Transit System?" draggable="false" ondragstart="drag(event,'addCouldYouCreateANewInternetOfThingsApplicationForYourLocalTransitSystem?')" onclick="add(this, 'addCouldYouCreateANewInternetOfThingsApplicationForYourLocalTransitSystem?')">
+    <span id='addCouldYouCreateANewInternetOfThingsApplicationForYourLocalTransitSystem?'>+</span> Could You Create A New Internet Of Things Application For Your Local Transit System?</div>
+  <div  class="draggableItem" id="If You Had A Smart Home, What Sequences Of Tasks Would You Automate To Better Your Life?" draggable="false" ondragstart="drag(event,'addIfYouHadASmartHome,WhatSequencesOfTasksWouldYouAutomateToBetterYourLife?')" onclick="add(this, 'addIfYouHadASmartHome,WhatSequencesOfTasksWouldYouAutomateToBetterYourLife?')"> 
+    <span id='addIfYouHadASmartHome,WhatSequencesOfTasksWouldYouAutomateToBetterYourLife?'">+</span>  If You Had A Smart Home, What Sequences Of Tasks Would You Automate To Better Your Life?</div>
+  <div class="draggableItem" id="How Would Citizens Use An App To Report Public Safety Incidents?" draggable="false" ondragstart="drag(event,'addHowWouldCitizensUseAnAppToReportPublicSafetyIncidents?')" onclick="add(this, 'addHowWouldCitizensUseAnAppToReportPublicSafetyIncidents?')"> 
+    <span id='addHowWouldCitizensUseAnAppToReportPublicSafetyIncidents?'>+</span>  How Would Citizens Use An App To Report Public Safety Incidents?</div>
+  <!-- <div  class="draggableItem" id="Sustainability" draggable="false" ondragstart="drag(event,'addSustainability')" onclick="add(this, 'addSustainability')"> 
+    <span id='addSustainability'>+</span> Sustainability</div>
+  <div class="draggableItem" id="Artificial Intelligence" draggable="false" ondragstart="drag(event,'addArtificialIntelligence')" onclick="add(this, 'addArtificialIntelligence')"> 
+    <span id='addArtificialIntelligence'>+</span>  Artificial Intelligence</div>
+  <div  class="draggableItem" id="Automotive" draggable="false" ondragstart="drag(event,'addAutomotive')" onclick="add(this, 'addAutomotive')"> 
+    <span id='addAutomotive'>+</span> Automotive</div>
+  <div class="draggableItem" id="Bioprinting" draggable="false" ondragstart="drag(event,'addBioprinting')" onclick="add(this, 'addBioprinting')"> 
+    <span id='addBioprinting'>+</span>  Bioprinting</div>
+  <div  class="draggableItem" id="Data" draggable="false" ondragstart="drag(event,'addData')" onclick="add(this, 'addData')"> 
+    <span id='addData'>+</span> Data</div>
+  <div class="draggableItem" id="Gaming" draggable="false" ondragstart="drag(event,'addGaming')" onclick="add(this, 'addGaming')"> 
+    <span id='addGaming'>+</span> Gaming</div>
+  <div  class="draggableItem" id="Healthcare" draggable="false" ondragstart="drag(event,'addHealthcare')" onclick="add(this, 'addHealthcare')"> 
+    <span id='addHealthcare'>+</span> Healthcare</div> -->
+  </div>
+</body>
+</html>

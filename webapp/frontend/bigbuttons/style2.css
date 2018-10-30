@@ -6,9 +6,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 @font-face {
 
-    font-family: 'Ubuntu' ;
+    font-family: 'Raleway-Bold' ;
     src:
-    url('Fonts/Ubuntu-R.ttf')
+    url('../DocumentFonts/Raleway-Bold.ttf')
+    format('truetype');
+ 
+ }
+
+ @font-face {
+
+    font-family: 'Raleway-BoldItalic' ;
+    src:
+    url('../DocumentFonts/Raleway-BoldItalic.ttf')
     format('truetype');
  
  }
@@ -100,7 +109,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      border: 0;
  
      font-size: 100%;
-     font-family: 'Ubuntu';
+     font-family: 'Raleway-Bold';
  
      vertical-align: baseline;
  }
@@ -148,45 +157,63 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      -ms-background-size: cover;
      background-position: center;
      font-size: 100%;
-     font-family: 'Ubuntu', sans-serif;
+     font-family: 'Raleway-Bold', sans-serif;
      min-height: 100vh;
+ }
+
+ h1 {
+    font-family: 'Raleway-BoldItalic', sans-serif;
+    color: #7a6f7a34;
  }
  
  p {
-     font-family: "Ubuntu";
+     font-family: 'Raleway-Bold';
  }
  
  .teacher {
     background-color: #FFB6C1;
+    border-radius: 25px;
+    font-size: 50px;
     border: none;
     color: white;
-    padding: 32px 32px;
+    width: 200px;
+    height: 200px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 22px;
+    vertical-align: middle;
+    line-height: 200px;
 }
 
  .employer {
     background-color: #c796c7;
+    border-radius: 25px;
     border: none;
     color: white;
-    padding: 32px 32px;
+    width: 200px;
+    height: 200px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 22px;
+    vertical-align: middle;
+    line-height: 200px;
 }
 
 .student {
+    border-radius: 25px;
     background-color: #71c97d;
     border: none;
     color: white;
-    padding: 32px 32px;
+    width: 200px;
+    height: 200px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    vertical-align: middle;
+    font-size: 22px;
+    line-height: 200px;
 }
  
 #roundedText {

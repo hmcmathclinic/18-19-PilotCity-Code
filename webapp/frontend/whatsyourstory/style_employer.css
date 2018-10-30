@@ -162,7 +162,7 @@ body {
 
 .whatsYourStory{
 
-    color:#eca0be;
+    color:#ae90b0;
     font-size: 50px;
 }
 
@@ -183,8 +183,8 @@ h1 {
 
 #roundedText {
     border-radius: 35px;
-    background: #eca0be;
-    padding: 20px; 
+    background: #ae90b0;
+    padding: 10px; 
     font-size: 20px;
     outline-width: 0;
     border: none;
