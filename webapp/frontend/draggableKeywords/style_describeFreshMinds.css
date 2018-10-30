@@ -108,6 +108,7 @@ h1{
     display: inline-block;
     word-wrap: break-word;
     margin: 10px;
+    cursor: pointer;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
