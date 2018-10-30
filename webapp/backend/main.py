@@ -43,44 +43,28 @@ def get_user_info():
     return jsonify(data)
 
 
-@app.route('/user/data/onboarding')
+@app.route('/user/onboarding')
 def create_entry():
     id_token = request.headers['Authorization'].split(' ').pop()
     claims = google.oauth2.id_token.verify_firebase_token(
         id_token, HTTP_REQUEST)
     if not claims:
         return 'Unauthorized', 401
-    users_dao.create_user(claims['sub'], {})
+    new_data = request.get_json()
+    users_dao.create_user(claims['sub'], new_data)
     return 'OK', 200
 
 
-@app.route('/user/data/formcompleted')
+@app.route('/user/data/update')
 def has_completed_form():
     id_token = request.headers['Authorization'].split(' ').pop()
     claims = google.oauth2.id_token.verify_firebase_token(
         id_token, HTTP_REQUEST)
     if not claims:
         return 'Unauthorized', 401
-    # user_data = query_user_data(claims['sub'])[0]
-    # result = {"status":user_data.has_completed_form}
-    # return jsonify(result)
-
-
-@app.route('/user/data/updateformcompletionstatus', methods=['POST', 'PUT'])
-def update_form_status():
-    id_token = request.headers['Authorization'].split(' ').pop()
-    claims = google.oauth2.id_token.verify_firebase_token(
-        id_token, HTTP_REQUEST)
-    if not claims:
-        return 'Unauthorized', 401
-    # [START gae_python_create_entity]
-    # data =  request.get_json()
-    # query_result =query_user_data(claims['sub'])
-    # user_data = query_result[0]
-    # user_data.has_completed_form = data['completedform']
-    # user_data.put()
-    # query_result[1]["has_completed_form"] = data['completedform']
-    # return jsonify(query_result[1])
+    new_values = request.get_json()
+    users_dao.update_user_properties(claims['sub'],new_values)
+    return 'OK', 200
 
 
 @app.errorhandler(500)
