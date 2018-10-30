@@ -177,6 +177,7 @@ button[class = 'next'] {
   font-size: 20px;
   outline-width: 0;
   border: none;
-  font-family: 'Raleway-Bold'
+  font-family: 'Raleway-Bold';
+  cursor: pointer;
 }
 

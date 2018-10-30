@@ -22,6 +22,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 }
 
+@font-face {
+
+   font-family: 'Raleway-Bold' ;
+   src:
+   url('../DocumentFonts/Raleway-Bold.ttf')
+   format('truetype');
+
+}
+
 /* reset */
 
 html,
@@ -195,5 +204,22 @@ h1 {
   font-size: 20px;
   text-align: center;
   color: #FFFFFF;
+}
+
+button[class = 'next'] {
+  float: right;
+  display: inline-block;
+  width: auto;
+  overflow: hidden;
+  padding: 12px 20px;
+  margin-top: 5px;
+  border-radius: 35px;
+  background: #C1C1C1;
+  color :#FFFFFF;
+  font-size: 20px;
+  outline-width: 0;
+  border: none;
+  font-family: 'Raleway-Bold';
+  cursor: pointer;
 }
 
