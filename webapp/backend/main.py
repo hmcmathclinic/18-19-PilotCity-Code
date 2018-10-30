@@ -25,7 +25,6 @@ from user_dao_impl import UserDaoImpl
 # URLFetch.
 requests_toolbelt.adapters.appengine.monkeypatch()
 HTTP_REQUEST = google.auth.transport.requests.Request()
-
 app = Flask(__name__)
 flask_cors.CORS(app)
 users_dao = UserDaoImpl()
@@ -50,8 +49,8 @@ def create_entry():
         id_token, HTTP_REQUEST)
     if not claims:
         return 'Unauthorized', 401
-    new_data = request.get_json()
-    users_dao.create_user(claims['sub'], new_data)
+    new_user_data = request.get_json()
+    users_dao.create_user(claims['sub'], new_user_data)
     return 'OK', 200
 
 

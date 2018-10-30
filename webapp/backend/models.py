@@ -1,7 +1,29 @@
 from google.appengine.ext import ndb
 import logging
 
-class Address(ndb.Model):
+
+class BaseModel(ndb.Model):
+
+    @classmethod
+    def entity_from_dict(cls, parent_key, data_dict):
+        valid_properties = {}
+        for cls_property in cls._properties:
+            if cls_property in data_dict:
+                valid_properties.update({cls_property: data_dict[cls_property]})
+        #logging.info(valid_properties)
+        # Update the id from the data_dict
+        if 'id' in data_dict: # if creating a new entity
+                valid_properties['id'] = data_dict['id']
+        # Add the parent
+        valid_properties['parent'] = parent_key
+        try:
+            entity = cls(**valid_properties)
+        except Exception as e:
+            logging.exception('Could not create entity \n' + repr(e))
+        return entity
+
+
+class Address(BaseModel):
 
     address_type = ndb.StringProperty()  # E.g., 'home', 'work'
     street = ndb.StringProperty()
@@ -9,7 +31,7 @@ class Address(ndb.Model):
     is_headquarters = ndb.BooleanProperty()
 
 
-class Course(ndb.Model):
+class Course(BaseModel):
 
     course_name = ndb.StringProperty()
     room_number = ndb.IntegerProperty()
@@ -18,7 +40,7 @@ class Course(ndb.Model):
     grade_level = ndb.StringProperty()
 
 
-class BasicUserData(ndb.Model):
+class BasicUserData(BaseModel):
     """NDB model class for a user's note.
 
     Key is user id from decrypted token.
@@ -32,26 +54,8 @@ class BasicUserData(ndb.Model):
     email_address = ndb.StringProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
 
-    @classmethod
-    def entity_from_dict(cls, parent_key, data_dict):
-        valid_properties = {}
-        for cls_property in cls._properties:
-            if cls_property in data_dict:
-                valid_properties.update({cls_property: data_dict[cls_property]})
-        #logging.info(valid_properties)
-        # Update the id from the data_dict
-        if 'id' in data_dict: # if creating a new entity
-                valid_properties['id'] = data_dict['id']
-        # Add the parent
-        valid_properties['parent'] = parent_key
-        try:
-            entity = cls(**valid_properties)
-        except Exception as e:
-            logging.exception('Could not create entity \n' + repr(e))
-        return entity
 
-
-class TeacherUserData(ndb.Model):
+class TeacherUserData(BaseModel):
 
     user_id = ndb.StringProperty()
     school_district_name = ndb.StringProperty()
@@ -59,26 +63,8 @@ class TeacherUserData(ndb.Model):
     school_address = ndb.StringProperty()
     courses = ndb.StructuredProperty(Course, repeated=True)
 
-    @classmethod
-    def entity_from_dict(cls, parent_key, data_dict):
-        valid_properties = {}
-        for cls_property in cls._properties:
-            if cls_property in data_dict:
-                valid_properties.update({cls_property: data_dict[cls_property]})
-        #logging.info(valid_properties)
-        # Update the id from the data_dict
-        if 'id' in data_dict: # if creating a new entity
-                valid_properties['id'] = data_dict['id']
-        # Add the parent
-        valid_properties['parent'] = parent_key
-        try:
-            entity = cls(**valid_properties)
-        except Exception as e:
-            logging.exception('Could not create entity \n' + repr(e))
-        return entity
 
-
-class EmployerUserData(ndb.Model):
+class EmployerUserData(BaseModel):
 
     user_id = ndb.StringProperty()
     company_name = ndb.StringProperty()
@@ -86,46 +72,11 @@ class EmployerUserData(ndb.Model):
     sectors = ndb.StringProperty(repeated=True)
     addresses = ndb.StructuredProperty(Address, repeated=True)
 
-    @classmethod
-    def entity_from_dict(cls, parent_key, data_dict):
-        valid_properties = {}
-        for cls_property in cls._properties:
-            if cls_property in data_dict:
-                valid_properties.update({cls_property: data_dict[cls_property]})
-        #logging.info(valid_properties)
-        # Update the id from the data_dict
-        if 'id' in data_dict: # if creating a new entity
-                valid_properties['id'] = data_dict['id']
-        # Add the parent
-        valid_properties['parent'] = parent_key
-        try:
-            entity = cls(**valid_properties)
-        except Exception as e:
-            logging.exception('Could not create entity \n' + repr(e))
-        return entity
 
-
-class StudentUserData(ndb.Model):
+class StudentUserData(BaseModel):
     user_id = ndb.StringProperty()
     school_district_name = ndb.StringProperty()
     school_name = ndb.StringProperty()
     grade_level = ndb.StringProperty()
 
-    @classmethod
-    def entity_from_dict(cls, parent_key, data_dict):
-        valid_properties = {}
-        for cls_property in cls._properties:
-            if cls_property in data_dict:
-                valid_properties.update({cls_property: data_dict[cls_property]})
-        #logging.info(valid_properties)
-        # Update the id from the data_dict
-        if 'id' in data_dict: # if creating a new entity
-                valid_properties['id'] = data_dict['id']
-        # Add the parent
-        valid_properties['parent'] = parent_key
-        try:
-            entity = cls(**valid_properties)
-        except Exception as e:
-            logging.exception('Could not create entity \n' + repr(e))
-        return entity
 
