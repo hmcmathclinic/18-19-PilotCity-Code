@@ -9,6 +9,15 @@
 
 @font-face {
 
+   font-family: 'Raleway-Bold' ;
+   src:
+   url('../DocumentFonts/Raleway-Bold.ttf')
+   format('truetype');
+
+}
+
+@font-face {
+
    font-family: 'Raleway-ExtraBold' ;
    src:
    url('../DocumentFonts/Raleway-ExtraBold.ttf')
@@ -131,4 +140,21 @@
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+}
+
+button[class = 'next'] {
+  float: right;
+  display: inline-block;
+  width: auto;
+  overflow: hidden;
+  padding: 12px 20px;
+  margin-top: 5px;
+  border-radius: 35px;
+  background: #C1C1C1;
+  color :#FFFFFF;
+  font-size: 20px;
+  outline-width: 0;
+  border: none;
+  font-family: 'Raleway-Bold';
+  cursor: pointer;
 }
