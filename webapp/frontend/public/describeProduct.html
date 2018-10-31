@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style_describeProduct.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="js/main_describeProduct.js"></script>
+  <title>PilotCity</title>
+</head>
+<body onload="main()">
+  <div id="top-box"><div id = "describe">Describe your Product</div><form id="searchForm" action="javascript:search();" autocomplete="off"> 
+	  	<div class="autocomplete" style="width:300px;">
+	  		<input type="text" id="searchItem" class="form-control" placeholder="Example: Mixed Reality Head Mounted Display"> 
+	  	</div> 
+	  </form>
+  </div> 
+ 
+  <div id="bottom-box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+  <div id="big-box">
+  <div class="draggableItem" id="Mixed Reality Head Mounted Display" draggable="false" ondragstart="drag(event,'addMixedRealityHeadMountedDisplay')" onclick="add(this, 'addMixedRealityHeadMountedDisplay')">
+    <span id='addMixedRealityHeadMountedDisplay'>+</span> Mixed Reality Head Mounted Display</div>
+  <div  class="draggableItem" id="Microsoft Hololens" draggable="false" ondragstart="drag(event,'addMicrosoftHololens')" onclick="add(this, 'addMicrosoftHololens')"> 
+    <span id='addMicrosoftHololens'">+</span>  Microsoft Hololens</div>
+  </div>
+<!--   <div class="draggableItem" id="Space" draggable="false" ondragstart="drag(event,'addSpace')" onclick="add(this, 'addSpace')"> 
+    <span id='addSpace'>+</span>  Space</div>
+  <div  class="draggableItem" id="Sustainability" draggable="false" ondragstart="drag(event,'addSustainability')" onclick="add(this, 'addSustainability')"> 
+    <span id='addSustainability'>+</span> Sustainability</div>
+  <div class="draggableItem" id="Artificial Intelligence" draggable="false" ondragstart="drag(event,'addArtificialIntelligence')" onclick="add(this, 'addArtificialIntelligence')"> 
+    <span id='addArtificialIntelligence'>+</span>  Artificial Intelligence</div>
+  <div  class="draggableItem" id="Automotive" draggable="false" ondragstart="drag(event,'addAutomotive')" onclick="add(this, 'addAutomotive')"> 
+    <span id='addAutomotive'>+</span> Automotive</div>
+  <div class="draggableItem" id="Bioprinting" draggable="false" ondragstart="drag(event,'addBioprinting')" onclick="add(this, 'addBioprinting')"> 
+    <span id='addBioprinting'>+</span>  Bioprinting</div>
+  <div  class="draggableItem" id="Data" draggable="false" ondragstart="drag(event,'addData')" onclick="add(this, 'addData')"> 
+    <span id='addData'>+</span> Data</div>
+  <div class="draggableItem" id="Gaming" draggable="false" ondragstart="drag(event,'addGaming')" onclick="add(this, 'addGaming')"> 
+    <span id='addGaming'>+</span> Gaming</div>
+  <div  class="draggableItem" id="Healthcare" draggable="false" ondragstart="drag(event,'addHealthcare')" onclick="add(this, 'addHealthcare')"> 
+    <span id='addHealthcare'>+</span> Healthcare</div>
+  </div> -->
+   <div class = 'button'>
+    <a href="add_department.html"><button  class = 'next'/> Next </button></a>
+  </div>
+</body>
+</html>
