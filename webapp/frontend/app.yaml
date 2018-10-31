@@ -6,8 +6,8 @@ threadsafe: true
 handlers:
 # root
 - url: /
-  static_files: index.html
-  upload: index.html
+  static_files: frontPage/front_page.html
+  upload: frontPage/front_page.html
 
 - url: /(.+)
   static_files: \1
