@@ -166,7 +166,7 @@ body {
     background-position: center;
     font-size: 100%;
     min-height: 100vh;
-    background-image: url("background.jpg");
+    background-image: url("../images/background.jpg");
 }
 
 div[class = 'button'] {
