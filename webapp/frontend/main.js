@@ -55,8 +55,7 @@ $(function(){
 
         user.getToken().then(function(idToken) {
           userIdToken = idToken;
-
-          createUserEntryInDb()
+          createUserEntryInDb({})
           $('#user').text(welcomeName);
           $('#logged-in').show();
 
@@ -94,46 +93,46 @@ $(function(){
   }
   // [END gae_python_firebase_login
 
-  function createUserEntryInDb() {
-    $.ajax(backendHostUrl + '/user/data/onboarding', {
+  function createUserEntryInDb(userProperties) {
+    $.ajax(backendHostUrl + '/user/onboarding', {
       /* Set header for the XMLHttpRequest to get data from the web server
       associated with userIdToken */
-      headers: {
-        'Authorization': 'Bearer ' + userIdToken
-      }
-    }).then(function(data){
-      fetchUserData()
-    });
-  }
-
-  function fetchUserData() {
-    $.ajax(backendHostUrl + '/user/data', {
-      /* Set header for the XMLHttpRequest to get data from the web server
-      associated with userIdToken */
-      headers: {
-        'Authorization': 'Bearer ' + userIdToken
-      }
-    }).then(function(data){
-      console.log(data)
-      console.log("Fetched user data successfully")
-      updateFormCompletionStatus(false)
-    });
-  }
-
-  function updateFormCompletionStatus(status) {
-    $.ajax(backendHostUrl + '/user/data/updateformcompletionstatus', {
       headers: {
         'Authorization': 'Bearer ' + userIdToken
       },
       method: 'POST',
-      data: JSON.stringify({'completedform': status}),
+      data: JSON.stringify(userProperties),
       contentType : 'application/json'
     }).then(function(data){
-      console.log("update form completion status successful")
-      console.log(data)
+      console.log("Created user entry in DB successfully")
     });
   }
 
+  function fetchUserData(userId) {
+    $.ajax(backendHostUrl + '/user/data', {
+      /* Set header for the XMLHttpRequest to get data from the web server
+      associated with userIdToken */
+      headers: {
+        'Authorization': 'Bearer ' + userId
+      }
+    }).then(function(data){
+      console.log(data)
+      console.log("Fetched user data successfully")
+    });
+  }
+
+  function updateUserProperties(userId,newValues) {
+    $.ajax(backendHostUrl + '/user/data/updateformcompletionstatus', {
+      headers: {
+        'Authorization': 'Bearer ' + userId
+      },
+      method: 'POST',
+      data: JSON.stringify(newValues),
+      contentType : 'application/json'
+    }).then(function(data){
+      console.log("Update of user properties successful")
+    });
+  }
 
   // Sign out a user
   var signOutBtn =$('#sign-out');
@@ -146,42 +145,6 @@ $(function(){
       console.log(error);
     });
   });
-
-  // Save a teacher/employer/student response to the backend
-
-  //   $('#save-res').click(function(event) {
-  //     event.preventDefault();
-  //
-  //   if ($('#radioEmployer').prop('checked')) {
-  //     window.location = 'googleform_employer.html';
-  //   }
-  //
-  //   else if ($('#radioTeacher').prop('checked')) {
-  //     window.location = 'googleform_teacher.html';
-  //   }
-  //
-  //
-  //   /*
-  //   var noteField = $('#note-content');
-  //   var note = noteField.val();
-  //   noteField.val("");
-  //
-  //   /* Send note data to backend, storing in database with existing data
-  //   associated with userIdToken */
-  //   /*
-  //   $.ajax(backendHostUrl + '/notes', {
-  //     headers: {
-  //       'Authorization': 'Bearer ' + userIdToken
-  //     },
-  //     method: 'POST',
-  //     data: JSON.stringify({'message': note}),
-  //     contentType : 'application/json'
-  //   }).then(function(){
-  //     // Refresh notebook display.
-  //     fetchNotes();
-  //   }); */
-  //
-  // });
 
   configureFirebaseLogin();
   configureFirebaseLoginWidget();
