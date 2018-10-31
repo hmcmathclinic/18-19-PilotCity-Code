@@ -192,6 +192,9 @@ body {
     display: inline-block;
     vertical-align: middle;
     line-height: 50px;
+    position:absolute;
+    top: 65%;
+    left: 12%;
 }
 
  .employer {
@@ -207,9 +210,17 @@ body {
     display: inline-block;
     vertical-align: middle;
     line-height: 50px;
+    position:absolute;
+    top: 65%;
+    left: 35%;
 }
 
 h1 {
+    font-family: 'Raleway-Bold';
+    text-align: center;
+}
+
+a {
     font-family: 'Raleway-Bold';
     text-align: center;
 }
