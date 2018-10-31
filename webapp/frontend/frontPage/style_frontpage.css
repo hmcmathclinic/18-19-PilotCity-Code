@@ -169,6 +169,26 @@ body {
     background-image: url("background.jpg");
 }
 
+div[class = 'button'] {
+    margin: 30px;
+  }
+
+ button[class = 'next'] {
+    float: right;
+    display: inline-block;
+    width: auto;
+    overflow: hidden;
+    padding: 12px 20px;
+    margin-top: 5px;
+    border-radius: 35px;
+    background: #C1C1C1;
+    color :#FFFFFF;
+    font-size: 20px;
+    outline-width: 0;
+    border: none;
+    font-family: 'Raleway-Bold';
+    cursor: pointer;
+  }
 
 .frontPage{
     color: white;
