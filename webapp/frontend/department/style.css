@@ -276,7 +276,8 @@ input[id = 'add-row'] {
   font-size: 20px;
   outline-width: 0;
   border-style: dotted;
-  font-family: 'Raleway-Bold' ;
+  font-family: 'Raleway-Bold';
+  cursor:pointer;
 }
 
 input[id = 'fake-add-row'] {
@@ -293,7 +294,7 @@ input[id = 'fake-add-row'] {
   font-size: 20px;
   outline-width: 0;
   border-style: dotted;
-  font-family: 'Raleway-Italic' ;
+  font-family: 'Raleway-Italic';
 }
 
 button[class = 'next'] {
@@ -309,7 +310,8 @@ button[class = 'next'] {
   font-size: 20px;
   outline-width: 0;
   border: none;
-  font-family: 'Raleway-Bold'
+  font-family: 'Raleway-Bold';
+  cursor:pointer;
 }
 
 label {
