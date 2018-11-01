@@ -9,9 +9,61 @@ handlers:
   static_files: public/index.html
   upload: public/index.html
 
-- url: /aboutyou
+- url: /onboarding/0
   static_files: public/who_are_you.html
   upload: public/who_are_you.html
+
+- url: /onboarding/1
+  static_files: public/story_teacher.html
+  upload: public/story_teacher.html
+
+- url: /onboarding/2
+  static_files: public/story_employer.html
+  upload: public/story_employer.html
+
+- url: /onboarding/3
+  static_files: public/story_student.html
+  upload: public/story_student.html
+
+- url: /onboarding/4
+  static_files: public/add_courses.html
+  upload: public/add_courses.html
+
+- url: /onboarding/5
+  static_files: public/employerAddress.html
+  upload: public/employerAddress.html
+
+- url: /onboarding/6
+  static_files: public/what_sector.html
+  upload: public/what_sector.html
+  
+- url: /onboarding/7
+  static_files: public/describeIndustry.html
+  upload: public/describeIndustry.html
+
+- url: /onboarding/8
+  static_files: public/product_service.html
+  upload: public/product_service.html
+
+- url: /onboarding/9
+  static_files: public/describeProduct.html
+  upload: public/describeProduct.html
+
+- url: /onboarding/10
+  static_files: public/describeService.html
+  upload: public/describeService.html
+
+- url: /onboarding/11
+  static_files: public/add_department.html
+  upload: public/add_department.html
+
+- url: /onboarding/12
+  static_files: public/describeBottomLine.html
+  upload: public/describeBottomLine.html
+
+- url: /onboarding/13
+  static_files: public/describeFreshMinds.html
+  upload: public/describeFreshMinds.html
 
 - url: /(.+)
   static_files: public/\1
