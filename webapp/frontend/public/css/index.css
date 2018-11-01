@@ -236,13 +236,8 @@ div[class = 'button'] {
 }
 
 header img {
-    /*height: 70px;*/
     margin-left: 40px;
 }
-
-/*main {
-    color: white;
-}*/
 
 header {
     background-color: rgb(64,64,64);
@@ -260,17 +255,17 @@ header * {
 }
 
 header li {
-    margin: 30px;
-    font-family: 'Raleway';
+    margin-left: 500px;
+    font-family: 'Raleway-Regular';
     font-size: 20px;
 }
 
 header li a {
     color: white;
     text-decoration: none;
-    margin: 200px;
     font-family: 'Raleway-Bold';
     font-size: 23px;
+    text-align: right;
 }
 
 h1 {
