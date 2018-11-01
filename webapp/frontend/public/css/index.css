@@ -235,6 +235,39 @@ div[class = 'button'] {
     left: 35%;
 }
 
+header img {
+    margin-left: 40px;
+}
+
+header {
+    background-color: rgb(64,64,64);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin-left: 500px;
+    font-family: 'Raleway-Regular';
+    font-size: 20px;
+}
+
+header li a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Raleway-Bold';
+    font-size: 23px;
+    text-align: right;
+}
+
 h1 {
     font-family: 'Raleway-Bold';
     text-align: center;
