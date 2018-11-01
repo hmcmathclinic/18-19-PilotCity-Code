@@ -5,10 +5,14 @@ threadsafe: true
 
 handlers:
 # root
-- url: /
-  static_files: frontPage/front_page.html
-  upload: frontPage/front_page.html
+- url: /$
+  static_files: public/index.html
+  upload: public/index.html
+
+- url: /aboutyou
+  static_files: public/who_are_you.html
+  upload: public/who_are_you.html
 
 - url: /(.+)
-  static_files: \1
-  upload: (.+)
+  static_files: public/\1
+  upload: public/(.*)
