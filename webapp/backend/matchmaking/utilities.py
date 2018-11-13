@@ -70,6 +70,11 @@ def cosine_similarity(vec1, vec2, lens1, lens2):
     dot_product = numpy.dot(vec1, vec2)
     return dot_product / (lens1 * lens2)
 
+def score(w1, w2):
+    w1_vector, w1_len = get_vec(w1, wordL, array, lengths)
+    w2_vector, w2_len = get_vec(w2, wordL, array, lengths)
+    return cosine_similarity(w1_vector, w2_vector, w1_len, w2_len)
+
 def test():
     ''' runs the tests cases provided '''
     # test 1

@@ -1,23 +1,6 @@
 import numpy as np
-from utilities import *
-
-def unit_vector(vector):
-    """ Returns the unit vector of the vector.  """
-    return vector / np.linalg.norm(vector)-
-
-def angle_between(v1, v2):
-    """ Returns the angle in radians between vectors 'v1' and 'v2'::
-
-            >>> angle_between((1, 0, 0), (0, 1, 0))
-            1.5707963267948966
-            >>> angle_between((1, 0, 0), (1, 0, 0))
-            0.0
-            >>> angle_between((1, 0, 0), (-1, 0, 0))
-            3.141592653589793
-    """
-    v1_u = unit_vector(v1)
-    v2_u = unit_vector(v2)
-    return np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+import math
+import utilities
 
 def get_industry(employer_id):
     return ["Drones", "Robotics"]
@@ -54,4 +37,22 @@ def get_score(s1, s2):
         for w2 in s2:
             # send w1 and w2 to GloVe model
             # square result 
-            s += angle_between
+            s += score(w1, w2)**2
+    return math.sqrt(s)
+
+def score_teacher(employer_id, teacher_id):
+    cit = get_courses_industry_and_tools(teacher_id)
+    tools = set(get_tools_tech_skills(teacher_id))
+
+    industry = set(get_industry(employer_id))
+    flock = set(get_flock(employer_id))
+    product  = set(get_product(employer_id)) 
+    service = set(get_service(employer_id)) 
+
+    industry_score = get_score(cit, industry)
+    flock_score = get_score(cit, flock)
+    product_score = get_score(product, tools)
+    servce_score = get_score(service, tools)
+
+    return math.avg(industry_score, flock_score, product_score, servce_score)
+
