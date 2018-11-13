@@ -4,15 +4,15 @@ class UserDao(abc.ABC):
 
 
     @abc.abstractmethod
-    def fetch_user_data(self, user_id):
+    def fetch_employer_data(self, employer_id):
         pass
 
 
     @abc.abstractmethod
-    def create_user(self,user_id, new_values):
+    def fetch_student_data(self, student_id):
         pass
 
 
     @abc.abstractmethod
-    def update_user_properties(self, user_id, new_values):
+    def fetch_teacher_data(self, teacher_id):
         pass
