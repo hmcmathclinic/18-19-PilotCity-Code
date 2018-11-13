@@ -3,3 +3,4 @@
 lib
 py2
 *.pyc
+/webapp/backend/serviceAccountKey.json
