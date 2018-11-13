@@ -46,3 +46,11 @@ def get_product_and_service(employer_id):
 def get_courses_industry_and_tools(teacher_id):
     courses_industry_and_tools = get_courses(teacher_id) + get_industry_preferences(teacher_id) + get_tools_tech_skills(teacher_id)
     return set(courses_industry_and_tools)
+
+def get_score(s1, s2):
+    s = 0
+    for w1 in s1:
+        for w2 in s2:
+            # send w1 and w2 to GloVe model
+            # square result 
+            s += angle_between
