@@ -16,7 +16,7 @@ class Matching:
         return self.employer_data["Industry Keywords"]
 
     def get_product(self):
-        return ["Robots"]
+        return ["Microsoft", "Robots"]
 
     def get_service(self):
         return ["Metal", "Manufacturing"]
