@@ -94,10 +94,11 @@ def main():
     npy = args.npyFILE
     save_glove_vectors(wordL, array, npy)
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(usage='utilities.py [-h] GloVeFILE npyFILE')
-    parser.add_argument('GloVeFILE', type=argparse.FileType("r"), help='a GloVe text file to read from')
-    parser.add_argument('npyFILE', type=argparse.FileType("wb"), help='an .npy file to write the saved numpy data to')
-    args = parser.parse_args()
-    main()
+fp = open("glove.6B.100d.npy", "rb")
+wordL, array, lengths =load_glove_vectors(fp)
+#parser = argparse.ArgumentParser(usage='utilities.py [-h] GloVeFILE npyFILE')
+#parser.add_argument('GloVeFILE', type=argparse.FileType("r"), help='a GloVe text file to read from')
+#parser.add_argument('npyFILE', type=argparse.FileType("wb"), help='an .npy file to write the saved numpy data to')
+#args = parser.parse_args()
+# main()
     
