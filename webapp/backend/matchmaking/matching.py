@@ -97,8 +97,10 @@ class Matching:
 
         return (courses_score + industry_preferences_score + tools_score)/3.0
 
-def main(): 
-    match = Matching("User1", "User2")
+def main():
+    teacher = sys.argv[1:][0]
+    employer = sys.argv[1:][1]
+    match = Matching(teacher, employer)
     print("Teacher score is ", match.score_teacher())
     print("Employer score is ", match.score_employer())
 
