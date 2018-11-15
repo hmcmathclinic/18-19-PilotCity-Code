@@ -70,6 +70,11 @@ def cosine_similarity(vec1, vec2, lens1, lens2):
     dot_product = numpy.dot(vec1, vec2)
     return dot_product / (lens1 * lens2)
 
+def score(w1, w2):
+    w1_vector, w1_len = get_vec(w1, wordL, array, lengths)
+    w2_vector, w2_len = get_vec(w2, wordL, array, lengths)
+    return cosine_similarity(w1_vector, w2_vector, w1_len, w2_len)
+
 def test():
     ''' runs the tests cases provided '''
     # test 1
@@ -89,10 +94,11 @@ def main():
     npy = args.npyFILE
     save_glove_vectors(wordL, array, npy)
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(usage='utilities.py [-h] GloVeFILE npyFILE')
-    parser.add_argument('GloVeFILE', type=argparse.FileType("r"), help='a GloVe text file to read from')
-    parser.add_argument('npyFILE', type=argparse.FileType("wb"), help='an .npy file to write the saved numpy data to')
-    args = parser.parse_args()
-    main()
+fp = open("glove.6B.100d.npy", "rb")
+wordL, array, lengths =load_glove_vectors(fp)
+#parser = argparse.ArgumentParser(usage='utilities.py [-h] GloVeFILE npyFILE')
+#parser.add_argument('GloVeFILE', type=argparse.FileType("r"), help='a GloVe text file to read from')
+#parser.add_argument('npyFILE', type=argparse.FileType("wb"), help='an .npy file to write the saved numpy data to')
+#args = parser.parse_args()
+# main()
     
