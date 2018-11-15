@@ -1,3 +1,4 @@
 #!/bin/sh
 
-python /app/main.py
+# python main.py
+gunicorn -b :5000 main:app
