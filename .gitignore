@@ -3,4 +3,5 @@
 lib
 py2
 *.pyc
-/webapp/backend/serviceAccountKey.json
+/webapp/backend/matchmaking/serviceAccountKey.json
+/webapp/backend/matchmaking/glove.6B.100d.npy
