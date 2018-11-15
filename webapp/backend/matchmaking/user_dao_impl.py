@@ -7,7 +7,7 @@ class UserDaoImpl(UserDao):
     
 
     def __init__(self):
-        self.cred = credentials.Certificate('serviceAccountKey.json')
+        self.cred = credentials.Certificate('../serviceAccountKey.json')
         firebase_admin.initialize_app(self.cred, {
             'databaseURL' : 'https://test-database-5c3f8.firebaseio.com'
         })
@@ -29,4 +29,10 @@ class UserDaoImpl(UserDao):
         student_data = self.db.collection("users").document(student_id).get()
         return student_data.to_dict()
 
+
+    def fetch_all_teachers(self):
+        out = []
+        for doc in self.db.collection("users").get():
+            out.append(doc.to_dict())
+        return out
 
