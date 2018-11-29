@@ -15,55 +15,61 @@
 import logging
 from flask import Flask, jsonify, request
 import flask_cors
-from google.appengine.ext import ndb
+# from google.appengine.ext import ndb
 import google.auth.transport.requests
 import google.oauth2.id_token
-import requests_toolbelt.adapters.appengine
-from user_dao_impl import UserDaoImpl
+# import requests_toolbelt.adapters.appengine
+# from user_dao_impl import UserDaoImpl
 
 # Use the App Engine Requests adapter. This makes sure that Requests uses
 # URLFetch.
-requests_toolbelt.adapters.appengine.monkeypatch()
-HTTP_REQUEST = google.auth.transport.requests.Request()
+# requests_toolbelt.adapters.appengine.monkeypatch()
+# HTTP_REQUEST = google.auth.transport.requests.Request()
 app = Flask(__name__)
 flask_cors.CORS(app)
-users_dao = UserDaoImpl()
+# users_dao = UserDaoImpl()
 
 
-@app.route('/user/data', methods=['GET'])
-def get_user_info():
-    id_token = request.headers['Authorization'].split(' ').pop()
-    claims = google.oauth2.id_token.verify_firebase_token(
-        id_token, HTTP_REQUEST)
-    if not claims:
-        return 'Unauthorized', 401
-    # [END gae_python_verify_token]
-    data = users_dao.fetch_user_data(claims['sub'])
-    return jsonify(data)
+# @app.route('/user/data', methods=['GET'])
+# def get_user_info():
+#     id_token = request.headers['Authorization'].split(' ').pop()
+#     claims = google.oauth2.id_token.verify_firebase_token(
+#         id_token, HTTP_REQUEST)
+#     if not claims:
+#         return 'Unauthorized', 401
+#     # [END gae_python_verify_token]
+#     data = users_dao.fetch_user_data(claims['sub'])
+#     return jsonify(data)
 
 
-@app.route('/user/onboarding')
-def create_entry():
-    id_token = request.headers['Authorization'].split(' ').pop()
-    claims = google.oauth2.id_token.verify_firebase_token(
-        id_token, HTTP_REQUEST)
-    if not claims:
-        return 'Unauthorized', 401
-    new_user_data = request.get_json()
-    users_dao.create_user(claims['sub'], new_user_data)
-    return 'OK', 200
+# @app.route('/user/onboarding')
+# def create_entry():
+#     id_token = request.headers['Authorization'].split(' ').pop()
+#     claims = google.oauth2.id_token.verify_firebase_token(
+#         id_token, HTTP_REQUEST)
+#     if not claims:
+#         return 'Unauthorized', 401
+#     new_user_data = request.get_json()
+#     users_dao.create_user(claims['sub'], new_user_data)
+#     return 'OK', 200
 
 
-@app.route('/user/data/update')
-def has_completed_form():
-    id_token = request.headers['Authorization'].split(' ').pop()
-    claims = google.oauth2.id_token.verify_firebase_token(
-        id_token, HTTP_REQUEST)
-    if not claims:
-        return 'Unauthorized', 401
-    new_values = request.get_json()
-    users_dao.update_user_properties(claims['sub'],new_values)
-    return 'OK', 200
+# @app.route('/user/data/update')
+# def has_completed_form():
+#     id_token = request.headers['Authorization'].split(' ').pop()
+#     claims = google.oauth2.id_token.verify_firebase_token(
+#         id_token, HTTP_REQUEST)
+#     if not claims:
+#         return 'Unauthorized', 401
+#     new_values = request.get_json()
+#     users_dao.update_user_properties(claims['sub'],new_values)
+#     return 'OK', 200
+
+
+@app.route('/hello')
+def hello():
+    name = request.args.get("name")
+    return "Hello, Your Name is {}!".format(name)
 
 
 @app.errorhandler(500)
@@ -72,3 +78,7 @@ def server_error(e):
     logging.exception('An error occurred during a request.')
     return 'An internal error occurred.', 500
 
+if __name__ == '__main__':
+    # This is used when running locally. Gunicorn is used to run the
+    # application on Google App Engine. See entrypoint in app.yaml.
+    app.run(host='127.0.0.1', port=8080, debug=True)
