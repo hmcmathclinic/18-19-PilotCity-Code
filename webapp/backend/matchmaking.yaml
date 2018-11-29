@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matchmaker
+spec:
+  selector:
+    matchLabels:
+      app: matchmaker
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: matchmaker
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: matchmaker
+          image: "gcr.io/silver-osprey-217701/matching:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5000
