@@ -1,10 +1,17 @@
-def arrayToDictionary(user_id):
-	# get data
-	arr = []
-	if isEmployer(user_id):
-		return getEmployerDictFromArray(arr), user_id
-	elif isTeacher(user_id):
-		return getTeacherDictFromArray(arr), user_id
+import push
+
+def getAllUserArrays():
+	users = push.get_all_users()
+	uids = users.keys()
+	for uid in uids:
+		if isEmployer(uid):
+			User_dict, employer_dict = getEmployerDictFromArray(arr, uid)
+			push.put_data_in_users(uid, User_dict) 
+			push.put_data_in_employers(uid, employer_dict) 
+		elif isTeacher(uid):
+			User_dict, teacher_dict = getTeacherDictFromArray(arr, uid)
+			push.put_data_in_users(uid, User_dict) 
+			push.put_data_in_teachers(uid, teacher_dict) 
 
 def isEmployer(arr):
 	if "employer_story" in arr[0].keys():
@@ -16,7 +23,7 @@ def isTeacher(arr):
 		return True
 	return False
 
-def getEmployerDictFromArray(arr):
+def getEmployerDictFromArray(arr, uid):
 	Users_dict = {}
 	employer_dict = {}
 
@@ -28,7 +35,7 @@ def getEmployerDictFromArray(arr):
 	employer_solution_keywords = arr[5]
 	employer_question_keywords = arr[6]
 
-	# Users_dict["email"] = figure out
+	Users_dict["email"] = push.get_user_record(uid)
 	Users_dict["first_name"] = employer_story["first_name"]
 	Users_dict["isEmployer"] = True
 	Users_dict["isStudent"] = False
@@ -46,7 +53,7 @@ def getEmployerDictFromArray(arr):
 
 	return Users_dict, employers_dict
 
-def getTeacherDictFromArray(arr):
+def getTeacherDictFromArray(arr, uid):
 	Users_dict = {}
 	teacher_dict = {}
 
@@ -57,7 +64,7 @@ def getTeacherDictFromArray(arr):
 	teacher_skills = arr[4]
 	teacher_industry = arr[5]
 
-	# Users_dict["email"] = figure out
+	Users_dict["email"] = push.get_user_record(uid)
 	Users_dict["first_name"] = teacher_story["first_name"]
 	Users_dict["isEmployer"] = False
 	Users_dict["isStudent"] = False
@@ -78,7 +85,8 @@ def getTeacherDictFromArray(arr):
 		classroom["school_year"] = school_year
  		classroom["semester"] = getSemester(bad_class["Semester"])
  		classroom["students"] = bad_class["Students"]
- 		# classroom["uid"] = 
+ 		# Follow up and change this
+ 		classroom["uid"] = uid
  		classes = classes.append(classroom)
 	teacher_dict["classes"] = classes
 	teacher_dict["room_number"] = teacher_address.pop("room")
