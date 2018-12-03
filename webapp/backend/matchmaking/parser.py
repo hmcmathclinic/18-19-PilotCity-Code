@@ -61,11 +61,18 @@ def getTeacherDictFromArray(arr, uid):
 	teacher_story = arr[0]["teacher_story"]
 	print(teacher_story)
 	teacher_address = arr[1]["teacher_address"]
-	teacher_class = arr[2]["teacher_class"]
-	teacher_ptype = arr[3]["teacher_ptype"]
-	teacher_skills = arr[4]["teacher_skills"]
-	teacher_industry = arr[5]["teacher_industry"]
+	if "teacher_class" in arr[2]:
+		teacher_class = arr[2]["teacher_class"]
+		teacher_ptype = arr[3]["teacher_ptype"]
+		teacher_skills = arr[4]["teacher_skills"]
+		teacher_industry = arr[5]["teacher_industry"]
 
+	else:
+		teacher_class = []
+		teacher_ptype = arr[2]["teacher_ptype"]
+		teacher_skills = arr[3]["teacher_skills"]
+		teacher_industry = arr[4]["teacher_industry"]
+	
 	Users_dict["email"] = push.get_user_record(uid)
 	Users_dict["first_name"] = teacher_story["first_name"]
 	Users_dict["isEmployer"] = False
