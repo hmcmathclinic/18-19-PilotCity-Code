@@ -83,11 +83,11 @@ def getTeacherDictFromArray(arr, uid):
 		school_year["end"] = 2019
 		school_year["start"] = 2018
 		classroom["school_year"] = school_year
- 		classroom["semester"] = getSemester(bad_class["Semester"])
- 		classroom["students"] = bad_class["Students"]
- 		# Follow up and change this
- 		classroom["uid"] = uid
- 		classes = classes.append(classroom)
+		classroom["semester"] = getSemester(bad_class["Semester"])
+		classroom["students"] = bad_class["Students"]
+		# Follow up and change this
+		classroom["uid"] = uid
+		classes = classes.append(classroom)
 	teacher_dict["classes"] = classes
 	teacher_dict["room_number"] = teacher_address.pop("room")
 	teacher_dict["school_addresss"] = teacher_address
@@ -127,8 +127,7 @@ def getSchedule(bad_class, teacher_ptype):
 					schedule["Friday"] = times
 	return schedule
 
-
-
-
+if __name__ == "__main__":
+	getAllUserArrays()
 
 
