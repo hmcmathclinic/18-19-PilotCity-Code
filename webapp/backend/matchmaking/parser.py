@@ -14,7 +14,6 @@ def getAllUserArrays():
 			push.put_data_in_teachers(uid, teacher_dict) 
 
 def isEmployer(arr):
-	print(arr)
 	if "employer_story" in arr[0].keys():
 		return True
 	return False
@@ -62,7 +61,6 @@ def getTeacherDictFromArray(arr, uid):
 	teacher_dict = {}
 
 	teacher_story = arr[0]["teacher_story"]
-	print(teacher_story)
 	teacher_address = arr[1]["teacher_address"]
 	if "teacher_class" in arr[2]:
 		teacher_class = arr[2]["teacher_class"]
@@ -118,25 +116,27 @@ def getSemester(n):
 	return "Spring" 
 
 def getSchedule(bad_class, teacher_ptype):
-	period = bad_class["Period"]
+	period = 'P' + bad_class["Period"]
 	schedule = {}
 
 	for classroom in teacher_ptype:
 		if classroom["period"] == period:
-			for day in teacher_ptype["days"]:
-				times = {}
-				times["end_time"] = classroom["end_time"]
-				times["start_time"] = classroom["start_time"]
-				if day == "M":
-					schedule["Monday"] = times
-				elif day == "T":
-					schedule["Tuesday"] = times
-				elif day == "W":
-					schedule["Wednesday"] = times
-				elif day == "Th":
-					schedule["Thursday"] = times
-				else:
-					schedule["Friday"] = times
+			for p in teacher_ptype:
+				days = p['days']
+				for day in days:
+					times = {}
+					times["end_time"] = classroom["end_time"]
+					times["start_time"] = classroom["start_time"]
+					if day == "M":
+						schedule["Monday"] = times
+					elif day == "T":
+						schedule["Tuesday"] = times
+					elif day == "W":
+						schedule["Wednesday"] = times
+					elif day == "Th":
+						schedule["Thursday"] = times
+					else:
+						schedule["Friday"] = times
 	return schedule
 
 if __name__ == "__main__":
