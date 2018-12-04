@@ -7,7 +7,7 @@ class UserDaoImpl(UserDao):
     
 
     def __init__(self):
-        self.cred = credentials.Certificate('../serviceAccountKey.json')
+        self.cred = credentials.Certificate('service_account.json')
         firebase_admin.initialize_app(self.cred, {
             'databaseURL' : 'https://test-database-5c3f8.firebaseio.com'
         })
