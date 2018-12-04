@@ -128,7 +128,8 @@ def getSchedule(bad_class, teacher_ptype):
 				times['end_time'] = classroom["end_time"]
 				times['start_time'] = classroom["start_time"]
 				this_class_schedule[day] = times
-		schedule.append(this_class_schedule)
+		if this_class_schedule != {}:
+			schedule.append(this_class_schedule)
 				
 	return schedule
 
