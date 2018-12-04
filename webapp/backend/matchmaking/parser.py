@@ -48,9 +48,12 @@ def getEmployerDictFromArray(arr, uid):
 	employer_dict["address"] = employer_address
 	employer_dict["isProduct"] = employer_solution_type["isProduct"]
 	employer_dict["isService"] = employer_solution_type["isService"]
-	employer_dict["keywords"] = employer_industry
 	employer_dict["position_name"] = employer_story["position_name"]
 	employer_dict["sector"] = employer_sector["sector"]
+	employer_dict["selected_challenge_keywords"] = employer_question_keywords["selected_question_keywords"]
+	employer_dict["selected_industry_keywords"] = employer_industry
+	employer_dict["selected_product_keywords"] = employer_solution_keywords["selected_product_keywords"]
+	employer_dict["selected_service_keywords"] = employer_solution_keywords["selected_service_keywords"]
 
 	return Users_dict, employer_dict
 
