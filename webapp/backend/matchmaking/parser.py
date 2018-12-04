@@ -120,7 +120,7 @@ def getSchedule(bad_class, teacher_ptype):
 	schedule = []
 
 	for classroom in teacher_ptype:
-    	this_class_schedule = {}
+		this_class_schedule = {}
 		if classroom["period"] == period:
 			days = classroom['days']
 			for day in days:
