@@ -121,22 +121,21 @@ def getSchedule(bad_class, teacher_ptype):
 
 	for classroom in teacher_ptype:
 		if classroom["period"] == period:
-			for p in teacher_ptype:
-				days = p['days']
-				for day in days:
-					times = {}
-					times["end_time"] = classroom["end_time"]
-					times["start_time"] = classroom["start_time"]
-					if day == "M":
-						schedule["Monday"] = times
-					elif day == "T":
-						schedule["Tuesday"] = times
-					elif day == "W":
-						schedule["Wednesday"] = times
-					elif day == "Th":
-						schedule["Thursday"] = times
-					else:
-						schedule["Friday"] = times
+			days = classroom['days']
+			for day in days:
+				times = {}
+				times["end_time"] = classroom["end_time"]
+				times["start_time"] = classroom["start_time"]
+				if day == "M":
+					schedule["Monday"] = times
+				elif day == "T":
+					schedule["Tuesday"] = times
+				elif day == "W":
+					schedule["Wednesday"] = times
+				elif day == "Th":
+					schedule["Thursday"] = times
+				else:
+					schedule["Friday"] = times
 	return schedule
 
 if __name__ == "__main__":
