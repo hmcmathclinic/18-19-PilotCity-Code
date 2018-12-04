@@ -117,25 +117,19 @@ def getSemester(n):
 
 def getSchedule(bad_class, teacher_ptype):
 	period = 'P' + bad_class["Period"]
-	schedule = {}
+	schedule = []
 
 	for classroom in teacher_ptype:
+    	this_class_schedule = {}
 		if classroom["period"] == period:
 			days = classroom['days']
 			for day in days:
 				times = {}
-				times["end_time"] = classroom["end_time"]
-				times["start_time"] = classroom["start_time"]
-				if day == "M":
-					schedule["Monday"] = times
-				elif day == "T":
-					schedule["Tuesday"] = times
-				elif day == "W":
-					schedule["Wednesday"] = times
-				elif day == "Th":
-					schedule["Thursday"] = times
-				else:
-					schedule["Friday"] = times
+				times['end_time'] = classroom["end_time"]
+				times['start_time'] = classroom["start_time"]
+				this_class_schedule[day] = times
+		schedule.append(this_class_schedule)
+				
 	return schedule
 
 if __name__ == "__main__":
