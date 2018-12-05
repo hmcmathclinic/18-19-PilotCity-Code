@@ -36,5 +36,13 @@ def put_data_in_employers(user_id, value):
     db.collection("employers_test").document(user_id).set(value)
 
 
+def test_id_generation():
+    db.collection("id").add({"class":1})
+    print(type(db.collection("id")))
+    db.collection("id").document("FIM946hd5tr9e2OMk5Dj").get().add({"selasi":"SELASI"})
+    # FIM946hd5tr9e2OMk5Dj
+
+
 if __name__ == "__main__":
-    get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")
+    # get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")
+    test_id_generation()
