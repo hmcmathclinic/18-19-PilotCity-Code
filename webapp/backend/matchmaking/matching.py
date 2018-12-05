@@ -13,25 +13,28 @@ class Matching:
         self.teacher_data = self.dao.fetch_teacher_data(teacher_id)
 
     def get_industry(self):
-        return self.employer_data["Industry Keywords"]
+        return self.employer_data["selected_industry_keywords"]
 
     def get_product(self):
-        return ["Microsoft", "Robots"]
+        return self.employer_data["selected_product_keywords"]
 
     def get_service(self):
-        return ["Metal", "Manufacturing"]
+        return self.employer_data["selected_service_keywords"]
 
     def get_flock(self):
-        return ["Create", "internet", "application", "transit"]
+        return self.employer_data["selected_challenge_keywords"]
 
     def get_courses(self):
-        return ["Computer Science", "Spanish"]
+        classes = []
+        for classroom in self.teacher_data["classes"]:
+            classes.append(classroom["coursename"])
+        return classes
 
     def get_industry_preferences(self):
-        return ["Drones", "Robotics"]
+        return self.teacher_data["selected_industry_keywords"]
 
     def get_tools_tech_skills(self):
-        return ["Technology", "Robots"]
+        return self.teacher_data["selected_skills_keywords"]
 
     def get_product_and_service(self):
         products_and_services = self.get_product() + self.get_service()
@@ -57,9 +60,14 @@ class Matching:
                 num_pairs = 0
                 for w1 in phrase1.split():
                     for w2 in phrase2.split():
-                        s_inner += utilities.score(w1.lower(), w2.lower())
-                        num_pairs += 1
-                s_inner = s_inner/num_pairs
+                        s += utilities.score(w1.lower(), w2.lower())
+                        if s_inner != 2:
+                            s_inner += s
+                            num_pairs += 1
+                if num_pairs != 0:
+                    s_inner = s_inner/num_pairs
+                else: 
+                    s_inner = 0
                 s += s_inner**2
         return math.sqrt(s)
 
@@ -98,8 +106,8 @@ class Matching:
         return (courses_score + industry_preferences_score + tools_score)/3.0
 
 def main():
-    teacher = sys.argv[1:][0]
-    employer = sys.argv[1:][1]
+    teacher = sys.argv[1]
+    employer = sys.argv[2]
     match = Matching(teacher, employer)
     print("Teacher score is ", match.score_teacher())
     print("Employer score is ", match.score_employer())

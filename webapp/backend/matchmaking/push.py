@@ -4,10 +4,9 @@ from firebase_admin import firestore
 from firebase_admin import auth
 
 
-cred = credentials.Certificate('service_account.json')
-firebase_admin.initialize_app(cred, options={
-    'databaseURL': 'https://my-project-id.firebaseio.com'
-})
+if (not len(firebase_admin._apps)):
+    cred = credentials.Certificate('service_account.json') 
+    default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
