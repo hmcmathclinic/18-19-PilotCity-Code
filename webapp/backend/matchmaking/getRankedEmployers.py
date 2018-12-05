@@ -16,7 +16,7 @@ class RankingEmployers: #teacher scoring the employers
             match = matching.Matching(employer, self.teacher_id)
             scoreE = match.score_employer()
             employer_dict[employer] = scoreE
-        for key, value in sorted(employer_dict.items(), key= lambda x: x[1]):
+        for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
              employer_list.append(key)  
              print(str(key) + ": " + str(value))
         return employer_list

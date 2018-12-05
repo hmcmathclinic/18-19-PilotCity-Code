@@ -60,15 +60,16 @@ class Matching:
                 num_pairs = 0
                 for w1 in phrase1.split():
                     for w2 in phrase2.split():
-                        s += utilities.score(w1.lower(), w2.lower())
-                        if s_inner != 2:
-                            s_inner += s
+                        ss = utilities.score(w1.lower(), w2.lower())
+                        if ss != 2:
+                            s_inner += ss
                             num_pairs += 1
                 if num_pairs != 0:
                     s_inner = s_inner/num_pairs
                 else: 
                     s_inner = 0
                 s += s_inner**2
+                #print(s)
         return math.sqrt(s)
 
     def score_teacher(self):
