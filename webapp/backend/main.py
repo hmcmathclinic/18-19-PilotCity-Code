@@ -15,19 +15,14 @@
 import logging
 from flask import Flask, jsonify, request
 import flask_cors
-# from google.appengine.ext import ndb
 import google.auth.transport.requests
 import google.oauth2.id_token
-# import requests_toolbelt.adapters.appengine
-# from user_dao_impl import UserDaoImpl
+import getRankedEmployers
+import getRankedTeachers
 
-# Use the App Engine Requests adapter. This makes sure that Requests uses
-# URLFetch.
-# requests_toolbelt.adapters.appengine.monkeypatch()
-# HTTP_REQUEST = google.auth.transport.requests.Request()
+
 app = Flask(__name__)
 flask_cors.CORS(app)
-# users_dao = UserDaoImpl()
 
 
 # @app.route('/user/data', methods=['GET'])
@@ -41,29 +36,20 @@ flask_cors.CORS(app)
 #     data = users_dao.fetch_user_data(claims['sub'])
 #     return jsonify(data)
 
-
-# @app.route('/user/onboarding')
-# def create_entry():
-#     id_token = request.headers['Authorization'].split(' ').pop()
-#     claims = google.oauth2.id_token.verify_firebase_token(
-#         id_token, HTTP_REQUEST)
-#     if not claims:
-#         return 'Unauthorized', 401
-#     new_user_data = request.get_json()
-#     users_dao.create_user(claims['sub'], new_user_data)
-#     return 'OK', 200
+@app.route('/matchmaker/classroomranking')
+def classroom_matchmaker():
+    employer_id = request.args.get("employer_id")
+    ranker = getRankedTeachers.RankingTeachers(employer_id)
+    list_of_ids = ranker.getRankedList()
+    return jsonify({"result": list_of_ids})
 
 
-# @app.route('/user/data/update')
-# def has_completed_form():
-#     id_token = request.headers['Authorization'].split(' ').pop()
-#     claims = google.oauth2.id_token.verify_firebase_token(
-#         id_token, HTTP_REQUEST)
-#     if not claims:
-#         return 'Unauthorized', 401
-#     new_values = request.get_json()
-#     users_dao.update_user_properties(claims['sub'],new_values)
-#     return 'OK', 200
+@app.route('/matchmaker/employerranking')
+def employer_matchmaker():
+    teacher_id = request.args.get("teacher_id")
+    ranker = getRankedEmployers.RankingEmployers(teacher_id)
+    list_of_ids = ranker.getRankedList()
+    return jsonify({"result": list_of_ids})
 
 
 @app.route('/hello')

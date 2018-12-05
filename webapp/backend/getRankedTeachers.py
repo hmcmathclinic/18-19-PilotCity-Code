@@ -4,10 +4,10 @@ from user_dao_impl import UserDaoImpl
 
 class RankingTeachers: #emplyer scoring the teachers
 
-    def __init__(self):
+    def __init__(self, employer_id):
         self.dao = UserDaoImpl()
         self.teacher_ids = self.dao.fetch_all_teachers()
-        self.employer_id = self.dao.fetch_all_employers()[0]
+        self.employer_id = employer_id
 
     def getRankedList(self):
         teacher_dict = {}
@@ -21,10 +21,10 @@ class RankingTeachers: #emplyer scoring the teachers
              print(str(key) + ": " + str(value))
         return teacher_list
 
-def main():
+# def main():
     # teacher_id = sys.argv[1]
-    rank = RankingTeachers()
-    print("The list of ranked teachers is ", rank.getRankedList())
+    # rank = RankingTeachers()
+    # print("The list of ranked teachers is ", rank.getRankedList())
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     # main()

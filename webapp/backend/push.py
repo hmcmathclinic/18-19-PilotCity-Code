@@ -4,10 +4,9 @@ from firebase_admin import firestore
 from firebase_admin import auth
 
 
-cred = credentials.Certificate('service_account.json')
-firebase_admin.initialize_app(cred, options={
-    'databaseURL': 'https://my-project-id.firebaseio.com'
-})
+if (not len(firebase_admin._apps)):
+    cred = credentials.Certificate('service_account.json') 
+    default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
@@ -25,24 +24,16 @@ def get_all_users():
 
 
 def put_data_in_users(user_id, value):
-    db.collection("Users_test").document(user_id).set(value)
+    db.collection("Users").document(user_id).set(value)
 
 
 def put_data_in_teachers(user_id, value):
-    db.collection("teachers_test").document(user_id).set(value)
+    db.collection("teachers").document(user_id).set(value)
 
 
 def put_data_in_employers(user_id, value):
-    db.collection("employers_test").document(user_id).set(value)
-
-
-def test_id_generation():
-    db.collection("id").add({"class":1})
-    print(type(db.collection("id")))
-    db.collection("id").document("FIM946hd5tr9e2OMk5Dj").get().add({"selasi":"SELASI"})
-    # FIM946hd5tr9e2OMk5Dj
+    db.collection("employers").document(user_id).set(value)
 
 
 if __name__ == "__main__":
-    # get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")
-    test_id_generation()
+    get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")
