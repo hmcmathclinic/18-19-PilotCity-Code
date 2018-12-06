@@ -122,14 +122,14 @@ def getSchedule(bad_class, teacher_ptype):
 	for classroom in teacher_ptype:
 		if classroom["period"] == period:
 			days = classroom['days']
-			this_class_schedule = {}
 			for day in days:
+				this_class_schedule = {}
 				times = {}
 				times['end_time'] = classroom["end_time"]
 				times['start_time'] = classroom["start_time"]
 				this_class_schedule[day] = times
-			if this_class_schedule != {}:
-				schedule.append(this_class_schedule)
+				if this_class_schedule != {}:
+					schedule.append(this_class_schedule)
 				
 	return schedule
 
