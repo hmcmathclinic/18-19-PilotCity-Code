@@ -14,30 +14,30 @@ class UserDaoImpl(UserDao):
 
 
     def fetch_employer_data(self, employer_id):
-        employer_data = self.db.collection("employers_test").document(employer_id).get()
+        employer_data = self.db.collection("employers").document(employer_id).get()
         # employer_data = db.reference('Employers/{0}'.format(employer_id)).get()
         return employer_data.to_dict()
 
 
     def fetch_teacher_data(self, teacher_id):
-        teacher_data = self.db.collection("teachers_test").document(teacher_id).get()
+        teacher_data = self.db.collection("teachers").document(teacher_id).get()
         return teacher_data.to_dict()
     
 
     def fetch_student_data(self, student_id):
-        student_data = self.db.collection("users").document(student_id).get()
+        student_data = self.db.collection("students").document(student_id).get()
         return student_data.to_dict()
 
 
     def fetch_all_teachers(self):
         out = []
-        for doc in self.db.collection("teachers_test").get():
+        for doc in self.db.collection("teachers").get():
             out.append(doc.id)
         return out
 
     def fetch_all_employers(self):
         out = []
-        for doc in self.db.collection("employers_test").get():
+        for doc in self.db.collection("employers").get():
             out.append(doc.id)
         return out
 
