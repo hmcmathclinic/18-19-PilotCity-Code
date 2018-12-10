@@ -6,20 +6,20 @@ class RankingTeachers: #emplyer scoring the teachers
 
     def __init__(self, employer_id):
         self.dao = UserDaoImpl()
-        self.teacher_ids = self.dao.fetch_all_teachers()
+        self.classroom_ids = self.dao.fetch_all_classrooms()
         self.employer_id = employer_id
 
     def getRankedList(self):
-        teacher_dict = {}
-        teacher_list = []
-        for teacher in self.teacher_ids:
-            match = matching.Matching(self.employer_id, teacher)
-            scoreT = match.score_teacher()
-            teacher_dict[teacher] = scoreT
-        for key, value in sorted(teacher_dict.items(), key= lambda x: x[1], reverse=True):
-             teacher_list.append(key)  
+        classroom_dict = {}
+        classroom_list = []
+        for classroom in self.classroom_ids:
+            match = matching.Matching(self.employer_id, classroom)
+            scoreC = match.score_teacher()
+            classroom_dict[classroom] = scoreC
+        for key, value in sorted(classroom_dict.items(), key= lambda x: x[1], reverse=True):
+             classroom_list.append(key)  
              print(str(key) + ": " + str(value))
-        return teacher_list
+        return classroom_list
 
 # def main():
     # teacher_id = sys.argv[1]

@@ -2,18 +2,18 @@ import matching
 import sys
 from user_dao_impl import UserDaoImpl
 
-class RankingEmployers: #teacher scoring the employers
+class RankingEmployers: #classroom scoring the employers
 
-    def __init__(self, teacher_id):
+    def __init__(self, classroom_id):
         self.dao = UserDaoImpl()
         self.employer_ids = self.dao.fetch_all_employers()
-        self.teacher_id = teacher_id
+        self.classroom_id = classroom_id
 
     def getRankedList(self):
         employer_dict = {}
         employer_list = []
         for employer in self.employer_ids:
-            match = matching.Matching(employer, self.teacher_id)
+            match = matching.Matching(employer, self.classroom_id)
             scoreE = match.score_employer()
             employer_dict[employer] = scoreE
         for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
