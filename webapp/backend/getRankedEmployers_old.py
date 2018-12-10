@@ -1,20 +1,20 @@
-import matching
+import matching_old
 import sys
 from user_dao_impl import UserDaoImpl
 
 class RankingEmployers: #classroom scoring the employers
 
-    def __init__(self, classroom_id):
+    def __init__(self, teacher_id):
         self.dao = UserDaoImpl()
         self.employer_ids = self.dao.fetch_all_employers()
-        self.classroom_id = classroom_id
+        self.teacher_id = teacher_id
 
     def getRankedList(self):
         employer_dict = {}
         employer_list = []
         for employer in self.employer_ids:
-            match = matching.Matching(employer, self.teacher_id)
-            if not "classes" in match.teacher_data or \ 
+            match = matching_old.Matching(employer, self.teacher_id)
+            if not "classes" in match.teacher_data or \
                 not "selected_industry_keywords" in match.teacher_data or \
                 not "selected_skills_keywords" in match.teacher_data:
                 return None # signal that teacher does not have enough data
@@ -31,7 +31,7 @@ class RankingEmployers: #classroom scoring the employers
         return employer_list
 
 def main():
-    teacher_id = sys.argv[1]
+    teacher_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt1"
     rank = RankingEmployers(teacher_id)
     print("The list of ranked employers is ", rank.getRankedList())
 

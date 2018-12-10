@@ -1,54 +1,33 @@
-# Copyright 2016 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import logging
 from flask import Flask, jsonify, request
 import flask_cors
 import google.auth.transport.requests
 import google.oauth2.id_token
-import getRankedEmployers
-import getRankedTeachers
+import getRankedEmployers_old
+import getRankedTeachers_old
 
 
 app = Flask(__name__)
 flask_cors.CORS(app)
 
 
-# @app.route('/user/data', methods=['GET'])
-# def get_user_info():
-#     id_token = request.headers['Authorization'].split(' ').pop()
-#     claims = google.oauth2.id_token.verify_firebase_token(
-#         id_token, HTTP_REQUEST)
-#     if not claims:
-#         return 'Unauthorized', 401
-#     # [END gae_python_verify_token]
-#     data = users_dao.fetch_user_data(claims['sub'])
-#     return jsonify(data)
-
 @app.route('/matchmaker/classroomranking')
 def classroom_matchmaker():
     employer_id = request.args.get("employer_id")
-    ranker = getRankedTeachers.RankingTeachers(employer_id)
+    ranker = getRankedTeachers_old.RankingTeachers(employer_id)
     list_of_ids = ranker.getRankedList()
+    if list_of_ids is None :
+        return jsonify({"result": "Missing keys in user data"})
     return jsonify({"result": list_of_ids})
 
 
 @app.route('/matchmaker/employerranking')
 def employer_matchmaker():
     teacher_id = request.args.get("teacher_id")
-    ranker = getRankedEmployers.RankingEmployers(teacher_id)
+    ranker = getRankedEmployers_old.RankingEmployers(teacher_id)
     list_of_ids = ranker.getRankedList()
+    if list_of_ids is None :
+        return jsonify({"result": "Missing keys in user data"})
     return jsonify({"result": list_of_ids})
 
 
