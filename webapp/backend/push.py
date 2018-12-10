@@ -24,16 +24,16 @@ def get_all_users():
 
 
 def put_data_in_users(user_id, value):
-    db.collection("Users").document(user_id).set(value)
+    db.collection("Users_test").document(user_id).set(value)
 
 
 def put_data_in_teachers(user_id, value):
-    db.collection("teachers").document(user_id).set(value)
+    db.collection("teachers_test").document(user_id).set(value)
 
 
 def put_data_in_employers(user_id, value):
-    db.collection("employers").document(user_id).set(value)
+    db.collection("employers_test").document(user_id).set(value)
 
 
-if __name__ == "__main__":
-    get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")
+# if __name__ == "__main__":
+#     # get_user_record("49Z7lfsLuihpCaJUZBpuZ0g2rGt1")

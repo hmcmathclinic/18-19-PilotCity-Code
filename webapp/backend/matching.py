@@ -5,12 +5,14 @@ from user_dao_impl import UserDaoImpl
 
 class Matching:
 
-    def __init__(self, employer_id, teacher_id):
+    def __init__(self, employer_id, classroom_id):
         self.dao = UserDaoImpl()
         self.employer_id = employer_id
-        self.teacher_id = teacher_id
+        self.classroom_id = classroom_id
         self.employer_data = self.dao.fetch_employer_data(employer_id)
-        self.teacher_data = self.dao.fetch_teacher_data(teacher_id)
+        self.classroom_data = self.dao.fetch_classroom_data(classroom_id)
+        self.teacher_id = self.classroom_data["teacher_uid"]
+        self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id) 
 
     def get_industry(self):
         return self.employer_data["selected_industry_keywords"]
@@ -24,11 +26,14 @@ class Matching:
     def get_flock(self):
         return self.employer_data["selected_challenge_keywords"]
 
-    def get_courses(self):
+    def get_all_courses_taught(self):
         classes = []
         for classroom in self.teacher_data["classes"]:
             classes.append(classroom["coursename"])
         return classes
+
+    def get_course_name(self):
+        return self.classroom_data["coursename"]
 
     def get_industry_preferences(self):
         return self.teacher_data["selected_industry_keywords"]
@@ -41,7 +46,7 @@ class Matching:
         return set(products_and_services)
 
     def get_courses_industry_and_tools(self):
-        courses_industry_and_tools = self.get_courses() + self.get_industry_preferences() + self.get_tools_tech_skills()
+        courses_industry_and_tools = self.get_all_courses_taught() + self.get_industry_preferences() + self.get_tools_tech_skills()
         return set(courses_industry_and_tools)
 
     def get_industry_and_flock(self):
@@ -72,7 +77,7 @@ class Matching:
                 #print(s)
         return math.sqrt(s)
 
-    def score_teacher(self):
+    def score_classroom(self):
         # Teacher data
         cit = self.get_courses_industry_and_tools()
         tools = set(self.get_tools_tech_skills())
@@ -92,7 +97,7 @@ class Matching:
 
     def score_employer(self):
         # Teacher data
-        courses = set(self.get_courses())
+        course = set(self.get_course_name())
         industry_preferences = set(self.get_industry_preferences())
         tools = set(self.get_tools_tech_skills())
 
@@ -100,17 +105,17 @@ class Matching:
         industry_and_flock = self.get_industry_and_flock()
         industry_product_service_and_flock = self.get_industry_product_service_and_flock()
 
-        courses_score = self.get_score(courses, industry_and_flock)
+        course_score = self.get_score(course, industry_and_flock)
         industry_preferences_score = self.get_score(industry_preferences, industry_and_flock)
         tools_score = self.get_score(tools, industry_product_service_and_flock)
 
-        return (courses_score + industry_preferences_score + tools_score)/3.0
+        return (course_score + industry_preferences_score + tools_score)/3.0
 
 def main():
-    teacher = sys.argv[1]
+    classroom = sys.argv[1]
     employer = sys.argv[2]
-    match = Matching(teacher, employer)
-    print("Teacher score is ", match.score_teacher())
+    match = Matching(employer,classroom)
+    print("Classroom score is ", match.score_classroom())
     print("Employer score is ", match.score_employer())
 
 if __name__ == '__main__':

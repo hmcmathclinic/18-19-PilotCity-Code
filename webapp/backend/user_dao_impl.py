@@ -9,7 +9,7 @@ class UserDaoImpl(UserDao):
     def __init__(self):
         if (not len(firebase_admin._apps)):
             self.cred = credentials.Certificate('service_account.json') 
-            default_app = firebase_admin.initialize_app(self.cred)
+            firebase_admin.initialize_app(self.cred)
         self.db = firestore.client()
 
 
@@ -40,4 +40,3 @@ class UserDaoImpl(UserDao):
         for doc in self.db.collection("employers").get():
             out.append(doc.id)
         return out
-
