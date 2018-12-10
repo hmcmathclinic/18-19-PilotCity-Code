@@ -5,7 +5,7 @@ from firebase_admin import auth
 
 
 if (not len(firebase_admin._apps)):
-    cred = credentials.Certificate('service_account.json') 
+    cred = credentials.Certificate('matchmaking/service_account.json') 
     default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
@@ -22,6 +22,12 @@ def get_all_users():
         out[user.id] = user.to_dict()
     return out
 
+def get_all_teachers():
+    out = {}
+    teachers = db.collection("teachers").get()
+    for teacher in teachers:
+        out[teacher.id] = teacher.to_dict()
+    return out
 
 def put_data_in_users(user_id, value):
     db.collection("Users_test").document(user_id).set(value)
@@ -33,6 +39,9 @@ def put_data_in_teachers(user_id, value):
 
 def put_data_in_employers(user_id, value):
     db.collection("employers_test").document(user_id).set(value)
+
+def put_data_in_classrooms(user_id, value):
+    db.collection("classroom").document(user_id).set(value)
 
 
 # if __name__ == "__main__":
