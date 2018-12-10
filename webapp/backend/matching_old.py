@@ -2,6 +2,7 @@ import numpy as np
 import math
 import utilities
 from user_dao_impl import UserDaoImpl
+import time 
 
 class Matching:
 
@@ -62,6 +63,7 @@ class Matching:
 
     def get_score(self, s1, s2):
         s = 0
+        start = time.time()
         for phrase1 in s1:
             for phrase2 in s2:
                 s_inner = 0
@@ -78,6 +80,8 @@ class Matching:
                     s_inner = 0
                 s += s_inner**2
             #print(s)
+        end = time.time()
+        print("nested for loops runtime - {}".format(end - start))
         return math.sqrt(s)
 
     def score_teacher(self):
