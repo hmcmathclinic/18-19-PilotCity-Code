@@ -41,22 +41,6 @@ class Matching:
     def get_tools_tech_skills(self):
         return self.teacher_data["selected_skills_keywords"]
 
-    def get_product_and_service(self):
-        products_and_services = self.get_product() + self.get_service()
-        return set(products_and_services)
-
-    def get_courses_industry_and_tools(self):
-        courses_industry_and_tools = self.get_all_courses_taught() + self.get_industry_preferences() + self.get_tools_tech_skills()
-        return set(courses_industry_and_tools)
-
-    def get_industry_and_flock(self):
-        industry_and_flock = self.get_industry() + self.get_flock()
-        return set(industry_and_flock)
-
-    def get_industry_product_service_and_flock(self):
-        industry_product_service_and_flock = self.get_industry() + self.get_product() + self.get_service() + self.get_flock()
-        return set(industry_product_service_and_flock)
-
     def get_score(self, s1, s2):
         s = 0
         for phrase1 in s1:
@@ -79,7 +63,9 @@ class Matching:
 
     def score_classroom(self):
         # Teacher data
-        cit = self.get_courses_industry_and_tools()
+        all_courses = self.get_all_courses_taught()
+        course = set(self.get_course_name())
+        industry_preferences = set(self.get_industry_preferences())
         tools = set(self.get_tools_tech_skills())
 
         # Employer data
@@ -88,12 +74,30 @@ class Matching:
         service = set(self.get_service()) 
         flock = set(self.get_flock())
 
-        industry_score = self.get_score(cit, industry)
-        flock_score = self.get_score(cit, flock)
+        industry_score_tools = self.get_score(tools, industry)
+        industry_score_industry = self.get_score(industry_preferences, industry)
+        industry_score_all_courses = self.get_score(all_courses, industry)
+        industry_score_coursename = self.get_score(course, industry)
+        industry_score = 0.4*industry_score_industry + 0.3*industry_score_coursename + 0.2*industry_score_tools + 0.1*industry_score_all_courses;
+
+        flock_score_tools = self.get_score(tools, flock)
+        flock_score_industry = self.get_score(industry_preferences, flock)
+        flock_score_all_courses = self.get_score(all_courses, flock)
+        flock_score = 0.5*flock_score_tools + 0.3*flock_score_industry + 0.2*flock_score_all_courses
+        
         product_score = self.get_score(product, tools)
         service_score = self.get_score(service, tools)
 
-        return (industry_score + flock_score + product_score + service_score) / 4.0
+        if(service_score == 0 and product_score != 0):
+            return 0.5*industry_score + 0.1*flock_score + 0.4*product_score
+        
+        elif (service_score != 0 and product_score == 0):
+            return 0.5*industry_score + 0.1*flock_score + 0.4*service_score
+        
+        elif (product_score != 0 and service_score != 0:
+            return 0.5*industry_score + 0.1*flock_score + 0.2*product_score + 0.2*service_score
+        else:
+            return 0.7*industry_score + 0.3*flock_score 
 
     def score_employer(self):
         # Teacher data
@@ -102,12 +106,36 @@ class Matching:
         tools = set(self.get_tools_tech_skills())
 
         # Employer data
-        industry_and_flock = self.get_industry_and_flock()
-        industry_product_service_and_flock = self.get_industry_product_service_and_flock()
+        industry = set(self.get_industry())
+        product  = set(self.get_product()) 
+        service = set(self.get_service()) 
+        flock = set(self.get_flock())
 
-        course_score = self.get_score(course, industry_and_flock)
-        industry_preferences_score = self.get_score(industry_preferences, industry_and_flock)
-        tools_score = self.get_score(tools, industry_product_service_and_flock)
+
+        course_score_industry = self.get_score(course, industry)
+        course_score_flock = self.get_score(course, flock)
+        course_score = 0.8*course_score_industry + 0.2*course_score_flock
+
+        industry_preferences_score_industry = self.get_score(industry_preferences, industry)
+        industry_preferences_score_flock = self.get_score(industry_preferences, flock)
+        industry_preferences_score = 0.8*industry_preferences_score_industry + 0.2*industry_preferences_score_flock
+
+        tools_score_industry = self.get_score(tools, industry)
+        tools_score_flock = self.get_score(tools, flock)
+        tools_score_product = self.get_score(tools, product)
+        tools_score_service = self.get_score(tools, service)
+        
+        if(tools_score_service == 0 and tools_score_product != 0):
+            tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.4*tools_score_product
+        
+        elif (tools_score_service != 0 and tools_score_product == 0):
+            tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.4*tools_score_service
+        
+        elif (tools_score_product != 0 and tools_score_service != 0:
+            tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.2*tools_score_product + 0.2*tools_score_service
+        else:
+            tools_score = 0.7*tools_score_industry + 0.3*tools_score_flock
+
 
         return (course_score + industry_preferences_score + tools_score)/3.0
 
