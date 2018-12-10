@@ -25,7 +25,7 @@ class UserDaoImpl(UserDao):
     
 
     def fetch_student_data(self, student_id):
-        student_data = self.db.collection("users").document(student_id).get()
+        student_data = self.db.collection("students").document(student_id).get()
         return student_data.to_dict()
 
 

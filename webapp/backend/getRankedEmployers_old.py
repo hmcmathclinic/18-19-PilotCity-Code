@@ -13,7 +13,16 @@ class RankingEmployers: #classroom scoring the employers
         employer_dict = {}
         employer_list = []
         for employer in self.employer_ids:
-            match = matching.Matching(employer, self.classroom_id)
+            match = matching.Matching(employer, self.teacher_id)
+            if not "classes" in match.teacher_data or \ 
+                not "selected_industry_keywords" in match.teacher_data or \
+                not "selected_skills_keywords" in match.teacher_data:
+                return None # signal that teacher does not have enough data
+            if not "selected_industry_keywords" in match.employer_data or \
+                not "selected_product_keywords" in match.employer_data or \
+                not "selected_service_keywords" in match.employer_data or \
+                not "selected_challenge_keywords" in match.employer_data:
+                continue    # move onto next employer (this one doesn't have enough info)
             scoreE = match.score_employer()
             employer_dict[employer] = scoreE
         for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
