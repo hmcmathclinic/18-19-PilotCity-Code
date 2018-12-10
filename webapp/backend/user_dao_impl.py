@@ -8,7 +8,7 @@ class UserDaoImpl(UserDao):
 
     def __init__(self):
         if (not len(firebase_admin._apps)):
-            self.cred = credentials.Certificate('service_account.json') 
+            self.cred = credentials.Certificate('matchmaking/service_account.json') 
             firebase_admin.initialize_app(self.cred)
         self.db = firestore.client()
 
@@ -22,6 +22,10 @@ class UserDaoImpl(UserDao):
     def fetch_teacher_data(self, teacher_id):
         teacher_data = self.db.collection("teachers").document(teacher_id).get()
         return teacher_data.to_dict()
+
+    def fetch_classroom_data(self, classroom_id):
+        classroom_data = self.db.collection("classroom").document(classroom_id).get()
+        return classroom_data.to_dict()
     
 
     def fetch_student_data(self, student_id):
@@ -38,5 +42,11 @@ class UserDaoImpl(UserDao):
     def fetch_all_employers(self):
         out = []
         for doc in self.db.collection("employers").get():
+            out.append(doc.id)
+        return out
+
+    def fetch_all_classrooms(self):
+        out = []
+        for doc in self.db.collection("classroom").get():
             out.append(doc.id)
         return out
