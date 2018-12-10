@@ -7,6 +7,7 @@ class Matching:
 
     def __init__(self, employer_id, classroom_id):
         self.dao = UserDaoImpl()
+        self.utilities = utilities.Utils()
         self.employer_id = employer_id
         self.classroom_id = classroom_id
         self.employer_data = self.dao.fetch_employer_data(employer_id)
@@ -49,7 +50,7 @@ class Matching:
                 num_pairs = 0
                 for w1 in phrase1.split():
                     for w2 in phrase2.split():
-                        ss = utilities.score(w1.lower(), w2.lower())
+                        ss = self.utilities.score(w1.lower(), w2.lower())
                         if ss != 2:
                             s_inner += ss
                             num_pairs += 1
@@ -88,13 +89,13 @@ class Matching:
         product_score = self.get_score(product, tools)
         service_score = self.get_score(service, tools)
 
-        if(service_score == 0 and product_score != 0):
+        if service_score == 0 and product_score != 0:
             return 0.5*industry_score + 0.1*flock_score + 0.4*product_score
         
-        elif (service_score != 0 and product_score == 0):
+        elif service_score != 0 and product_score == 0:
             return 0.5*industry_score + 0.1*flock_score + 0.4*service_score
         
-        elif (product_score != 0 and service_score != 0:
+        elif product_score != 0 and service_score != 0:
             return 0.5*industry_score + 0.1*flock_score + 0.2*product_score + 0.2*service_score
         else:
             return 0.7*industry_score + 0.3*flock_score 
@@ -125,13 +126,13 @@ class Matching:
         tools_score_product = self.get_score(tools, product)
         tools_score_service = self.get_score(tools, service)
         
-        if(tools_score_service == 0 and tools_score_product != 0):
+        if tools_score_service == 0 and tools_score_product != 0:
             tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.4*tools_score_product
         
-        elif (tools_score_service != 0 and tools_score_product == 0):
+        elif tools_score_service != 0 and tools_score_product == 0:
             tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.4*tools_score_service
         
-        elif (tools_score_product != 0 and tools_score_service != 0:
+        elif tools_score_product != 0 and tools_score_service != 0:
             tools_score = 0.5*tools_score_industry + 0.1*tools_score_flock + 0.2*tools_score_product + 0.2*tools_score_service
         else:
             tools_score = 0.7*tools_score_industry + 0.3*tools_score_flock

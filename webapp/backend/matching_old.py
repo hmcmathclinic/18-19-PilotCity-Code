@@ -6,13 +6,10 @@ import time
 
 class Matching:
 
-
-    def __init__(self, employer_id, teacher_id):
-        self.dao = UserDaoImpl()
-        self.employer_id = employer_id
-        self.teacher_id = teacher_id
-        self.employer_data = self.dao.fetch_employer_data(employer_id)
-        self.teacher_data = self.dao.fetch_teacher_data(teacher_id)
+    def __init__(self, employer_data, teacher_data, utilities):
+        self.utilities = utilities
+        self.employer_data = employer_data
+        self.teacher_data = teacher_data
 
 
     def get_industry(self):
@@ -63,14 +60,14 @@ class Matching:
 
     def get_score(self, s1, s2):
         s = 0
-        start = time.time()
+        # start = time.time()
         for phrase1 in s1:
             for phrase2 in s2:
                 s_inner = 0
                 num_pairs = 0
                 for w1 in phrase1.split():
                     for w2 in phrase2.split():
-                        ss = utilities.score(w1.lower(), w2.lower())
+                        ss = self.utilities.score(w1.lower(), w2.lower())
                         if ss != 2:
                             s_inner += ss
                             num_pairs += 1
@@ -80,8 +77,8 @@ class Matching:
                     s_inner = 0
                 s += s_inner**2
             #print(s)
-        end = time.time()
-        print("nested for loops runtime - {}".format(end - start))
+        # end = time.time()
+        # print("nested for loops runtime - {}".format(end - start))
         return math.sqrt(s)
 
     def score_teacher(self):
@@ -116,12 +113,13 @@ class Matching:
         tools_score = self.get_score(tools, industry_product_service_and_flock)
         return (courses_score + industry_preferences_score + tools_score)/3.0
 
-def main():
-    teacher = sys.argv[1]
-    employer = sys.argv[2]
-    match = Matching(teacher, employer)
-    print("Teacher score is ", match.score_teacher())
-    print("Employer score is ", match.score_employer())
+# def main():
+#     teacher = sys.argv[1]
+#     employer = sys.argv[2]
+
+#     match = Matching(teacher, employer)
+#     print("Teacher score is ", match.score_teacher())
+#     print("Employer score is ", match.score_employer())
 
 if __name__ == '__main__':
      main()

@@ -5,16 +5,19 @@ import google.auth.transport.requests
 import google.oauth2.id_token
 import getRankedEmployers_old
 import getRankedTeachers_old
-
+import utilities
+from user_dao_impl import UserDaoImpl
 
 app = Flask(__name__)
 flask_cors.CORS(app)
 
+utils = utilities.Utils()
+user_dao = UserDaoImpl()
 
 @app.route('/matchmaker/classroomranking')
 def classroom_matchmaker():
     employer_id = request.args.get("employer_id")
-    ranker = getRankedTeachers_old.RankingTeachers(employer_id)
+    ranker = getRankedTeachers_old.RankingTeachers(employer_id, user_dao, utils)
     list_of_ids = ranker.getRankedList()
     if list_of_ids is None :
         return jsonify({"result": "Missing keys in user data"})
@@ -24,7 +27,7 @@ def classroom_matchmaker():
 @app.route('/matchmaker/employerranking')
 def employer_matchmaker():
     teacher_id = request.args.get("teacher_id")
-    ranker = getRankedEmployers_old.RankingEmployers(teacher_id)
+    ranker = getRankedEmployers_old.RankingEmployers(teacher_id, user_dao, utils)
     list_of_ids = ranker.getRankedList()
     if list_of_ids is None :
         return jsonify({"result": "Missing keys in user data"})

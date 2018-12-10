@@ -22,6 +22,10 @@ class UserDaoImpl(UserDao):
     def fetch_teacher_data(self, teacher_id):
         teacher_data = self.db.collection("teachers").document(teacher_id).get()
         return teacher_data.to_dict()
+
+    def fetch_classroom_data(self, classroom_id):
+        classroom_data = self.db.collection("classroom").document(classroom_id).get()
+        return classroom_data.to_dict()
     
 
     def fetch_student_data(self, student_id):
@@ -30,13 +34,19 @@ class UserDaoImpl(UserDao):
 
 
     def fetch_all_teachers(self):
-        out = []
+        out = {}
         for doc in self.db.collection("teachers").get():
-            out.append(doc.id)
+            out[doc.id] = doc.to_dict()
         return out
 
     def fetch_all_employers(self):
-        out = []
+        out = {}
         for doc in self.db.collection("employers").get():
-            out.append(doc.id)
+            out[doc.id] = doc.to_dict()
+        return out
+
+    def fetch_all_classrooms(self):
+        out = {}
+        for doc in self.db.collection("classroom").get():
+            out[doc.id] = doc.to_dict()
         return out
