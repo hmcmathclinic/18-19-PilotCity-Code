@@ -11,7 +11,6 @@ class Matching:
         self.employer_data = employer_data
         self.teacher_data = teacher_data
 
-
     def get_industry(self):
         return self.employer_data["selected_industry_keywords"]
  
