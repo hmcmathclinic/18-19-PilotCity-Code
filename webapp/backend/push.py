@@ -39,10 +39,8 @@ def get_all_employers():
 def put_data_in_users(user_id, value):
     db.collection("Users_test").document(user_id).set(value)
 
-
 def put_data_in_teachers(user_id, value):
     db.collection("teachers_test").document(user_id).set(value)
-
 
 def put_data_in_employers(user_id, value):
     db.collection("employers_test").document(user_id).set(value)
