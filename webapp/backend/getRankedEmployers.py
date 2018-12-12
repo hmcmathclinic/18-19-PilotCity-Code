@@ -33,8 +33,8 @@ class RankingEmployers: #classroom scoring the employers
             scoreE = match.score_employer()
             employer_dict[employer_id] = scoreE
         for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
-             employer_list.append(key)  
-             print(str(key) + ": " + str(value))
+            employer_list.append(key)  
+            print(str(key) + ": " + str(value))
         return employer_list
 
 def main():
