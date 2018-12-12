@@ -10,7 +10,7 @@ class RankingClassrooms: #emplyer scoring the classrooms
     def __init__(self, employer_id, user_dao, utilities):
         
         self.dao = user_dao
-        self.all_classrooms = self.dao.fetch_all_classrooms() # used to be called classroom_ids
+        self.all_classrooms = self.dao.fetch_all_classrooms() 
         self.all_teachers = self.dao.fetch_all_teachers()
         self.classroom_ids = list(self.all_classrooms.keys())
         self.employer_data = self.dao.fetch_employer_data(employer_id)
