@@ -112,13 +112,3 @@ class Matching:
         tools_score = self.get_score(tools, industry_product_service_and_flock)
         return (courses_score + industry_preferences_score + tools_score)/3.0
 
-# def main():
-#     teacher = sys.argv[1]
-#     employer = sys.argv[2]
-
-#     match = Matching(teacher, employer)
-#     print("Teacher score is ", match.score_teacher())
-#     print("Employer score is ", match.score_employer())
-
-if __name__ == '__main__':
-     main()
