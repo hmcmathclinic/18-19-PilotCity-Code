@@ -7,16 +7,15 @@ import concurrent.futures
 
 class RankingEmployers: #classroom scoring the employers
 
-    def __init__(self, teacher_id, user_dao, utilities):
+    def __init__(self, classroom_id, user_dao, utilities):
         self.dao = user_dao
-        self.classroom_id = self.dao.fetch_all_classrooms()[2]
+        self.classroom_id = classroom_id
         self.classroom_data = self.dao.fetch_classroom_data(self.classroom_id)
         self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
         self.employer_ids = list(self.all_employers.keys())
-        self.teacher_id = teacher_id
-        self.all_teachers = self.dao.fetch_all_teachers()
+        self.teacher_id = self.classroom_data["teacher_uid"]
         self.utilities = utilities
-        self.teacher_data = self.all_teachers[teacher_id]
+        self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id)
 
     def getScore(self, employer_data):
         match = matching.Matching(employer_data, self.teacher_data, self.classroom_data, self.utilities)
@@ -55,15 +54,17 @@ class RankingEmployers: #classroom scoring the employers
         return employer_list
 
 def main():
-    teacher_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt1"
+    classroom_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt10"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
-    rank = RankingEmployers(teacher_id,user_dao, utils)
+    rank = RankingEmployers(classroom_id,user_dao, utils)
     start = time.time()
-    print("The list of ranked employers is ", rank.getRankedList())
+    ranked_list = rank.getRankedList()
+    print(len(ranked_list))
+    print("The list of ranked employers is ", ranked_list)
     end = time.time()
     print("Runtime for getting ranked list: {} ".format(end - start))
-
+    print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
 
 if __name__ == '__main__':
     main()
