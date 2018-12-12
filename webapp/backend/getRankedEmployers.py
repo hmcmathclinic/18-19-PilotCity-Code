@@ -4,16 +4,23 @@ from user_dao_impl import UserDaoImpl
 
 class RankingEmployers: #classroom scoring the employers
 
-    def __init__(self):
-        self.dao = UserDaoImpl()
-        self.employer_ids = self.dao.fetch_all_employers()
+    def __init__(self, teacher_id, user_dao, utilities):
+        self.dao = user_dao
         self.classroom_id = self.dao.fetch_all_classrooms()[2]
+        self.classroom_data = self.dao.fetch_classroom_data(classroom_id)
+        self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
+        self.employer_ids = list(self.all_employers.keys())
+        self.teacher_id = teacher_id
+        self.all_teachers = self.dao.fetch_all_teachers()
+        self.utilities = utilities
+        self.teacher_data = self.all_teachers[teacher_id]
 
     def getRankedList(self):
         employer_dict = {}
         employer_list = []
-        for employer in self.employer_ids:
-            match = matching.Matching(employer, self.classroom_id)
+        for employer_id in self.employer_ids:
+            employer_data = self.all_employers[employer_id]
+            match = matching.Matching(employer_data, self.teacher_data, self.classroom_data, self.utilities)
             if not "classes" in match.teacher_data or \
                 not "selected_industry_keywords" in match.teacher_data or \
                 not "selected_skills_keywords" in match.teacher_data:
@@ -31,7 +38,10 @@ class RankingEmployers: #classroom scoring the employers
         return employer_list
 
 def main():
-    rank = RankingEmployers()
+    teacher_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt1"
+    user_dao = UserDaoImpl()
+    utils = utilities.Utils()
+    rank = RankingEmployers(teacher_id,user_dao, utils)
     print("The list of ranked employers is ", rank.getRankedList())
 
 if __name__ == '__main__':

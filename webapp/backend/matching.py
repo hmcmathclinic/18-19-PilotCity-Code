@@ -5,16 +5,13 @@ from user_dao_impl import UserDaoImpl
 
 class Matching:
 
-    def __init__(self, employer_id, classroom_id):
-        self.dao = UserDaoImpl()
-        self.utilities = utilities.Utils()
-        self.employer_id = employer_id
-        self.classroom_id = classroom_id
-        self.employer_data = self.dao.fetch_employer_data(employer_id)
-        self.classroom_data = self.dao.fetch_classroom_data(classroom_id)
+    def __init__(self, employer_data, teacher_data, classroom_data, utilities):
+        self.employer_data = employer_data
+        self.teacher_data = teacher_data
+        self.classroom_data = classroom_data
+        self.utilities = utilities
         self.teacher_id = self.classroom_data["teacher_uid"]
-        self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id) 
-
+        
     def get_industry(self):
         return self.employer_data["selected_industry_keywords"]
 
