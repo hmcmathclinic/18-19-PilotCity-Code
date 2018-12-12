@@ -100,7 +100,7 @@ def getTeacherDictFromArray(arr, uid):
 		classes.append(classroom)
 	teacher_dict["classes"] = classes
 	teacher_dict["room_number"] = teacher_address.pop("room")
-	teacher_dict["school_addresss"] = teacher_address
+	teacher_dict["school_address"] = teacher_address
 	teacher_dict["school_district"] = teacher_story["school_district"]
 	teacher_dict["school_name"] = teacher_story["school_name"]
 	teacher_dict["selected_industry_keywords"] = teacher_industry
