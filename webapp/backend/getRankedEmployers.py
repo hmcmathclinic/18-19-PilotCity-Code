@@ -13,7 +13,7 @@ class RankingEmployers: #classroom scoring the employers
         self.classroom_data = self.dao.fetch_classroom_data(self.classroom_id)
         self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
         self.employer_ids = list(self.all_employers.keys())
-        self.teacher_id = self.classroom_data["teacher_id"]
+        self.teacher_id = self.classroom_data["teacher_uid"]
         self.utilities = utilities
         self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id)
 
@@ -49,19 +49,22 @@ class RankingEmployers: #classroom scoring the employers
             except Exception as exc:
                 print('%r generated an exception: %s' % (employer_id, exc))
         for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
-             employer_list.append(key)  
-             print(str(key) + ": " + str(value))
+            employer_list.append(key)  
+            print(str(key) + ": " + str(value))
         return employer_list
 
 def main():
-    teacher_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt1"
+    classroom_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt10"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
-    rank = RankingEmployers(teacher_id,user_dao, utils)
+    rank = RankingEmployers(classroom_id,user_dao, utils)
     start = time.time()
-    print("The list of ranked employers is ", rank.getRankedList())
+    ranked_list = rank.getRankedList()
+    print(len(ranked_list))
+    print("The list of ranked employers is ", ranked_list)
     end = time.time()
     print("Runtime for getting ranked list: {} ".format(end - start))
+    print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
 
 if __name__ == '__main__':
     main()
