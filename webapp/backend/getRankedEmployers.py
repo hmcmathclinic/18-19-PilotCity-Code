@@ -7,16 +7,15 @@ import concurrent.futures
 
 class RankingEmployers: #classroom scoring the employers
 
-    def __init__(self, teacher_id, user_dao, utilities):
+    def __init__(self, classroom_id, user_dao, utilities):
         self.dao = user_dao
-        self.classroom_id = self.dao.fetch_all_classrooms()[2]
+        self.classroom_id = classroom_id
         self.classroom_data = self.dao.fetch_classroom_data(self.classroom_id)
         self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
         self.employer_ids = list(self.all_employers.keys())
-        self.teacher_id = teacher_id
-        self.all_teachers = self.dao.fetch_all_teachers()
+        self.teacher_id = self.classroom_data["teacher_id"]
         self.utilities = utilities
-        self.teacher_data = self.all_teachers[teacher_id]
+        self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id)
 
     def getScore(self, employer_data):
         match = matching.Matching(employer_data, self.teacher_data, self.classroom_data, self.utilities)
