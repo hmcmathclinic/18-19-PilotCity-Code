@@ -7,7 +7,7 @@ class RankingEmployers: #classroom scoring the employers
     def __init__(self, teacher_id, user_dao, utilities):
         self.dao = user_dao
         self.classroom_id = self.dao.fetch_all_classrooms()[2]
-        self.classroom_data = self.dao.fetch_classroom_data(classroom_id)
+        self.classroom_data = self.dao.fetch_classroom_data(self.classroom_id)
         self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
         self.employer_ids = list(self.all_employers.keys())
         self.teacher_id = teacher_id
@@ -31,7 +31,7 @@ class RankingEmployers: #classroom scoring the employers
                 not "selected_challenge_keywords" in match.employer_data:
                 continue    # move onto next employer (this one doesn't have enough info)
             scoreE = match.score_employer()
-            employer_dict[employer] = scoreE
+            employer_dict[employer_id] = scoreE
         for key, value in sorted(employer_dict.items(), key= lambda x: x[1], reverse=True):
              employer_list.append(key)  
              print(str(key) + ": " + str(value))
