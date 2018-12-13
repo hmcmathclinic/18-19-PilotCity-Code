@@ -15,6 +15,9 @@ class Matching:
     def get_industry(self):
         return self.employer_data["selected_industry_keywords"]
 
+    def get_company_city(self):
+        return self.employer_data["address"]["city"]
+
     def get_product(self):
         return self.employer_data["selected_product_keywords"]
 
@@ -29,6 +32,9 @@ class Matching:
         for classroom in self.teacher_data["classes"]:
             classes.append(classroom["coursename"])
         return classes
+    
+    def get_school_city(self):
+        return self.teacher_data["school_address"]["city"]
 
     def get_course_name(self):
         return self.classroom_data["coursename"]
@@ -61,6 +67,7 @@ class Matching:
 
     def score_classroom(self):
         # Teacher data
+        city_teacher = self.get_school_city()
         all_courses = self.get_all_courses_taught()
         course = set(self.get_course_name())
         industry_preferences = set(self.get_industry_preferences())
@@ -71,7 +78,10 @@ class Matching:
         product  = set(self.get_product()) 
         service = set(self.get_service()) 
         flock = set(self.get_flock())
+        city_emp = self.get_company_city()
 
+        city_score = get_city_score(city_teacher, city_emp)
+        
         industry_score_tools = self.get_score(tools, industry)
         industry_score_industry = self.get_score(industry_preferences, industry)
         industry_score_all_courses = self.get_score(all_courses, industry)
@@ -87,18 +97,20 @@ class Matching:
         service_score = self.get_score(service, tools)
 
         if service_score == 0 and product_score != 0:
-            return 0.5*industry_score + 0.1*flock_score + 0.4*product_score
+            return 0.5*industry_score + 0.1*flock_score + 0.3*product_score + 0.1*city_score
         
         elif service_score != 0 and product_score == 0:
-            return 0.5*industry_score + 0.1*flock_score + 0.4*service_score
+            return 0.5*industry_score + 0.1*flock_score + 0.3*service_score + 0.1*city_score
         
         elif product_score != 0 and service_score != 0:
-            return 0.5*industry_score + 0.1*flock_score + 0.2*product_score + 0.2*service_score
+            return 0.5*industry_score + 0.1*flock_score + 0.15*product_score + 0.15*service_score + 0.1*city_score
+        
         else:
-            return 0.7*industry_score + 0.3*flock_score 
+            return 0.6*industry_score + 0.3*flock_score + 0.1*city_score
 
     def score_employer(self):
         # Teacher data
+        city_teacher = self.get_school_city()
         course = set(self.get_course_name())
         industry_preferences = set(self.get_industry_preferences())
         tools = set(self.get_tools_tech_skills())
@@ -108,8 +120,10 @@ class Matching:
         product  = set(self.get_product()) 
         service = set(self.get_service()) 
         flock = set(self.get_flock())
+        city_emp = self.get_company_city()
 
-
+        city_score = get_city_score(city_teacher, city_emp)
+        
         course_score_industry = self.get_score(course, industry)
         course_score_flock = self.get_score(course, flock)
         course_score = 0.8*course_score_industry + 0.2*course_score_flock
@@ -135,7 +149,10 @@ class Matching:
             tools_score = 0.7*tools_score_industry + 0.3*tools_score_flock
 
 
-        return (course_score + industry_preferences_score + tools_score)/3.0
+        return (course_score + industry_preferences_score + tools_score + city_score)/4.0
+
+    def city_score(self, city1, city2):
+        return city1==city2
 
 def main():
     classroom = sys.argv[1]
