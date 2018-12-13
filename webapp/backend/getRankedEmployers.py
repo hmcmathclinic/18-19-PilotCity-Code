@@ -17,10 +17,6 @@ class RankingEmployers: #classroom scoring the employers
         self.utilities = utilities
         self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id)
 
-    def getScore(self, employer_data):
-        match = matching.Matching(employer_data, self.teacher_data, self.classroom_data, self.utilities)
-        return match.score_employer()
-
     def getRankedList(self):
         employer_dict = {}
         employer_list = []

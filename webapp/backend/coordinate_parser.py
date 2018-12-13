@@ -5,9 +5,6 @@ import googlemaps
 keyFile = open('key.txt', 'r')
 api_key = keyFile.read()
 gmaps = googlemaps.Client(key=api_key)
-#destination = '1060 Foster City Blvd, Foster City, CA 94404';
-#distance = gmaps.distance_matrix(origin, destination); #for the future
-
 
 def getAllTeachersArrays():
 	teachers = push.get_all_teachers() #map with uid:data

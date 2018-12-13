@@ -11,7 +11,7 @@ class Matching:
         self.classroom_data = classroom_data
         self.utilities = utilities
         self.teacher_id = self.classroom_data["teacher_uid"]
-        
+
     def get_industry(self):
         return self.employer_data["selected_industry_keywords"]
 
