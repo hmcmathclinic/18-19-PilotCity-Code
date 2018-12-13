@@ -6,3 +6,4 @@ py2
 *.json
 /webapp/backend/matchmaking/serviceAccountKey.json
 *.npy
+key.txt

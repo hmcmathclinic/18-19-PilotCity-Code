@@ -27,14 +27,14 @@ class RankingClassrooms: #emplyer scoring the classrooms
             teacher_id = classroom_data["teacher_uid"]
             teacher_data = self.all_teachers[teacher_id]
             match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.utilities)
-            if not "selected_industry_keywords" in match.employer_data or \
-                not "selected_product_keywords" in match.employer_data or \
-                not "selected_service_keywords" in match.employer_data or \
-                not "selected_challenge_keywords" in match.employer_data:
+            if not "selected_industry_keywords" in self.employer_data or \
+                not "selected_product_keywords" in self.employer_data or \
+                not "selected_service_keywords" in self.employer_data or \
+                not "selected_challenge_keywords" in self.employer_data:
                 return None # this employer doesn't have enough info to be matched
-            if not "classes" in match.teacher_data or  \
-                not "selected_industry_keywords" in match.teacher_data or \
-                not "selected_skills_keywords" in match.teacher_data:
+            if not "classes" in teacher_data or  \
+                not "selected_industry_keywords" in teacher_data or \
+                not "selected_skills_keywords" in teacher_data:
                 continue    # move onto next teacher (this one doesn't have enough info)
             future_to_classroom_id[executor.submit(match.score_classroom)] = classroom
             # scoreC = match.score_classroom()
