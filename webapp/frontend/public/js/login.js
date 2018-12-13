@@ -55,7 +55,7 @@ $(function(){
 
         user.getToken().then(function(idToken) {
           userIdToken = idToken;
-          createUserEntryInDb(userIdToken,{})
+          createUserEntryInDb({})
           $('#user').text(welcomeName);
           $('#logged-in').show();
 
@@ -93,18 +93,17 @@ $(function(){
   }
   // [END gae_python_firebase_login
 
-  function createUserEntryInDb(userId, userProperties) {
+  function createUserEntryInDb(userProperties) {
     $.ajax(backendHostUrl + '/user/onboarding', {
       /* Set header for the XMLHttpRequest to get data from the web server
       associated with userIdToken */
       headers: {
-        'Authorization': 'Bearer ' + userId
+        'Authorization': 'Bearer ' + userIdToken
       },
       method: 'POST',
       data: JSON.stringify(userProperties),
       contentType : 'application/json'
     }).then(function(data){
-
       console.log("Created user entry in DB successfully")
     });
   }

@@ -48,6 +48,7 @@ class BasicUserData(BaseModel):
     user_id = ndb.StringProperty()
     user_type = ndb.StringProperty()
     has_completed_onboarding = ndb.BooleanProperty()
+    current_onboarding_page = ndb.StringProperty()
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     phone_number = ndb.StringProperty()
@@ -78,5 +79,3 @@ class StudentUserData(BaseModel):
     school_district_name = ndb.StringProperty()
     school_name = ndb.StringProperty()
     grade_level = ndb.StringProperty()
-
-

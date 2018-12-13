@@ -3,14 +3,14 @@ import sys
 from user_dao_impl import UserDaoImpl
 import utilities
 import time
-import concurrent
+import concurrent.futures
 
 class RankingClassrooms: #emplyer scoring the classrooms
 
     def __init__(self, employer_id, user_dao, utilities):
-        
+
         self.dao = user_dao
-        self.all_classrooms = self.dao.fetch_all_classrooms() 
+        self.all_classrooms = self.dao.fetch_all_classrooms()
         self.all_teachers = self.dao.fetch_all_teachers()
         self.classroom_ids = list(self.all_classrooms.keys())
         self.employer_data = self.dao.fetch_employer_data(employer_id)
@@ -49,7 +49,7 @@ class RankingClassrooms: #emplyer scoring the classrooms
                 print('%r generated an exception: %s' % (teacher_id, exc))
 
         for key, value in sorted(classroom_dict.items(), key= lambda x: x[1], reverse=True):
-             classroom_list.append(key)  
+             classroom_list.append(key)
              print(str(key) + ": " + str(value))
         return classroom_list
 
