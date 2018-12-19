@@ -19,10 +19,4 @@ WORKDIR /app
 COPY . ./
 
 # Install dependencies.
-
 RUN pip install -r /app/requirements.txt
-RUN chmod +x entrypoint.sh
-
-# EXPOSE 5000
-
-ENTRYPOINT [ "./entrypoint.sh" ]

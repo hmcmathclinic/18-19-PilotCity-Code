@@ -21,40 +21,37 @@ class RankingClassrooms: #emplyer scoring the classrooms
         classroom_dict = {}
         classroom_list = []
         future_to_classroom_id = {}
-        executor = concurrent.futures.ThreadPoolExecutor(max_workers=10)
-        for classroom in self.classroom_ids:
-            classroom_data = self.all_classrooms[classroom]
-            teacher_id = classroom_data["teacher_uid"]
-            teacher_data = self.all_teachers[teacher_id]
-            match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.utilities)
-            if not "selected_industry_keywords" in self.employer_data or \
-                not "selected_product_keywords" in self.employer_data or \
-                not "selected_service_keywords" in self.employer_data or \
-                not "selected_challenge_keywords" in self.employer_data:
-                return None # this employer doesn't have enough info to be matched
-            if not "classes" in teacher_data or  \
-                not "selected_industry_keywords" in teacher_data or \
-                not "selected_skills_keywords" in teacher_data:
-                continue    # move onto next teacher (this one doesn't have enough info)
-            future_to_classroom_id[executor.submit(match.score_classroom)] = classroom
-            # scoreC = match.score_classroom()
-            # classroom_dict[classroom] = scoreC
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            for classroom in self.classroom_ids:
+                classroom_data = self.all_classrooms[classroom]
+                teacher_id = classroom_data["teacher_uid"]
+                teacher_data = self.all_teachers[teacher_id]
+                match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.utilities)
+                if not "selected_industry_keywords" in self.employer_data or \
+                    not "selected_product_keywords" in self.employer_data or \
+                    not "selected_service_keywords" in self.employer_data or \
+                    not "selected_challenge_keywords" in self.employer_data:
+                    return None # this employer doesn't have enough info to be matched
+                if not "classes" in teacher_data or  \
+                    not "selected_industry_keywords" in teacher_data or \
+                    not "selected_skills_keywords" in teacher_data:
+                    continue    # move onto next teacher (this one doesn't have enough info)
+                future_to_classroom_id[executor.submit(match.score_classroom)] = classroom
 
-        for future in concurrent.futures.as_completed(future_to_classroom_id):
-            classroom = future_to_classroom_id[future]
-            try:
-                scoreT = future.result()
-                classroom_dict[classroom] = scoreT
-            except Exception as exc:
-                print('%r generated an exception: %s' % (teacher_id, exc))
+            for future in concurrent.futures.as_completed(future_to_classroom_id):
+                classroom = future_to_classroom_id[future]
+                try:
+                    scoreT = future.result()
+                    classroom_dict[classroom] = scoreT
+                except Exception as exc:
+                    print('%r generated an exception: %s' % (teacher_id, exc))
 
-        for key, value in sorted(classroom_dict.items(), key= lambda x: x[1], reverse=True):
-             classroom_list.append(key)  
-             print(str(key) + ": " + str(value))
-        return classroom_list
+            for key, _ in sorted(classroom_dict.items(), key= lambda x: x[1], reverse=True):
+                classroom_list.append(key)  
+            return classroom_list
 
 def main():
-    employer_id = "7bNr6B30iscz7hL4zAvSqiN1g0l2"
+    employer_id = "0tZa0ZkParN8X7fGXbIMpWkLxMs2"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
     rank = RankingClassrooms(employer_id, user_dao, utils)

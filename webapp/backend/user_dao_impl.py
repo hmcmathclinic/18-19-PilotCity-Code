@@ -50,3 +50,22 @@ class UserDaoImpl(UserDao):
         for doc in self.db.collection("classroom").get():
             out[doc.id] = doc.to_dict()
         return out
+
+
+    def push_ranking(self, id_, value):
+        self.db.collection("rankings").document(id_).set(value)
+
+
+    def get_ranking(self, id_):
+        try:
+            data = self.db.collection("rankings").document(id_).get()
+            return data.to_dict()
+        except Exception as exc:
+            print('%r generated an exception: %s' % (id_, exc))
+        return None
+
+
+if __name__ == "__main__":
+    dao = UserDaoImpl()
+    print(dao.get_ranking("ZGStpiVL7lVNZWNvOiLVWR4IHXO22ere"))
+    

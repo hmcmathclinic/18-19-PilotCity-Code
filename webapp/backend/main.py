@@ -7,6 +7,7 @@ import getRankedEmployers
 import getRankedClassrooms
 import utilities
 from user_dao_impl import UserDaoImpl
+import concurrent
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -14,24 +15,23 @@ flask_cors.CORS(app)
 utils = utilities.Utils()
 user_dao = UserDaoImpl()
 
+
 @app.route('/matchmaker/classroomranking')
 def classroom_matchmaker():
     employer_id = request.args.get("employer_id")
-    ranker = getRankedClassrooms.RankingClassrooms(employer_id, user_dao, utils)
-    list_of_ids = ranker.getRankedList()
+    list_of_ids = user_dao.get_ranking(employer_id)
     if list_of_ids is None :
-        return jsonify({"result": "Missing keys in user data"})
-    return jsonify({"result": list_of_ids})
+        return jsonify({"result": [], "status":"Missing keys in user data or rankings not computed yet"})
+    return jsonify({"result": list_of_ids["rankings"]})
 
 
 @app.route('/matchmaker/employerranking')
 def employer_matchmaker():
     classroom_id = request.args.get("classroom_id")
-    ranker = getRankedEmployers.RankingEmployers(classroom_id, user_dao, utils)
-    list_of_ids = ranker.getRankedList()
+    list_of_ids = user_dao.get_ranking(classroom_id)
     if list_of_ids is None :
-        return jsonify({"result": "Missing keys in user data"})
-    return jsonify({"result": list_of_ids})
+        return jsonify({"result": [], "status":"Missing keys in user data or rankings not computed yet"})
+    return jsonify({"result": list_of_ids["rankings"]})
 
 
 @app.route('/hello')
@@ -45,6 +45,7 @@ def server_error(e):
     # Log the error and stacktrace.
     logging.exception('An error occurred during a request.')
     return 'An internal error occurred.', 500
+    
 
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
