@@ -2,9 +2,10 @@
 PilotCity's onboarding and matching platform is hosted at [pilotcity.com](https://pilotcity.com/).
 
 # Matchmaking
-The matchmaking algorithm that we use to match employers to classroom aligns employers' and teachers' priorities and skillsets by scoring and comparing the semantic similarity of their onboarding responses. We score semantic similariy by leveraging the GloVe model, which scores words for semantic similarity.
+The matchmaking algorithm that we use to match employers to classroom aligns employers' and teachers' priorities and skillsets by scoring and comparing the semantic similarity of their onboarding responses. We score semantic similariy by leveraging the GloVe model.
 
 ## GloVe Model
+We use the GloVe model to obtain a vector representations of each word. We obtain a score of similarity between two words using cosine similarity. The paper introducing the GloVe model can be found [here](https://nlp.stanford.edu/pubs/glove.pdf). The code that calls the GloVe model and computes the cosine similarity between woks is located in [utilities](backend/utilities.py). 
 
 ## Scoring a single classroom for a single employer
 
