@@ -10,29 +10,29 @@ We use the GloVe model to obtain a vector representations of each word. We obtai
 ## Scoring a single classroom for a single employer
 
 ## Ranking the optimal classrooms for a single employer
-Given an employer's uid (unique identifier), our algorithm outputs a list of classroom uid's ranked by the scores described above. 
+Given an employer's uid (unique identifier), our algorithm outputs a list of classroom uids ranked by the scores described above. 
 
 The main file in which this direction of matching takes place can be found in [getRankedClassrooms](backend/getRankedClassrooms.py).
 
-1. Obtain the list of all classroom_ids from firebase by calling the `fetch_all_classrooms` function located in [push](backend/fetch_all_classrooms).
-2. Compute the score for each classroom (TODO: insert section link).
-3. Rank the classrooms from highest to lowest score (TODO: confirm). 
-4. TODO: describe how to send a request for this.
+1. Obtain the list of all classroom_ids from firebase by calling the `fetch_all_classrooms` function located in [user_dao_impl](backend/user_dao_impl.py).
+2. Compute the score between the employer and each classroom using the `get_score` function in [matching](backend/matching.py)
+3. Rank the classrooms from highest to lowest score and return the resulting ranked list.
 
 ## Scoring a single employer for a single classroom
 
 ## Ranking the optimal employers for a single classroom
-Given a classroom's uid (unique identifier), our algorithm outputs a list of employer uids ranked by the scores described above. Note that the teacher's uid appended with the index at which the teacher entered the clas
+Given an classroom's uid (unique identifier), our algorithm outputs a list of employer uids ranked by the scores described above. Note that a classroom's uid is the corresponding teacher's uid appended with the index of the classroom. 
 
 The main file in which this direction of matching takes place can be found in [getRankedEmployers](backend/getRankedEmployers.py).
 
-1. Obtain the list of all classroom_ids from firebase by calling the `fetch_all_classrooms` function located in [push](backend/fetch_all_classrooms).
-2. Compute the score for each classroom (TODO: insert section link).
-3. Rank the classrooms from highest to lowest score (TODO: confirm). 
-4. TODO: describe how to send a request for this.
+1. Obtain the list of all employer_ids from firebase by calling the `fetch_all_employers` function located in [user_dao_impl](backend/user_dao_impl.py).
+2. Compute the score between the classroom and each employer using the `get_score` function in [matching](backend/matching.py)
+3. Rank the employers from highest to lowest score and return the resulting ranked list.
 
 
-# Making changes to the database structure (parser)
+
+# Changing the database structure
+We have build two parsers to transform 
 
 # Tasks:
 - [x] task1
