@@ -1,6 +1,10 @@
-## Website
+# Website
 PilotCity's onboarding and matching platform is hosted at [pilotcity.com](https://pilotcity.com/).
 
-## Matchmaking
+# Matchmaking
 The matchmaking algorithm that we use to match employers to classroom is based off of the GloVe model, 
 which scores words for semantic similarity.
+
+## Algorithm 
+1. First, we 
+2.
