@@ -34,6 +34,6 @@ The main file in which this direction of matching takes place can be found in [g
 # Making changes to the database structure (parser)
 
 # Tasks:
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
+- [x] task1
+- [ ] task2
+- [ ] task3
