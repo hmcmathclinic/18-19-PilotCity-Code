@@ -32,7 +32,11 @@ The main file in which this direction of matching takes place can be found in [g
 
 
 # Changing the database structure
-We have build two parsers to transform 
+We have built two parsers to change the structure of data in the database. These parser that we used to structure the data in a dictionary structure is located in [parser](backend/parser.py) and the parser that we add coordinates for addresses is located in [coordinate_parser](backend/coordinate_parser.py). 
+
+The steps of creating a parser are:
+1. Get the data in the current format by calling the `get_all_users` function in [push](backend/push.py) 
+2. Make any desired changes to the data structure
 
 # Tasks:
 - [x] task1
