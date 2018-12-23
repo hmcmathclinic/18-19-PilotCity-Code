@@ -8,6 +8,16 @@ The matchmaking algorithm that we use to match employers to classroom aligns emp
 We use the GloVe model to obtain a vector representations of each word. We obtain a score of similarity between two words using cosine similarity. The paper introducing the GloVe model can be found [here](https://nlp.stanford.edu/pubs/glove.pdf). The code that calls the GloVe model and computes the cosine similarity between woks is located in [utilities](backend/utilities.py#L79-L84). 
 
 ## Scoring a single classroom for a single employer
+We score a single classroom from the persective of a single employer use the `score_classroom` function in [matching](backend/matching.py#L68-L109). 
+
+The steps of scoring a single classroom from the perspective of a single employer are:
+1. Collect the words associated with an employer's industry, service, product, and their vision for their participation with PilotCity into the sets `industry`, `service`, `product`, and `flock` respectively. 
+2. Collect the words associated with a classroom's city, the courses that the classroom's teacher offers, the course name, the industry preferences of the teacher, and the tools, technologies, and skills taught in the classroom into the sets `city_teacher`, `all_courses`, `course`, `industry_preferences`, and `tools`. 
+3. Compute the score between different sets using the `get_score` function in [matching](backend/matching.py#L48-L66).  This function returns the square root of the sum of the squared score between every pairwise word. That is, if A = {a1, a2, a3} and B = {b1, b2}, `get_score(A, B)` returns sqrt(score(a1, b1)^2 + score(a1, b2)^2 + score(a2, b1)^2 + score(a2, b2)^2 + score(a3, b1)^2 + score(a3, b2)^2). We decided to align the different higher level categories in the following way:
+  - `industry_score` is a weighted sum of the scores between `industry` and `tools`, `industry_preferences`, `all_courses`, and `course`
+  - `flock_score` is a weighted sum of the scores between `flock` and 
+  
+4. 
 
 ## Ranking the optimal classrooms for a single employer
 Given an employer's uid (unique identifier), our algorithm outputs a list of classroom uids ranked by the scores described above. 
@@ -15,10 +25,11 @@ Given an employer's uid (unique identifier), our algorithm outputs a list of cla
 The main file in which this direction of matching takes place can be found in [getRankedClassrooms](backend/getRankedClassrooms.py).
 
 1. Obtain the list of all classroom_ids from firebase by calling the `fetch_all_classrooms` function located in [user_dao_impl](backend/user_dao_impl.py).
-2. Compute the score between the employer and each classroom using the `get_score` function in [matching](backend/matching.py)
+2. Compute the score between the employer and each classroom using the `score_classroom` function in [matching](backend/matching.py).
 3. Rank the classrooms from highest to lowest score and return the resulting ranked list.
 
 ## Scoring a single employer for a single classroom
+
 
 ## Ranking the optimal employers for a single classroom
 Given an classroom's uid (unique identifier), our algorithm outputs a list of employer uids ranked by the scores described above. Note that a classroom's uid is the corresponding teacher's uid appended with the index of the classroom. 
@@ -26,7 +37,7 @@ Given an classroom's uid (unique identifier), our algorithm outputs a list of em
 The main file in which this direction of matching takes place can be found in [getRankedEmployers](backend/getRankedEmployers.py).
 
 1. Obtain the list of all employer_ids from firebase by calling the `fetch_all_employers` function located in [user_dao_impl](backend/user_dao_impl.py).
-2. Compute the score between the classroom and each employer using the `get_score` function in [matching](backend/matching.py)
+2. Compute the score between the classroom and each employer using the `get_score` function in [matching](backend/matching.py).
 3. Rank the employers from highest to lowest score and return the resulting ranked list.
 
 # Changing the database structure
