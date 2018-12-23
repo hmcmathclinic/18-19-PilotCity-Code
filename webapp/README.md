@@ -60,3 +60,17 @@ The steps of creating a parser are:
 1. Get the data in the current format by calling the `get_all_users` function in [push](backend/push.py).
 2. Make any desired changes to the data structure. 
 3. Put data in the appropriate location. For example, if you are changing the format of teacher data, you can call the `put_data_in teachers` function in [push](backend/push.py#L79-L84). Note that this function will overwrite any existing data in the teachers collection. 
+
+# Running code:
+Don't forget to run `pip install -r requirements.txt` to install the relevant dependencies
+
+# Steps to deploy code to Kubernetes.
+1. Install docker
+2. Install gcloud SDK (https://cloud.google.com/sdk/install)
+3. Run `gcloud init`, sign in as pilotcity and choose the project "backend-dot-pilotcity"
+4. Run `gcloud container clusters get-credentials matchmaking-cluster --zone us-west1-a`
+5. Run `gcloud auth configure-docker`
+6. Run `chmod u+x ./build.sh`(Run this once on any shell script to make the script executable )
+7. Run `./build.sh` to build and push docker images to GCR
+8. Run `./down.sh` to shut down any running instance of the backend service.
+9. Run `./up.sh` to restart the backend service.
