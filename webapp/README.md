@@ -65,6 +65,7 @@ The steps of creating a parser are:
 Don't forget to run `pip install -r requirements.txt` to install the relevant dependencies
 
 # Steps to deploy code to Kubernetes.
+0. Get service key for PilotCity Firestore DB, copy into `webapp/backend` directory and rename as `service_account.json`
 1. Install docker
 2. Install gcloud SDK (https://cloud.google.com/sdk/install)
 3. Run `gcloud init`, sign in as pilotcity and choose the project "backend-dot-pilotcity"
