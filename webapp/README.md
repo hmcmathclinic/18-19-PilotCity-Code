@@ -14,10 +14,12 @@ The steps of scoring a single classroom from the perspective of a single employe
 1. Collect the words associated with an employer's industry, service, product, and their vision for their participation with PilotCity into the sets `industry`, `service`, `product`, and `flock` respectively. 
 2. Collect the words associated with a classroom's city, the courses that the classroom's teacher offers, the course name, the industry preferences of the teacher, and the tools, technologies, and skills taught in the classroom into the sets `city_teacher`, `all_courses`, `course`, `industry_preferences`, and `tools`. 
 3. Compute the score between different sets using the `get_score` function in [matching](backend/matching.py#L48-L66).  This function returns the square root of the sum of the squared score between every pairwise word. That is, if A = {a1, a2, a3} and B = {b1, b2}, `get_score(A, B)` returns sqrt(score(a1, b1)^2 + score(a1, b2)^2 + score(a2, b1)^2 + score(a2, b2)^2 + score(a3, b1)^2 + score(a3, b2)^2). We decided to align the different higher level categories in the following way:
-  - `industry_score` is a weighted sum of the scores between `industry` and `tools`, `industry_preferences`, `all_courses`, and `course`
-  - `flock_score` is a weighted sum of the scores between `flock` and 
-  
-4. 
+    - `industry_score` is a weighted sum of the scores between `industry` and `tools`, `industry_preferences`, `all_courses`, and `course`
+    - `flock_score` is a weighted sum of the scores between `flock` and `tools`, `industry_preferences`, and all courses
+    - `product_score` is the score between `product` and `tools`
+    - `service_score` is the score between `service` and `tools`
+    - `city_score` is 1 if the classroom and employer are in the same city and 0 otherwise. 
+4. Compute the final score between the employer and classroom, a weighted combination of `industry_score`, `flock_score`, `product_score`, `service_score`, and `city_score `. Note that these weights can be changed at any time as long as the sum of the weights is 1. 
 
 ## Ranking the optimal classrooms for a single employer
 Given an employer's uid (unique identifier), our algorithm outputs a list of classroom uids ranked by the scores described above. 
@@ -29,6 +31,17 @@ The main file in which this direction of matching takes place can be found in [g
 3. Rank the classrooms from highest to lowest score and return the resulting ranked list.
 
 ## Scoring a single employer for a single classroom
+We score a single employer from the persective of a single classroom use the `score_employer` function in [matching](backend/matching.py#L113-L154). 
+
+The steps of scoring a single employer from the perspective of a single classroom are:
+1. Collect the words associated with a classroom's city, the course name, the industry preferences of the teacher, and the tools, technologies, and skills taught in the classroom into the sets `city_teacher`, `course`, `industry_preferences`, and `tools`. 
+2. Collect the words associated with an employer's industry, service, product, and their vision for their participation with PilotCity into the sets `industry`, `service`, `product`, and `flock` respectively. 
+3. Compute the score between different sets using the `get_score` function in [matching](backend/matching.py#L48-L66).  This function returns the square root of the sum of the squared score between every pairwise word. That is, if A = {a1, a2, a3} and B = {b1, b2}, `get_score(A, B)` returns sqrt(score(a1, b1)^2 + score(a1, b2)^2 + score(a2, b1)^2 + score(a2, b2)^2 + score(a3, b1)^2 + score(a3, b2)^2). We decided to align the different higher level categories in the following way:
+    - `course_score` is a weighted sum of the scores between `course` and `industry` and `flock`
+    - `industry_preferences_score` is a weighted sum of the scores between `industry_preferences` and `industry`, `flock`, `product`, and `service`
+    - `tools_score` is a weighted combination of the scores between `tools` and `industry`, `flock`, `product`, and `service`.
+    - `city_score` is 1 if the classroom and employer are in the same city and 0 otherwise. 
+4. Compute the final score between the classroom and employer, a weighted combination of `course_score`, `industry_preferences_score`, `tools_score`, and `city_score `. Note that these weights can be changed at any time as long as the sum of the weights is 1. 
 
 
 ## Ranking the optimal employers for a single classroom
