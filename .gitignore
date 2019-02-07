@@ -7,3 +7,4 @@ py2
 /webapp/backend/matchmaking/serviceAccountKey.json
 *.npy
 key.txt
+mobile/PilotCityApp/Pods
