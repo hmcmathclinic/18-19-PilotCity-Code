@@ -8,3 +8,4 @@ py2
 *.npy
 key.txt
 mobile/PilotCityApp/Pods
+mobile/PilotCityApp/GoogleService-Info.plist
