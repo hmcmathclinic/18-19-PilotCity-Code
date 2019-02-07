@@ -47,6 +47,7 @@ class Matching:
 
     def get_score(self, s1, s2):
         s = 0
+        if len(s1) == 0 or len(s2) == 0: return 0
         for phrase1 in s1:
             for phrase2 in s2:
                 s_inner = 0
@@ -62,8 +63,7 @@ class Matching:
                 else:
                     s_inner = 0
                 s += s_inner**2
-                #print(s)
-        return math.sqrt(s)
+        return math.sqrt(s/(len(s1)*len(s2)))
 
     def score_classroom(self):
         # Teacher data

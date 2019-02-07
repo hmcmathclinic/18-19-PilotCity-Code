@@ -51,13 +51,13 @@ class RankingClassrooms: #emplyer scoring the classrooms
             return classroom_list
 
 def main():
-    employer_id = "cY4agqWy3pYQipqPsJhGLuyZpIc2"
+    employer_id = "4ABo8QzgahZuzJrmEa64Hxu3a2m1"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
     rank = RankingClassrooms(employer_id, user_dao, utils)
     start = time.time()
     ranked_list = rank.getRankedList()
-    print(len(ranked_list))
+    #print(len(ranked_list))
     print("The list of ranked classrooms is ", ranked_list)
     end = time.time()
     print(end - start)

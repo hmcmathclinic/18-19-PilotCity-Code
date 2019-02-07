@@ -55,7 +55,7 @@ class RankingEmployers: #classroom scoring the employers
         return employer_list
 
 def main():
-    teacher_id = "49Z7lfsLuihpCaJUZBpuZ0g2rGt1"
+    teacher_id = "77OehFwJ3DdGUNfRPgm6rRzrjuE2"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
     rank = RankingEmployers(teacher_id,user_dao, utils)
