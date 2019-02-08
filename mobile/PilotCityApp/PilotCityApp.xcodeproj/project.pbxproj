@@ -15,7 +15,7 @@
 		35985394220CBED1005F4280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35985392220CBED1005F4280 /* LaunchScreen.storyboard */; };
 		3598539F220CBED1005F4280 /* PilotCityAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3598539E220CBED1005F4280 /* PilotCityAppTests.swift */; };
 		359853AA220CBED1005F4280 /* PilotCityAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359853A9220CBED1005F4280 /* PilotCityAppUITests.swift */; };
-		359853B8220CC6DF005F4280 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359853B7220CC6DF005F4280 /* LoginViewController.swift */; };
+		359853B8220CC6DF005F4280 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359853B7220CC6DF005F4280 /* LoginSignUpViewController.swift */; };
 		359853BF220CCD3D005F4280 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359853BE220CCD3D005F4280 /* AuthProvider.swift */; };
 		359853C1220CCFEE005F4280 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 359853C0220CCFEE005F4280 /* GoogleService-Info.plist */; };
 		359853C6220CD0BE005F4280 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359853C5220CD0BE005F4280 /* MainViewController.swift */; };
@@ -56,7 +56,7 @@
 		359853A5220CBED1005F4280 /* PilotCityAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PilotCityAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		359853A9220CBED1005F4280 /* PilotCityAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilotCityAppUITests.swift; sourceTree = "<group>"; };
 		359853AB220CBED1005F4280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		359853B7220CC6DF005F4280 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		359853B7220CC6DF005F4280 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		359853BE220CCD3D005F4280 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		359853C0220CCFEE005F4280 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		359853C5220CD0BE005F4280 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3598538B220CBED0005F4280 /* WelcomeViewController.swift */,
-				359853B7220CC6DF005F4280 /* LoginViewController.swift */,
+				359853B7220CC6DF005F4280 /* LoginSignUpViewController.swift */,
 				359853C5220CD0BE005F4280 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
@@ -412,7 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				359853B8220CC6DF005F4280 /* LoginViewController.swift in Sources */,
+				359853B8220CC6DF005F4280 /* LoginSignUpViewController.swift in Sources */,
 				359853BF220CCD3D005F4280 /* AuthProvider.swift in Sources */,
 				3598538C220CBED0005F4280 /* WelcomeViewController.swift in Sources */,
 				3598538A220CBED0005F4280 /* AppDelegate.swift in Sources */,
