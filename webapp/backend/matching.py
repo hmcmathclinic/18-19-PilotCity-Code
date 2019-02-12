@@ -5,10 +5,11 @@ from user_dao_impl import UserDaoImpl
 
 class Matching:
 
-    def __init__(self, employer_data, teacher_data, classroom_data, utilities):
+    def __init__(self, employer_data, teacher_data, classroom_data, all_classrooms, utilities):
         self.employer_data = employer_data
         self.teacher_data = teacher_data
         self.classroom_data = classroom_data
+        self.all_classrooms = all_classrooms
         self.utilities = utilities
         self.teacher_id = self.classroom_data["teacher_uid"]
 
@@ -29,8 +30,8 @@ class Matching:
 
     def get_all_courses_taught(self):
         classes = []
-        for classroom in self.teacher_data["classes"]:
-            classes.append(classroom["coursename"])
+        for classroom_id in self.teacher_data["classes"]:
+            classes.append(self.all_classrooms[classroom_id]["coursename"])
         return classes
 
     def get_school_city(self):

@@ -28,17 +28,17 @@ class EvalThisEmployer:
     def scoreAllClassrooms(self):
         ''' Returns the average normalized rank of the indices of 
         self.myClassrooms in self.rankings '''
-        scoreL = [self.getIndexFromRank(classroom_id) for classroom_id in self.myClassrooms]
-        print(scoreL)
-        idealRank = (len(scoreL) - 1)*len(scoreL)/2
+        scoreL = [self.getIndexFromRank(classroom_id[0]) for classroom_id in self.myClassrooms]
+        idealRank = ((len(scoreL) - 1)*len(scoreL)/2)/2
         return sum(scoreL)/float(len(scoreL)) - idealRank
         
     def getIndexFromRank(self, classroom_id):
         ''' Return the index of classroom_id in self.rankings '''
-        print(self.rankingIDs)
         for index in range(len(self.rankings)):
-            if self.rankings[index] == classroom_id:
+            if self.rankingIDs[index] == classroom_id:
                 return index
+
+# class evalAll:
 
 def main():
     employer_id = "OMVVQHvDRyMdF4wRQe22gllXgcn1"
