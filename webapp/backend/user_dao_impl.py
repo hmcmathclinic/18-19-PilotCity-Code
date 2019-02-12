@@ -4,7 +4,6 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 class UserDaoImpl(UserDao):
-    
 
     def __init__(self):
         if (not len(firebase_admin._apps)):
@@ -32,6 +31,10 @@ class UserDaoImpl(UserDao):
         student_data = self.db.collection("students").document(student_id).get()
         return student_data.to_dict()
 
+    def fetch_challenge_data(self, challenge_id):
+        challenge_data = self.db.collection("challenges").document(challenge_id).get()
+        return challenge_data.to_dict()
+
 
     def fetch_all_teachers(self):
         out = {}
@@ -50,11 +53,15 @@ class UserDaoImpl(UserDao):
         for doc in self.db.collection("classrooms").get():
             out[doc.id] = doc.to_dict()
         return out
-
+    
+    def fetch_all_challenges(self):
+        out = {}
+        for doc in self.db.collection("challenges").get():
+            out[doc.id] = doc.to_dict()
+        return out
 
     def push_ranking(self, id_, value):
         self.db.collection("rankings").document(id_).set(value)
-
 
     def get_ranking(self, id_):
         try:
