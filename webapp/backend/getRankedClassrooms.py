@@ -24,6 +24,8 @@ class RankingClassrooms: #emplyer scoring the classrooms
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             for classroom in self.classroom_ids:
                 classroom_data = self.all_classrooms[classroom]
+                if not "teacher_uid" in classroom_data:
+                    continue
                 teacher_id = classroom_data["teacher_uid"]
                 teacher_data = self.all_teachers[teacher_id]
                 match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.utilities)
