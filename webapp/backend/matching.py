@@ -5,7 +5,7 @@ from user_dao_impl import UserDaoImpl
 
 class Matching:
 
-    def __init__(self, employer_data, teacher_data, classroom_data, all_classrooms, utilities):
+    def __init__(self, employer_data, teacher_data, classroom_data, utilities, all_classrooms = None):
         self.employer_data = employer_data
         self.teacher_data = teacher_data
         self.classroom_data = classroom_data

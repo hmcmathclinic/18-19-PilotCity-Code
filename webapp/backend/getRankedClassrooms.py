@@ -27,7 +27,7 @@ class RankingClassrooms: #emplyer scoring the classrooms
                     continue
                 teacher_id = classroom_data["teacher_uid"]
                 teacher_data = self.all_teachers[teacher_id]
-                match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.all_classrooms, self.utilities)
+                match = matching.Matching(self.employer_data, teacher_data, classroom_data, self.utilities, self.all_classrooms)
                 if not "selected_industry_keywords" in self.employer_data or \
                     not "selected_product_keywords" in self.employer_data or \
                     not "selected_service_keywords" in self.employer_data or \
