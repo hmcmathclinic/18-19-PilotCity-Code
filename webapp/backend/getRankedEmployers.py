@@ -13,7 +13,6 @@ class RankingEmployers: #classroom scoring the employers
         self.classroom_data = self.dao.fetch_classroom_data(self.classroom_id)
         self.all_employers = self.dao.fetch_all_employers() # used to be employer_ids
         self.employer_ids = list(self.all_employers.keys())
-        print(classroom_id)
         self.teacher_id = self.classroom_data["teacher_uid"]
         self.utilities = utilities
         self.teacher_data = self.dao.fetch_teacher_data(self.teacher_id)
@@ -49,7 +48,7 @@ class RankingEmployers: #classroom scoring the employers
             return employer_list
 
 def main():
-    classroom_id = "4ABo8QzgahZuzJrmEa64Hxu3a2m1"
+    classroom_id = "05pU0f4Z0q7IBTEvdVjo"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
     rank = RankingEmployers(classroom_id,user_dao, utils)
