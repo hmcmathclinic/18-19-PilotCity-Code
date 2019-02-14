@@ -2,6 +2,7 @@ import numpy as np
 import math
 import utilities
 from user_dao_impl import UserDaoImpl
+import time
 
 class Matching:
 
@@ -49,6 +50,7 @@ class Matching:
     def get_score(self, s1, s2):
         s = 0
         if len(s1) == 0 or len(s2) == 0: return 0
+        start = time.time()
         for phrase1 in s1:
             for phrase2 in s2:
                 s_inner = 0

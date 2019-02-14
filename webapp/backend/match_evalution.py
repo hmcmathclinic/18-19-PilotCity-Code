@@ -38,12 +38,33 @@ class EvalThisEmployer:
             if self.rankingIDs[index] == classroom_id:
                 return index
 
-# class evalAll:
+    def scoreInvite(self):
+
+
+class evalAllEmployers:
+
+    def __init__(self, user_dao, utilities):
+        self.dao = user_dao
+        self.utilities = utilities
+        self.employer_ids = list(self.dao.fetch_all_employers().keys())
+        self.evalObjects = [EvalThisEmployer(id, self.dao, self.utilities) 
+                            for id in self.employer_ids]
+
+    def getOverallScore(self):
+        ''' Returns average score across all employers'''
+        scores = []
+        for evalObject in self.evalObjects:
+            scores.append(evalObject.scoreAllClassrooms())
+        return sum(scores)/float(len(scores))
 
 def main():
     employer_id = "OMVVQHvDRyMdF4wRQe22gllXgcn1"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
+    evalAll = evalAllEmployers(user_dao, utils)
+    print(evalAll.employer_ids)
+    print("\n")
+    print(evalAll.evalObjects)
     eval = EvalThisEmployer(employer_id, user_dao, utils)
     print(eval.scoreAllClassrooms())
 

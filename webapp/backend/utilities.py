@@ -7,6 +7,9 @@ class Utils:
     def __init__(self):
         fp = open("glove.6B.100d.npy", "rb")
         self.wordL, self.array, self.lengths = self.load_glove_vectors(fp)
+        self.index_dict = {} # keys: words, values: index
+        for i in range(len(self.wordL)):
+            self.index_dict[self.wordL[i]] = i
 
     def load_text_vectors(self, f):
         ''' loads vectors from text file, returning
@@ -59,15 +62,15 @@ class Utils:
         new array that stores the lengths of each row in the array. '''
         return numpy.linalg.norm(array, axis=1)
 
-    def get_vec(self, word, wordlist, array, lengths):
+    def get_vec(self, word):
         ''' Given a certain word we want to find within
         a list of words, corresponding vector array,
         and corresponding vector lengths, returns a
         tuple containing the vector of that word and
-        the length of that vector  '''
-        word_index = wordlist.index(word)
-        word_vector = array[word_index]
-        word_length = lengths[word_index]
+        the length of that vector  '''    # see what is taking all the time tho
+        word_index = self.index_dict[word] 
+        word_vector = self.array[word_index]
+        word_length = self.lengths[word_index]
         return word_vector, word_length
 
     def cosine_similarity(self, vec1, vec2, lens1, lens2):
@@ -79,8 +82,8 @@ class Utils:
     def score(self, w1, w2):
         if w1 not in self.wordL or w2 not in self.wordL:
             return 2
-        w1_vector, w1_len = self.get_vec(w1, self.wordL, self.array, self.lengths)
-        w2_vector, w2_len = self.get_vec(w2, self.wordL, self.array, self.lengths)
+        w1_vector, w1_len = self.get_vec(w1)
+        w2_vector, w2_len = self.get_vec(w2)
         return self.cosine_similarity(w1_vector, w2_vector, w1_len, w2_len)
     
     

@@ -52,17 +52,17 @@ class RankingClassrooms: #emplyer scoring the classrooms
             return classroom_list
 
 def main():
-    employer_id = "OMVVQHvDRyMdF4wRQe22gllXgcn1"
+    employer_id = "5LSkd65MowXXMzIlyaJRaPgucDE2"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
     rank = RankingClassrooms(employer_id, user_dao, utils)
     start = time.time()
     ranked_list = rank.getRankedList()
     #print(len(ranked_list))
-    print("The list of ranked classrooms is ", ranked_list)
+    #print("The list of ranked classrooms is ", ranked_list)
     end = time.time()
-    print(end - start)
-    print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
+    #print(end - start)
+    #print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
 
 if __name__ == '__main__':
     main()
