@@ -21,7 +21,7 @@ def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
 
 def find_pdfs():
-    return glob(os.path.join('./HMCSyllabusRepository',"*.{}".format('pdf')))
+    return glob(os.path.join('./AllSyllabiParser',"*.{}".format('pdf')))
 
 def convert(fname, pages=None):
     """ Function converting pdf to string """
@@ -52,6 +52,7 @@ def word_count(string):
             my_dict[item] += 1
         else:
             my_dict[item] = 1
+    return my_dict
     
 list_of_pdfs = find_pdfs()
 syllabus_string = ''
