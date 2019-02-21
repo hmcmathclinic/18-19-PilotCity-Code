@@ -1,30 +1,22 @@
-import csv
-import re
-import spacy
-import sys
-import requests
-import pandas as pd
 from io import StringIO
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-from pdfminer.pdfparser import PDFParser
-from pdfminer.pdfdocument import PDFDocument
-from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfpage import PDFTextExtractionNotAllowed
-from pdfminer.pdfinterp import PDFResourceManager
-from pdfminer.pdfinterp import PDFPageInterpreter
-from pdfminer.pdfdevice import PDFDevice
 import os
-import sys, getopt
-import numpy as np
-from bs4 import BeautifulSoup
-import urllib3
 from glob import glob
 from string import punctuation
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.ldamodel import LdaModel
+import pandas as pd
+
+def get_lda_topics(model, num_topics):
+    word_dict = {};
+    for i in range(num_topics):
+        words = model.show_topic(i, topn = 20);
+        word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words];
+    return pd.DataFrame(word_dict);
 
 def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
@@ -65,3 +57,4 @@ for pdf in list_of_pdfs:
 common_dictionary = Dictionary(common_texts)
 common_corpus = [common_dictionary.doc2bow(text) for text in common_texts]
 lda = LdaModel(common_corpus, num_topics=10)
+print(get_lda_topics(lda,10))
