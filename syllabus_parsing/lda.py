@@ -17,8 +17,12 @@ def create_model(common_corpus,common_dictionary):
     temp_file = datapath("model")
     lda.save(temp_file)
 
-def get_lda_topics(lda):
-    print(lda.print_topics(num_topics=10))
+def get_lda_topics(model):
+    word_dict = {};
+    for i in range(model.num_topics):
+        words = model.show_topic(i, topn = 20);
+        word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words];
+    return pd.DataFrame(word_dict);
 
 def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
@@ -62,4 +66,4 @@ def create_dict_corpus():
 
 # create_model(common_corpus,common_dictionary)
 lda = LdaModel.load(datapath("model"))
-get_lda_topics(lda)
+print(get_lda_topics(lda))
