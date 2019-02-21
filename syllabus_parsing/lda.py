@@ -10,13 +10,15 @@ from string import punctuation
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.ldamodel import LdaModel
 import pandas as pd
+from gensim.test.utils import datapath
 
-def get_lda_topics(model, num_topics):
-    word_dict = {};
-    for i in range(num_topics):
-        words = model.show_topic(i, topn = 20);
-        word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words];
-    return pd.DataFrame(word_dict);
+def create_model(common_corpus,common_dictionary):
+    lda = LdaModel(common_corpus, num_topics=10,id2word = common_dictionary, passes=50)
+    temp_file = datapath("model")
+    lda.save(temp_file)
+
+def get_lda_topics(lda):
+    print(lda.print_topics(num_topics=10))
 
 def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
@@ -46,15 +48,18 @@ def convert(fname, pages=None):
     text = output.getvalue()
     output.close
     return strip_punctuation(text)
-    
-list_of_pdfs = find_pdfs()
-common_texts = []
-#Converting pdf to string
-for pdf in list_of_pdfs:
-    syllabus_string = convert(pdf)
-    common_texts.append(syllabus_string.split())
+ 
+def create_dict_corpus():   
+    list_of_pdfs = find_pdfs()
+    common_texts = []
+    #Converting pdf to string
+    for pdf in list_of_pdfs:
+        syllabus_string = convert(pdf)
+        common_texts.append(syllabus_string.split())
+    common_dictionary = Dictionary(common_texts)
+    common_corpus = [common_dictionary.doc2bow(text) for text in common_texts]
+    return common_dictionary,common_corpus
 
-common_dictionary = Dictionary(common_texts)
-common_corpus = [common_dictionary.doc2bow(text) for text in common_texts]
-lda = LdaModel(common_corpus, num_topics=10)
-print(get_lda_topics(lda,10))
+# create_model(common_corpus,common_dictionary)
+lda = LdaModel.load(datapath("model"))
+get_lda_topics(lda)
