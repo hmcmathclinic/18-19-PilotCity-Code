@@ -58,7 +58,7 @@ def extract_course_topics(string):
     r = re.compile(r'lesson\s\d+\.\d+\s(.*)\s\(')
     return r.findall(string)
 #Converting pdf to string
-resume_string = convert("pltw_syllabus.pdf")
+resume_string = convert("pltw_syllabus_2.pdf")
 resume_string1 = resume_string
 #Removing commas in the resume for an effecient check
 resume_string = resume_string.replace(',',' ')
