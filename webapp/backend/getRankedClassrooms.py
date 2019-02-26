@@ -58,11 +58,11 @@ def main():
     rank = RankingClassrooms(employer_id, user_dao, utils)
     start = time.time()
     ranked_list = rank.getRankedList()
-    #print(len(ranked_list))
-    #print("The list of ranked classrooms is ", ranked_list)
+    print(len(ranked_list))
+    print("The list of ranked classrooms is ", ranked_list)
     end = time.time()
-    #print(end - start)
-    #print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
+    print(end - start)
+    print("Average time per classroom: {} ".format((end - start)/len(ranked_list)))
 
 if __name__ == '__main__':
     main()
