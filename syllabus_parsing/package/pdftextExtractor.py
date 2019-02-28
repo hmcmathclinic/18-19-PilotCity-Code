@@ -14,7 +14,8 @@ from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfdevice import PDFDevice
 from string import punctuation
 
-class SyllabiPDFTextExtractor:
+
+class PDFTextExtractor:
 
 
     def __init__(self):
@@ -65,7 +66,7 @@ class SyllabiPDFTextExtractor:
 
 ## Test
 # if __name__ == "__main__":
-#     parser = SyllabiPDFTextExtractor()
+#     parser = PDFTextExtractor()
 #     print(parser.convert_pdf_to_text('../AllSyllabiParser/math2010.pdf'))
 #     print(parser.find_pdfs('../AllSyllabiParser'))
      
