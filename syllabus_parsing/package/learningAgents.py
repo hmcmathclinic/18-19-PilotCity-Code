@@ -77,4 +77,6 @@ class HdaAgent(Model):
 
 if __name__ == "__main__":
     parser = PDFTextExtractor()
-    # documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
+    documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
+    lda_agent = LdaAgent(documents)
+    print(lda_agent.train(20))

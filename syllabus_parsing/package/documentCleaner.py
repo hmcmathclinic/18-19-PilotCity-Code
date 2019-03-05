@@ -1,8 +1,10 @@
 import re
 from nltk.corpus import words, stopwords
+import nltk
 
 
 class DocumentCleaner:
+
 
     def __init__(self):
         self.allEnglishWords = set(words.words())
