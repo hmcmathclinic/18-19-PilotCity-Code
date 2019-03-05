@@ -48,7 +48,7 @@ class NmfAgent(Model):
         self.words = self.vectorizer.get_feature_names()
         self.transformer = TfidfTransformer(smooth_idf=False)
         self.x_tfidf = self.transformer.fit_transform(self.x_counts)
-        self.xtfidf_norm = normalize(x_tfidf, norm='l1', axis=1)
+        self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
 
 
     def __get_nmf_topics(self, num_topics):
@@ -77,5 +77,4 @@ class HdaAgent(Model):
 
 if __name__ == "__main__":
     parser = PDFTextExtractor()
-    documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    print(documents)
+    # documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
