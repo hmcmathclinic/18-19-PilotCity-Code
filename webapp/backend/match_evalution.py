@@ -4,7 +4,8 @@ from user_dao_impl import UserDaoImpl
 import utilities
 import time
 import concurrent.futures
-import getRankedClassrooms 
+import getRankedClassrooms
+from bisect import bisect_left  
 
 class EvalThisEmployer:
 
@@ -33,10 +34,14 @@ class EvalThisEmployer:
     def scoreAllClassrooms(self):
         ''' Returns the average normalized rank of the indices of 
         self.myClassrooms in self.rankings '''
-        for id in self.myClassrooms:
-            print(id)
-            print(id[0])
-        scoreL = [self.getIndexFromRank(classroom_id[0]) for classroom_id in self.myClassrooms]
+        scoreL = []
+        for classroom_id in self.myClassrooms:
+            print(classroom_id)
+            print(classroom_id[0])
+            index = self.getIndexFromRank(classroom_id[0])
+            print(index)
+            scoreL.append(index) #= [self.getIndexFromRank(classroom_id[0]) for classroom_id in self.myClassrooms \
+                   # if not self.getIndexFromRank(classroom_id[0]) is None and classroom_id != []]
         print(scoreL)
         # note:
         # kV0g3Wo35iW489WXL4ooXTzHFxk2
@@ -49,10 +54,23 @@ class EvalThisEmployer:
         return sum(scoreL)/float(len(scoreL)) - idealRank # the higher this non-zero number, the better
         
     def getIndexFromRank(self, classroom_id):
-        ''' Return the index of classroom_id in self.rankings '''
-        for index in range(len(self.rankings)):
-            if self.rankingIDs[index] == classroom_id:
-                return index
+        ''' Binary search to return the index of classroom_id in self.rankings.'''
+        print(self.rankingIDs)
+        i = bisect_left(self.rankingIDs, classroom_id) 
+        print(i)
+        if i != len(self.rankingIDs) and self.rankingIDs[i] == classroom_id: 
+            return i 
+        else: 
+            return None # wasn't there
+
+    # def getIndexFromRank(self, classroom_id):
+    #     ''' Return the index of classroom_id in self.rankings '''
+    #     if classroom_id not in self.rankingIDs: # if not there, give worst rank
+    #         return len(self.rankingIDs)
+    #     return self.rankingIDs.index(classroom_id)
+    #     # for index in range(len(self.rankings)):
+    #     #     if self.rankingIDs[index] == classroom_id:
+    #     #         return index
 
     # def scoreInvitesAndRequests(self):
     #     ''' Compare Matchmaking Output with "otherPossibilities" (this employer's invited 
@@ -99,16 +117,16 @@ class evalAllEmployers:
         return sum(scores)/float(len(scores))
 
 def main():
-    employer_id = "dCKmzXDjB0ZEAlYN7cT9kRBPu6E3"
+    employer_id = "ChWk1xHs5SbiodeTQPllu8TXTws1"
     user_dao = UserDaoImpl()
     utils = utilities.Utils()
-    evalAll = evalAllEmployers(user_dao, utils)
-    print("Overall score is ", evalAll.getOverallScore())
-    print(evalAll.employer_ids)
-    print("\n")
-    print(evalAll.evalObjects)
-    # eval = EvalThisEmployer(employer_id, user_dao, utils)
-    # print(eval.scoreAllClassrooms())
+    # evalAll = evalAllEmployers(user_dao, utils)
+    # print("Overall score is ", evalAll.getOverallScore())
+    # print(evalAll.employer_ids)
+    # print("\n")
+    # print(evalAll.evalObjects)
+    eval = EvalThisEmployer(employer_id, user_dao, utils)
+    print(eval.scoreAllClassrooms())
 
 if __name__ == "__main__":
     main()
