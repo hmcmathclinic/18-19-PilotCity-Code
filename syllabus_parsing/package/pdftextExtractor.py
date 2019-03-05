@@ -60,6 +60,11 @@ class PDFTextExtractor:
         return corpus
 
     
+    def build_corpus_from_pdf_file_path(self, filepath):
+        corpus = []
+        corpus.append(self.convert_pdf_to_text(filepath))
+        return corpus
+    
     def __strip_punctuation(self, s):
         return ''.join(c for c in s if c not in punctuation)
 
