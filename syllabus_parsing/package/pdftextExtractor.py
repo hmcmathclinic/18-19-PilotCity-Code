@@ -51,7 +51,7 @@ class PDFTextExtractor:
         return self.__strip_punctuation(text)
 
     
-    def build_corpus_from_pdf_folder_path(self, folder_path):
+    def get_documents_from_pdf_folder_path(self, folder_path):
         corpus = []
         list_of_pdfs = self.find_pdfs(folder_path)
         for pdf in list_of_pdfs:
@@ -60,7 +60,7 @@ class PDFTextExtractor:
         return corpus
 
     
-    def build_corpus_from_pdf_file_path(self, filepath):
+    def get_document_from_pdf_file_path(self, filepath):
         corpus = []
         corpus.append(self.convert_pdf_to_text(filepath))
         return corpus
