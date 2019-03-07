@@ -49,6 +49,6 @@ for employer_id in employer_ids:
 print(employer_ranks)
 
 # save out the ranks for each employer's assigned classrooms
-ranks_file= "assigned_classroom_ranks_all_employers.sav"
+ranks_file = "assigned_classroom_ranks_all_employers.sav"
 with open(ranks_file, 'wb') as filehandle:
     pickle.dump(employer_ranks, filehandle)

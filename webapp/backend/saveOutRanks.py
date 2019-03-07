@@ -11,8 +11,8 @@ user_dao = UserDaoImpl()
 utils = utilities.Utils()
 employer_ids = list(user_dao.fetch_all_employers().keys())
 
-# rankings = {}   # dictionary where keys are employer ids and each  
-#                 # value is the ranked classroom list for that employer
+rankings = {}   # dictionary where keys are employer ids and each  
+                # value is the ranked classroom list for that employer
 
 indices = {}    # dict where each key is an employer_id and each value is
                 # itself a dictionary whose keys are classroom_id's and
@@ -22,6 +22,9 @@ indices = {}    # dict where each key is an employer_id and each value is
 for employer_id in employer_ids:
     ranker = getRankedClassrooms.RankingClassrooms(employer_id, user_dao, utils)
     this_employers_ranked_classrooms = ranker.getRankedList()
+    print("\n")
+    print(this_employers_ranked_classrooms)
+    rankings[employer_id] = this_employers_ranked_classrooms
     this_employers_classroom_indices = {}   # what index does each classroom_id have in 
                                             # this_employers_ranked_classrooms
     if this_employers_ranked_classrooms is None: 
@@ -38,5 +41,10 @@ for employer_id in employer_ids:
 index_dict = "classroom_indices_all_employers.sav"
 with open(index_dict, 'wb') as filehandle:
     pickle.dump(indices, filehandle)
+
+# save out the rankings
+rankings_dict = "classroom_rankings_all_employers.sav"
+with open(rankings_dict, 'wb') as filehandle:
+    pickle.dump(rankings, filehandle)
     
 
