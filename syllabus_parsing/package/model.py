@@ -12,3 +12,6 @@ class Model:
 
     def train(self, num_topics):
         pass
+
+    def get_last_trained_results(self):
+        pass

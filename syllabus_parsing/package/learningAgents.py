@@ -13,7 +13,8 @@ class LdaAgent(Model):
     def __init__(self, documents):
         self.documents = documents        
         self.preprocess(self.documents)
-
+        self.last_trained_results = None
+        
 
     def __get_lda_topics(self, num_topics, use_tfidf):
         if not use_tfidf:
@@ -37,9 +38,15 @@ class LdaAgent(Model):
 
 
     def train(self, num_topics, use_tfidf=False):
-        return self.__get_lda_topics(num_topics, use_tfidf)
+        results = self.__get_lda_topics(num_topics, use_tfidf)
+        self.last_trained_results = results
+        return results
 
-        
+
+    def get_last_trained_results(self):
+        return self.last_trained_results
+
+
 class NmfAgent(Model):
 
 
@@ -73,7 +80,13 @@ class NmfAgent(Model):
 
 
     def train(self, num_topics, use_tfidf=True):
-        return self.__get_nmf_topics(num_topics)
+        results = self.__get_nmf_topics(num_topics)
+        self.last_trained_results = results
+        return results
+
+
+    def get_last_trained_results(self):
+        return self.last_trained_results
 
 
 class HdaAgent(Model):
