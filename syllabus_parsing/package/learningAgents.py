@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.decomposition import NMF
 from sklearn.preprocessing import normalize
 
+
 class LdaAgent(Model):
 
 
@@ -14,7 +15,7 @@ class LdaAgent(Model):
         self.documents = documents        
         self.preprocess(self.documents)
         self.last_trained_results = None
-        
+
 
     def __get_lda_topics(self, num_topics, use_tfidf):
         if not use_tfidf:
@@ -90,6 +91,7 @@ class NmfAgent(Model):
 
 
 class HdaAgent(Model):
+
 
     def train(self, num_topics):
         pass
