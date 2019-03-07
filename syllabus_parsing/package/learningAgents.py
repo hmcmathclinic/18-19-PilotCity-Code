@@ -11,11 +11,8 @@ class LdaAgent(Model):
 
 
     def __init__(self, documents):
-        self.documents = documents
-        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True) 
-                                for document in self.documents]
-        self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
-        self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
+        self.documents = documents        
+        self.preprocess(self.documents)
 
 
     def __get_lda_topics(self, num_topics, use_tfidf):
@@ -30,25 +27,25 @@ class LdaAgent(Model):
             words = model.show_topic(i, topn = 20)
             word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words]
         return pd.DataFrame(word_dict)
-            
+
+
+    def preprocess(self, documents):
+        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True) 
+                                for document in self.documents]
+        self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
+        self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
+
 
     def train(self, num_topics, use_tfidf=False):
         return self.__get_lda_topics(num_topics, use_tfidf)
 
         
-
 class NmfAgent(Model):
 
 
     def __init__(self, documents):
         self.documents = documents
-        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True) for document in self.documents]
-        self.vectorizer = CountVectorizer(analyzer='word', stop_words='english', lowercase=True, token_pattern=r'[^\d\W]{2,}')
-        self.x_counts = self.vectorizer.fit_transform(self.cleaned_documents)
-        self.words = self.vectorizer.get_feature_names()
-        self.transformer = TfidfTransformer(smooth_idf=False)
-        self.x_tfidf = self.transformer.fit_transform(self.x_counts)
-        self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
+        self.preprocess(self.documents)
 
 
     def __get_nmf_topics(self, num_topics):
@@ -63,6 +60,16 @@ class NmfAgent(Model):
             words = [feat_names[key] for key in words_ids]
             word_dict['Topic # ' + '{:02d}'.format(i+1)] = words
         return pd.DataFrame(word_dict)
+
+
+    def preprocess(self, documents):
+        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True) for document in self.documents]
+        self.vectorizer = CountVectorizer(analyzer='word', stop_words='english', lowercase=True, token_pattern=r'[^\d\W]{2,}')
+        self.x_counts = self.vectorizer.fit_transform(self.cleaned_documents)
+        self.words = self.vectorizer.get_feature_names()
+        self.transformer = TfidfTransformer(smooth_idf=False)
+        self.x_tfidf = self.transformer.fit_transform(self.x_counts)
+        self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
 
 
     def train(self, num_topics, use_tfidf=True):
