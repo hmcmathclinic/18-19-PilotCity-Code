@@ -12,9 +12,9 @@ class LdaAgent(Model):
 
 
     def __init__(self, documents):
+        Model.__init__(self)
         self.documents = documents        
         self.preprocess(self.documents)
-        self.last_trained_results = None
 
 
     def __get_lda_topics(self, num_topics, use_tfidf):
@@ -25,6 +25,7 @@ class LdaAgent(Model):
             corpus_tfidf = tfidf[self.bag_of_words_per_document]
             model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics=10, id2word=self.id2word, passes=50)
         word_dict = {}
+        self.trained_model = model
         for i in range(num_topics):
             words = model.show_topic(i, topn = 20)
             word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words]
@@ -44,14 +45,11 @@ class LdaAgent(Model):
         return results
 
 
-    def get_last_trained_results(self):
-        return self.last_trained_results
-
-
 class NmfAgent(Model):
 
 
     def __init__(self, documents):
+        Model.__init__(self)
         self.documents = documents
         self.preprocess(self.documents)
 
@@ -61,6 +59,7 @@ class NmfAgent(Model):
         feat_names = self.vectorizer.get_feature_names()
         model = NMF(n_components=num_topics, init='nndsvd')
         model.fit(self.xtfidf_norm)
+        self.trained_model = model
         word_dict = {}
         for i in range(num_topics):
             #for each topic, obtain the largest values, and add the words they map to into the dictionary.
@@ -80,14 +79,10 @@ class NmfAgent(Model):
         self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
 
 
-    def train(self, num_topics, use_tfidf=True):
+    def train(self, num_topics, use_tfidf=False):
         results = self.__get_nmf_topics(num_topics)
         self.last_trained_results = results
         return results
-
-
-    def get_last_trained_results(self):
-        return self.last_trained_results
 
 
 class HdaAgent(Model):
