@@ -15,6 +15,9 @@ class Model:
 
     def train(self, num_topics, use_tfidf=False):
         pass
+    
+    def transform_unseen_document(self, document):
+        pass
 
     def get_last_trained_results(self):
         return self.last_trained_results

@@ -45,6 +45,14 @@ class LdaAgent(Model):
         return results
 
 
+    def transform_unseen_document(self, document):
+        cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True)
+        bow = self.id2word.doc2bow(cleaned_document)
+        if self.trained_model:
+            return self.trained_model[bow]
+        return None
+
+
 class NmfAgent(Model):
 
 
@@ -84,6 +92,11 @@ class NmfAgent(Model):
         self.last_trained_results = results
         return results
 
+
+    def transform_unseen_document(self, document):
+        cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True)
+        return self.trained_model.transform(self.vectorizer.transform([cleaned_document]))[0]
+        
 
 class HdaAgent(Model):
 
