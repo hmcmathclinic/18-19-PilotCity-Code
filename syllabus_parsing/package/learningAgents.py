@@ -6,12 +6,12 @@ from pdftextExtractor import PDFTextExtractor
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.decomposition import NMF
 from sklearn.preprocessing import normalize
-
+import pickle
 
 class LdaAgent(Model):
 
 
-    def __init__(self, documents):
+    def __init__(self, documents=None):
         Model.__init__(self)
         self.documents = documents        
         self.preprocess(self.documents)
@@ -24,19 +24,26 @@ class LdaAgent(Model):
             tfidf = gensim.models.TfidfModel(self.bag_of_words_per_document)
             corpus_tfidf = tfidf[self.bag_of_words_per_document]
             model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics=10, id2word=self.id2word, passes=50)
-        word_dict = {}
         self.trained_model = model
-        for i in range(num_topics):
-            words = model.show_topic(i, topn = 20)
-            word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words]
-        return pd.DataFrame(word_dict)
+        return self.extract_topics_from_trained_model(num_topics)
+
+
+    def extract_topics_from_trained_model(self, num_topics):
+        if self.trained_model:
+            word_dict = {}
+            for i in range(num_topics):
+                words = self.trained_model.show_topic(i, topn = 20)
+                word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words]
+            return pd.DataFrame(word_dict)
+        return None
 
 
     def preprocess(self, documents):
-        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True) 
-                                for document in self.documents]
-        self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
-        self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
+        if documents:
+            self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True) 
+                                    for document in self.documents]
+            self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
+            self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
 
 
     def train(self, num_topics, use_tfidf=False):
@@ -56,7 +63,7 @@ class LdaAgent(Model):
 class NmfAgent(Model):
 
 
-    def __init__(self, documents):
+    def __init__(self, documents=None):
         Model.__init__(self)
         self.documents = documents
         self.preprocess(self.documents)
@@ -64,27 +71,34 @@ class NmfAgent(Model):
 
     def __get_nmf_topics(self, num_topics):
         #the word ids obtained need to be reverse-mapped to the words so we can print the topic names.
-        feat_names = self.vectorizer.get_feature_names()
         model = NMF(n_components=num_topics, init='nndsvd')
         model.fit(self.xtfidf_norm)
         self.trained_model = model
-        word_dict = {}
-        for i in range(num_topics):
-            #for each topic, obtain the largest values, and add the words they map to into the dictionary.
-            words_ids = model.components_[i].argsort()[:-20 - 1:-1]
-            words = [feat_names[key] for key in words_ids]
-            word_dict['Topic # ' + '{:02d}'.format(i+1)] = words
-        return pd.DataFrame(word_dict)
+        return self.extract_topics_from_trained_model(num_topics)
+    
+
+    def extract_topics_from_trained_model(self, num_topics):
+        if self.trained_model:
+            feat_names = self.vectorizer.get_feature_names()
+            word_dict = {}
+            for i in range(num_topics):
+                #for each topic, obtain the largest values, and add the words they map to into the dictionary.
+                words_ids = self.trained_model.components_[i].argsort()[:-20 - 1:-1]
+                words = [feat_names[key] for key in words_ids]
+                word_dict['Topic # ' + '{:02d}'.format(i+1)] = words
+            return pd.DataFrame(word_dict)
+        return None
 
 
     def preprocess(self, documents):
-        self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True) for document in self.documents]
-        self.vectorizer = CountVectorizer(analyzer='word', stop_words='english', lowercase=True, token_pattern=r'[^\d\W]{2,}')
-        self.x_counts = self.vectorizer.fit_transform(self.cleaned_documents)
-        self.words = self.vectorizer.get_feature_names()
-        self.transformer = TfidfTransformer(smooth_idf=False)
-        self.x_tfidf = self.transformer.fit_transform(self.x_counts)
-        self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
+        if documents:
+            self.cleaned_documents = [DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True) for document in self.documents]
+            self.vectorizer = CountVectorizer(analyzer='word', stop_words='english', lowercase=True, token_pattern=r'[^\d\W]{2,}')
+            self.x_counts = self.vectorizer.fit_transform(self.cleaned_documents)
+            self.words = self.vectorizer.get_feature_names()
+            self.transformer = TfidfTransformer(smooth_idf=False)
+            self.x_tfidf = self.transformer.fit_transform(self.x_counts)
+            self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
 
 
     def train(self, num_topics, use_tfidf=False):
@@ -96,7 +110,7 @@ class NmfAgent(Model):
     def transform_unseen_document(self, document):
         cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True)
         return self.trained_model.transform(self.vectorizer.transform([cleaned_document]))[0]
-        
+
 
 class HdaAgent(Model):
 
@@ -106,7 +120,19 @@ class HdaAgent(Model):
 
 
 if __name__ == "__main__":
-    parser = PDFTextExtractor()
-    documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    agent = NmfAgent(documents)
-    print(agent.train(20))
+    # parser = PDFTextExtractor()
+    # documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
+    # agent = LdaAgent(documents)
+    # print(agent.train(20))
+    # print(agent.transform_unseen_document("computational complexity is the best topic in computer science"))
+    # trained_model = agent.get_trained_model()
+    # #save model
+    # agent.save_info(agent, "trained_agent")
+    #retrieve saved model
+    # retrieved_model = Model.load_saved_info("trained_model")
+    # newAgent = LdaAgent()
+    # newAgent.set_trained_model(retrieved_model)
+    retrieved_agent = Model.load_saved_info("trained_agent")
+    print(retrieved_agent.extract_topics_from_trained_model(20))
+    print(retrieved_agent.transform_unseen_document("computational complexity is the best topic in computer science"))
+
