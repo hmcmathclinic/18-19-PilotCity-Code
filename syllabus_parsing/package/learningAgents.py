@@ -11,19 +11,20 @@ import pickle
 class LdaAgent(Model):
 
 
-    def __init__(self, documents=None):
+    def __init__(self, topn=20, documents=None):
         Model.__init__(self)
+        self.topn = topn
         self.documents = documents        
         self.preprocess(self.documents)
 
 
     def __get_lda_topics(self, num_topics, use_tfidf):
         if not use_tfidf:
-            model = gensim.models.ldamodel.LdaModel(self.bag_of_words_per_document, num_topics=20, id2word=self.id2word, passes=50)
+            model = gensim.models.ldamodel.LdaModel(self.bag_of_words_per_document, num_topics, id2word=self.id2word, passes=50)
         else:
             tfidf = gensim.models.TfidfModel(self.bag_of_words_per_document)
             corpus_tfidf = tfidf[self.bag_of_words_per_document]
-            model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics=10, id2word=self.id2word, passes=50)
+            model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics, id2word=self.id2word, passes=50)
         self.trained_model = model
         return self.extract_topics_from_trained_model(num_topics)
 
@@ -32,7 +33,7 @@ class LdaAgent(Model):
         if self.trained_model:
             word_dict = {}
             for i in range(num_topics):
-                words = self.trained_model.show_topic(i, topn = 20)
+                words = self.trained_model.show_topic(i, topn = self.topn)
                 word_dict['Topic # ' + '{:02d}'.format(i+1)] = [i[0] for i in words]
             return pd.DataFrame(word_dict)
         return None
@@ -63,8 +64,9 @@ class LdaAgent(Model):
 class NmfAgent(Model):
 
 
-    def __init__(self, documents=None):
+    def __init__(self, topn, documents=None):
         Model.__init__(self)
+        self.topn = topn
         self.documents = documents
         self.preprocess(self.documents)
 
@@ -83,7 +85,7 @@ class NmfAgent(Model):
             word_dict = {}
             for i in range(num_topics):
                 #for each topic, obtain the largest values, and add the words they map to into the dictionary.
-                words_ids = self.trained_model.components_[i].argsort()[:-20 - 1:-1]
+                words_ids = self.trained_model.components_[i].argsort()[:-self.topn - 1:-1]
                 words = [feat_names[key] for key in words_ids]
                 word_dict['Topic # ' + '{:02d}'.format(i+1)] = words
             return pd.DataFrame(word_dict)
@@ -122,7 +124,7 @@ class HdaAgent(Model):
 if __name__ == "__main__":
     # parser = PDFTextExtractor()
     # documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    # agent = LdaAgent(documents)
+    # agent = LdaAgent(20, documents)
     # print(agent.train(20))
     # print(agent.transform_unseen_document("computational complexity is the best topic in computer science"))
     # trained_model = agent.get_trained_model()
