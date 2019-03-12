@@ -121,20 +121,4 @@ class HdaAgent(Model):
         pass
 
 
-if __name__ == "__main__":
-    # parser = PDFTextExtractor()
-    # documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    # agent = LdaAgent(20, documents)
-    # print(agent.train(20))
-    # print(agent.transform_unseen_document("computational complexity is the best topic in computer science"))
-    # trained_model = agent.get_trained_model()
-    # #save model
-    # agent.save_info(agent, "trained_agent")
-    #retrieve saved model
-    # retrieved_model = Model.load_saved_info("trained_model")
-    # newAgent = LdaAgent()
-    # newAgent.set_trained_model(retrieved_model)
-    retrieved_agent = Model.load_saved_info("trained_agent")
-    print(retrieved_agent.extract_topics_from_trained_model(20))
-    print(retrieved_agent.transform_unseen_document("computational complexity is the best topic in computer science"))
 
