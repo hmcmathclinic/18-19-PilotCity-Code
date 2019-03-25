@@ -41,7 +41,7 @@ def main():
     nmfTFIDF_topics_scoreL = []
     k_values = range(5, 95, 5)
     for num_topics in k_values:
-        topics_fname = "topics/NMF_5_95_5/"+str(num_topics)+"topics_NMFTFIDF_laspositas.sav"
+        topics_fname = "topics/LDA_5_95_5/"+str(num_topics)+"topics_NMFTFIDF_laspositas.sav"
         with open(topics_fname, 'rb') as filehandle:
             topics = pickle.load(filehandle)
         score, skipped_over = calculate_coherence(topics, top=3)
@@ -52,6 +52,8 @@ def main():
         with open(topics_fname, 'rb') as filehandle:
             topics = pickle.load(filehandle)
         score, skipped_over = calculate_coherence(topics, top=3)
+        print(score)
+        print(skipped_over)
         nmfTFIDF_topics_scoreL.append(score)
         print("\n")
 
@@ -60,7 +62,7 @@ def main():
     ax = plt.plot(k_values, nmf_topics_scoreL)
     plt.xticks(k_values)
     plt.xlabel("Number of Topics")
-    plt.xlabel("Mean Coherence")
+    plt.ylabel("Mean Coherence")
     plt.title("LDA vs. NMF, both with TFIDF")
     # add the points
     plt.scatter(k_values, nmf_topics_scoreL, c="purple", label = "NMF")
