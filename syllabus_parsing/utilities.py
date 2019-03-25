@@ -55,11 +55,11 @@ class Utils:
         return wordL, array, lengths
 
     def compute_lengths(self, array):
-        ''' takes the array as its only parameter and returns a 
+        ''' takes the array as its only parameter and returns a
         new array that stores the lengths of each row in the array. '''
         return numpy.linalg.norm(array, axis=1)
 
-    def get_vec(self, word, wordlist, array, lengths):
+    def get_vec(self, word, wordlist = self.wordL, array = self.array, lengths = self.lengths):
         ''' Given a certain word we want to find within
         a list of words, corresponding vector array,
         and corresponding vector lengths, returns a
@@ -71,7 +71,7 @@ class Utils:
         return word_vector, word_length
 
     def cosine_similarity(self, vec1, vec2, lens1, lens2):
-        ''' Takes in 2 vectors and their lengths. 
+        ''' Takes in 2 vectors and their lengths.
         Returns their cosine similarity. '''
         dot_product = numpy.dot(vec1, vec2)
         return dot_product / (lens1 * lens2)
@@ -82,5 +82,3 @@ class Utils:
         w1_vector, w1_len = self.get_vec(w1, self.wordL, self.array, self.lengths)
         w2_vector, w2_len = self.get_vec(w2, self.wordL, self.array, self.lengths)
         return self.cosine_similarity(w1_vector, w2_vector, w1_len, w2_len)
-    
-    
