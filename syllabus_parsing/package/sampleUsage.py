@@ -13,7 +13,10 @@ if __name__ == "__main__":
     # # Save a trained agent
     # agent.save_info(agent, "trained_agent")
     ## Retrieve a saved agent
-    retrieved_agent = Model.load_saved_info("trained_agent")
+    #retrieved_agent = Model.load_saved_info("trained_agent")
+    # print(retrieved_agent.get_last_trained_results())
+    # print(retrieved_agent.transform_unseen_document("computational complexity is the best topic in computer science"))
+
+    retrieved_agent = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
     print(retrieved_agent.get_last_trained_results())
     print(retrieved_agent.transform_unseen_document("computational complexity is the best topic in computer science"))
-
