@@ -57,7 +57,12 @@ class LdaAgent(Model):
         cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = True, stopwords = True)
         bow = self.id2word.doc2bow(cleaned_document)
         if self.trained_model:
-            return self.trained_model[bow]
+            topics = self.trained_model[bow]
+            out = {}
+            for topic in topics:
+                key = 'Topic # ' + '{:02d}'.format(topic[0]+1)
+                out[key] = self.last_trained_results[key]
+            return pd.DataFrame(out)
         return None
 
 
@@ -111,7 +116,13 @@ class NmfAgent(Model):
 
     def transform_unseen_document(self, document):
         cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True)
-        return self.trained_model.transform(self.vectorizer.transform([cleaned_document]))[0]
+        topics = self.trained_model.transform(self.vectorizer.transform([cleaned_document]))[0]
+        out = {}
+        for i in range(len(topics)):
+            if topics[i] > 0:
+                key = 'Topic # ' + '{:02d}'.format(i+1)
+                out[key] = self.last_trained_results[key]
+        return pd.DataFrame(out)
 
 
 class HdaAgent(Model):

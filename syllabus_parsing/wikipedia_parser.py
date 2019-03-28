@@ -2,6 +2,7 @@ import wikipedia
 import pickle
 import warnings
 import sys
+import syllabusparser
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch, cm
 from reportlab.lib.enums import TA_JUSTIFY
@@ -24,10 +25,24 @@ def create_layout(logo, story, styles):
 
 
 def get_topics():
-	index_dict = "package/20topics_nmf_laspositas.sav"
+    ''' Gets all topics from the file specified '''
+    index_dict = "topics/NMF_1_40_1/16topics_NMFTFIDF_laspositas.sav"
 
 	with open(index_dict, 'rb') as filehandle:
 		indices = pickle.load(filehandle)
+	indices.values.T.tolist()
+	return [list(l) for l in zip(*indices.values)]
+
+def get_topics_new_input(syllabus):
+    ''' Get the topics from a new, unseen syllabus '''
+	with open(syllabus, 'rb') as filehandle:
+		# convert syllabus to string
+		syllabus = 
+	
+    index_dict = "topics/NMF_1_40_1/16topics_NMFTFIDF_laspositas.sav"
+	with open(index_dict, 'rb') as filehandle:
+		indices = pickle.load(filehandle)
+
 	indices.values.T.tolist()
 	return [list(l) for l in zip(*indices.values)]
 
