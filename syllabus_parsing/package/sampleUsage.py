@@ -20,8 +20,13 @@ if __name__ == "__main__":
     # print(topics)
 
     # #Instantiate an LDA agent that uses LDA model to obtain topic distribution
-    agent2 = Model.load_saved_info("trained-agent-nmf")
+    #agent2 = Model.load_saved_info("trained-agent-nmf")
+    agent2 = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
+    print(agent2.get_last_trained_results())
     topics2 = agent2.transform_unseen_document("computational complexity and algorithms make you a better computer scientist")
     print(topics2)
 
-
+    # agent2 = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
+    # retrieved_agent = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
+    # print(retrieved_agent.get_last_trained_results())
+    # print(retrieved_agent.transform_unseen_document("computational complexity is the best topic in computer science"))
