@@ -2,13 +2,10 @@ import wikipedia
 import pickle
 import warnings
 import sys
-import syllabusparser
-# packages
 from learningAgents import LdaAgent,NmfAgent
 from pdftextExtractor import PDFTextExtractor
 from model import Model
 import pandas as pd
-#
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch, cm
 from reportlab.lib.enums import TA_JUSTIFY
@@ -17,7 +14,6 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 warnings.filterwarnings("ignore")
-
 
 def create_layout(logo, story, styles):  
     im = Image(logo, 2*inch, 2*inch)
@@ -31,17 +27,19 @@ def create_layout(logo, story, styles):
 
 def get_topics():
     ''' Gets all topics from the file specified '''
-    index_dict = "../topics/NMF_1_40_1/16topics_NMFTFIDF_laspositas.sav"
-    with open(index_dict, 'rb') as filehandle:
-        indices = pickle.load(filehandle)
+    agent = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
+    indices = agent.get_last_trained_results()
+    # index_dict = "../topics/NMF_1_40_1/16topics_NMFTFIDF_laspositas.sav"
+    # with open(index_dict, 'rb') as filehandle:
+    #     indices = pickle.load(filehandle)
     indices.values.T.tolist()
     return [list(l) for l in zip(*indices.values)]
 
 def get_topics_new_input(syllabus):
     ''' Get the topics from a new, unseen syllabus '''
-    with open(syllabus, 'rb') as filehandle:
-        # convert syllabus to string
-        syllabus = syllabusparser.convert(syllabus)
+    extractor = PDFTextExtractor()
+    # convert syllabus to string
+    syllabus = extractor.convert_pdf_to_text(syllabus)
     agent = Model.load_saved_info("../trained_models/NMF_1_40_1/16topics_agent_NMFTFIDF_laspositas.sav")
     indices = agent.transform_unseen_document(syllabus)
     print(indices)
@@ -59,8 +57,8 @@ def get_definition(topic):
 
 def add_data_to_document(Story, doc, styles):
     syllabus = "../LosPositasSyllabi/course_outline_pdf - 2019-02-28T120643.112.pdf"
-    #topics = get_topics()
-    topics = get_topics_new_input(syllabus)
+    topics = get_topics()
+    #topics = get_topics_new_input(syllabus)
     for topic in topics:
         s = ''
         n = 0
