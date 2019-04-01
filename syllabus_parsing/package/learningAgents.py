@@ -114,13 +114,15 @@ class NmfAgent(Model):
         return results
 
 
-    def transform_unseen_document(self, document):
+    def transform_unseen_document(self, document, num_topics=5):
         cleaned_document = DocumentCleaner().clean_document(document, english = True, return_list = False, stopwords = True)
         topics = self.trained_model.transform(self.vectorizer.transform([cleaned_document]))[0]
+        topics_and_id = [(i, topics[i]) for i in range(len(topics))]
+        top_n_topics = sorted(topics_and_id, key=lambda x: x[1], reverse=True)[:num_topics]
         out = {}
-        for i in range(len(topics)):
-            if topics[i] > 0:
-                key = 'Topic # ' + '{:02d}'.format(i+1)
+        for topic_tup in top_n_topics:
+            if topic_tup[1] > 0:
+                key = 'Topic # ' + '{:02d}'.format(topic_tup[0]+1)
                 out[key] = self.last_trained_results[key]
         return pd.DataFrame(out)
 
