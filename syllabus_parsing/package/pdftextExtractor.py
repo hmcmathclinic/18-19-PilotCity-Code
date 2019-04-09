@@ -68,10 +68,3 @@ class PDFTextExtractor:
     def __strip_punctuation(self, s):
         return ''.join(c for c in s if c not in punctuation)
 
-
-## Test
-# if __name__ == "__main__":
-#     parser = PDFTextExtractor()
-#     print(parser.convert_pdf_to_text('../AllSyllabiParser/math2010.pdf'))
-#     print(parser.find_pdfs('../AllSyllabiParser'))
-     

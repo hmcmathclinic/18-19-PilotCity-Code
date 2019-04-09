@@ -2,3 +2,4 @@ pdfminer.six
 gensim
 nltk
 wikipedia
+pyLDAvis
