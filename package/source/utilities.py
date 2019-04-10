@@ -79,6 +79,6 @@ class Utils:
     def score(self, w1, w2):
         if w1 not in self.wordL or w2 not in self.wordL:
             return 2
-        w1_vector, w1_len = self.get_vec(w1, self.wordL, self.array, self.lengths)
-        w2_vector, w2_len = self.get_vec(w2, self.wordL, self.array, self.lengths)
+        w1_vector, w1_len = self.get_vec(w1)
+        w2_vector, w2_len = self.get_vec(w2)
         return self.cosine_similarity(w1_vector, w2_vector, w1_len, w2_len)

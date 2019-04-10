@@ -34,11 +34,12 @@ if __name__ == "__main__":
         topics = agent.transform_unseen_document("computational complexity and algorithms make you a better computer scientist")
     '''
     parser = PDFTextExtractor()
-    documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    numberOfWordsPerTopics = 20
-    numberOfTopics =  20
+    documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
+    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
+    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
+    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
     agent = NmfAgent(documents)
-    topics = agent.train(numberOfTopics, numberOfWordsPerTopics)
+    topics = agent.construct_model()
     print(topics)
     print("Read SampleUsage.py for instructions")
     agent.visualize()
