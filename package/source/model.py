@@ -6,6 +6,7 @@ class Model:
         self.last_trained_results = None
         self.trained_model = None
 
+
     def preprocess(self, documents):
         pass
 
@@ -30,6 +31,9 @@ class Model:
 
     def get_trained_model(self):
         return self.trained_model
+
+    def construct_model(self):
+        pass
 
     def visualize(self):
         pass

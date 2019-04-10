@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.decomposition import NMF
 from sklearn.preprocessing import normalize
 from sklearn.manifold import TSNE
+import trainTopicModels
 import pyLDAvis
 import pyLDAvis.gensim
 import pickle
@@ -54,6 +55,8 @@ class LdaAgent(Model):
             self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
             self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
 
+    def construct_model(self):
+       return trainTopicModels.trainModel("LDA", self.documents)
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
         results = self.__get_lda_topics(num_topics, number_words_per_topic, use_tfidf)
@@ -85,6 +88,8 @@ class NmfAgent(Model):
 
     def __init__(self, documents=None):
         Model.__init__(self)
+        if not documents:
+            raise ValueError("Pass a non-empy list of documents")
         self.documents = documents
         self.preprocess(self.documents)
 
@@ -130,6 +135,10 @@ class NmfAgent(Model):
             self.transformer = TfidfTransformer(smooth_idf=False)
             self.x_tfidf = self.transformer.fit_transform(self.x_counts)
             self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
+
+
+    def construct_model(self):
+       return trainTopicModels.trainModel("NMF", self.documents)
 
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
