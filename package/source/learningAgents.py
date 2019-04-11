@@ -58,7 +58,7 @@ class LdaAgent(Model):
 
     def construct_model(self):
        trainTopicModels.trainModel(self,"LDA")
-       
+
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
         results = self.__get_lda_topics(num_topics, number_words_per_topic, use_tfidf)
@@ -140,7 +140,8 @@ class NmfAgent(Model):
 
 
     def construct_model(self):
-       trainTopicModels.trainModel(self,"NMF")
+        print("Starting process of training model")
+        trainTopicModels.trainModel(self,"NMF")
 
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):

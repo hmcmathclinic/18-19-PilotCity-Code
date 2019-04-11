@@ -55,14 +55,3 @@ def calculate_coherence(topics_df, top = 3):
     # get the mean score across all topics
     return overall_coherence / num_topics, skipped_over
 
-if __name__ == "__main__":
-    parser = PDFTextExtractor()
-    #documents = parser.get_documents_from_pdf_folder_path('../AllSyllabiParser')
-    print("Parser initialized")
-    # las positas syllabi
-    documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
-    trainModel(documents=documents, use_tfidf=True, type = "NMF")
-    trainModel(documents=documents, use_tfidf=True, type = "LDA")

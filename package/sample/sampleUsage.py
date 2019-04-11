@@ -4,6 +4,10 @@ from learningAgents import LdaAgent,NmfAgent
 from pdftextExtractor import PDFTextExtractor
 from model import Model
 import pandas as pd
+import config
+
+outputPath = config.CONFIG["outputPath"]
+
 
 if __name__ == "__main__":
     '''
@@ -42,6 +46,6 @@ if __name__ == "__main__":
     agent.construct_model()
     topics = agent.get_last_trained_results()
     print(topics)
-    agent.save_info(agent,"../output/trained_agent-nmf")
+    agent.save_info(agent, outputPath + "/trained_agent-nmf")
     print("Read SampleUsage.py for instructions")
     agent.visualize()
