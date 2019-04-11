@@ -1,11 +1,13 @@
 import numpy
 import argparse
+import config
 
+glovePath = config.CONFIG['pathToGloveData']
 
 class Utils:
 
     def __init__(self):
-        fp = open("glove.6B.100d.npy", "rb")
+        fp = open(glovePath, "rb")
         self.wordL, self.array, self.lengths = self.load_glove_vectors(fp)
 
     def load_text_vectors(self, f):

@@ -54,6 +54,7 @@ class PDFTextExtractor:
     def get_documents_from_pdf_folder_path(self, folder_path):
         corpus = []
         list_of_pdfs = self.find_pdfs(folder_path)
+        print("Extracting text from all PDFs in given folder path")
         for pdf in list_of_pdfs:
             syllabus_string = self.convert_pdf_to_text(pdf)
             corpus.append(syllabus_string)
@@ -61,6 +62,7 @@ class PDFTextExtractor:
 
     
     def get_document_from_pdf_file_path(self, filepath):
+        print("Extracting text from given PDF")
         corpus = []
         corpus.append(self.convert_pdf_to_text(filepath))
         return corpus
