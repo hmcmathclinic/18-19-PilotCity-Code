@@ -80,6 +80,7 @@ class LdaAgent(Model):
     
 
     def visualize(self):
+        print("Visualization works for LDA works only if you're running our code in a Jupyter Notebook")
         if self.trained_model:
             vis_data =pyLDAvis.gensim.prepare(self.trained_model, self.bag_of_words_per_document, self.id2word)
             pyLDAvis.display(vis_data)
