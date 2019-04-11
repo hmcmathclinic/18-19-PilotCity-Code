@@ -55,8 +55,10 @@ class LdaAgent(Model):
             self.id2word = gensim.corpora.Dictionary(self.cleaned_documents)
             self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
 
+
     def construct_model(self):
-       return trainTopicModels.trainModel("LDA", self.documents)
+       trainTopicModels.trainModel(self,"LDA")
+       
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
         results = self.__get_lda_topics(num_topics, number_words_per_topic, use_tfidf)
@@ -138,7 +140,7 @@ class NmfAgent(Model):
 
 
     def construct_model(self):
-       return trainTopicModels.trainModel("NMF", self.documents)
+       trainTopicModels.trainModel(self,"NMF")
 
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
