@@ -17,9 +17,9 @@ if __name__ == "__main__":
         numberOfWordsPerTopics = 20
         numberOfTopics =  20
         agent = LdaAgent(documents)
-        topics = agent.train(numberOfTopics, numberOfWordsPerTopics)
+        agent.construct_model()
+        topics = agent.get_last_trained_results()
         print(topics)
-
 
             #Save Trained Agent
         agent.save_info(agent,"trained_agent-lda")
@@ -35,11 +35,13 @@ if __name__ == "__main__":
     '''
     parser = PDFTextExtractor()
     documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
-    documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
     agent = NmfAgent(documents)
-    topics = agent.construct_model()
+    agent.construct_model()
+    topics = agent.get_last_trained_results()
     print(topics)
+    agent.save_info(agent,"../output/trained_agent-nmf")
     print("Read SampleUsage.py for instructions")
     agent.visualize()

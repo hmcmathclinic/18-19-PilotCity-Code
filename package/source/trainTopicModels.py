@@ -13,13 +13,10 @@ import pickle
 
 utils = utilities.Utils()
 
-def trainModel(model_type, documents, use_tfidf=True):
+
+def trainModel(agent, type, use_tfidf=True):
     ''' Type is either LDA or NMF. Set tfidf to true or false (LDA only) '''
-    if model_type == "LDA":
-        agent = learningAgents.LdaAgent(documents=documents)
-    elif model_type == "NMF": 
-        agent = learningAgents.NmfAgent(documents=documents)
-    else: 
+    if not (type == "NMF" or type == "LDA"): 
         return "Error! type needs to be either LDA or NMF"
     if use_tfidf: 
         addin = "TFIDF"
@@ -33,10 +30,7 @@ def trainModel(model_type, documents, use_tfidf=True):
         topic_coherence.append(score)
     ymax = max(topic_coherence)
     num_topics = topic_coherence.index(ymax) + 10
-    topics = agent.train(num_topics, use_tfidf)
-    name = "../output/" + str(num_topics) + "agent_" + model_type + addin
-    agent.save_info(agent, name)
-    return topics
+    topics = agent.train(num_topics, use_tfidf=use_tfidf)
 
 def calculate_coherence(topics_df, top = 3):
     skipped_over = 0
