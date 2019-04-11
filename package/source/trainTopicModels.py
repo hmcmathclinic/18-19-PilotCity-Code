@@ -34,8 +34,8 @@ def trainModel(type, documents, use_tfidf=True):
     ymax = max(topic_coherence)
     num_topics = topic_coherence.index(ymax) + 10
     topics = agent.train(num_topics, use_tfidf)
-    name = str(num_topics) + "topics_" + type + addin + "_laspositas.sav"
-    agent.save_info(topics, name)
+    name = "../output/" + str(num_topics) + "agent_" + type + addin
+    agent.save_info(agent, name)
     return topics
 
 def calculate_coherence(topics_df, top = 3):
