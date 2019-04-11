@@ -5,7 +5,7 @@ Topics Extractor is a learning model that extracts insights(topics) from a corpu
 
 # Requirements
 - Requires Python 3 to run. 
-- Open Python Interpreter and enter the following commands ```>>> import nltk; nltk.download()```
+- Open Python Interpreter in terminal and enter the following commands ```import nltk; nltk.download()```
 - Requires that for your first usage you run ```pip install -r requirements.txt ``` in source
 - Edit ```config.py``` in source to specify path to gloVe data files needed by the app 
 
