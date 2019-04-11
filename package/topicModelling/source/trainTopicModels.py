@@ -24,7 +24,7 @@ def trainModel(agent, type, use_tfidf=True):
         addin = ""
     topic_coherence = []
     for num_topics in range(10, 20, 1):
-        print("Training " + model_type + " model on ", str(num_topics), " topics with" + addin)
+        print("Training " + type + " model on ", str(num_topics), " topics with" + addin)
         topics = agent.train(num_topics, use_tfidf=use_tfidf)
         score = calculate_coherence(topics)
         topic_coherence.append(score)
