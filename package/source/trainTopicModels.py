@@ -13,11 +13,11 @@ import pickle
 
 utils = utilities.Utils()
 
-def trainModel(type, documents, use_tfidf=True):
+def trainModel(model_type, documents, use_tfidf=True):
     ''' Type is either LDA or NMF. Set tfidf to true or false (LDA only) '''
-    if type == "LDA":
+    if model_type == "LDA":
         agent = learningAgents.LdaAgent(documents=documents)
-    elif type == "NMF": 
+    elif model_type == "NMF": 
         agent = learningAgents.NmfAgent(documents=documents)
     else: 
         return "Error! type needs to be either LDA or NMF"
@@ -27,14 +27,14 @@ def trainModel(type, documents, use_tfidf=True):
         addin = ""
     topic_coherence = []
     for num_topics in range(10, 20, 1):
-        print("Training " + type + " model on ", str(num_topics), " topics with" + addin)
+        print("Training " + model_type + " model on ", str(num_topics), " topics with" + addin)
         topics = agent.train(num_topics, use_tfidf=use_tfidf)
         score = calculate_coherence(topics)
         topic_coherence.append(score)
     ymax = max(topic_coherence)
     num_topics = topic_coherence.index(ymax) + 10
     topics = agent.train(num_topics, use_tfidf)
-    name = "../output/" + str(num_topics) + "agent_" + type + addin
+    name = "../output/" + str(num_topics) + "agent_" + model_type + addin
     agent.save_info(agent, name)
     return topics
 
@@ -70,5 +70,5 @@ if __name__ == "__main__":
     documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
     documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
     documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
-    trainModel(documents=documents, use_tfidf=True, type = "NMF")
-    trainModel(documents=documents, use_tfidf=True, type = "LDA")
+    trainModel(documents=documents, use_tfidf=True, model_type = "NMF")
+    trainModel(documents=documents, use_tfidf=True, model_type = "LDA")
