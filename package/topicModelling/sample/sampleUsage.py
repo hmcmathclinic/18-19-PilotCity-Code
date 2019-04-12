@@ -19,8 +19,6 @@ if __name__ == "__main__":
 
             #Instantiate an LDA/NMF agent that uses LDA/NMF model to obtain topic distribution
 
-        numberOfWordsPerTopics = 20
-        numberOfTopics =  20
         agent = NmfAgent(documents)
         # or use agent = LdaAgent(documents)
         agent.construct_model()
@@ -53,18 +51,17 @@ if __name__ == "__main__":
         # Create the study guide
         generator.create_document(use_all_topics=False, image = logo, syllabus=syllabus)
     '''
-    # parser = PDFTextExtractor()
-    # documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
-    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
-    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
-    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
-    # agent = NmfAgent(documents)
-    # agent.construct_model()
-    # topics = agent.get_last_trained_results()
-    # print(topics)
-    # agent.save_info(agent, outputPath + "/trained_agent-nmf")
-    # print("Read SampleUsage.py for instructions")
-    # agent.visualize()
+    parser = PDFTextExtractor()
+    documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
+    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
+    agent = NmfAgent(documents)
+    agent.construct_model()
+    topics = agent.get_last_trained_results()
+    print(topics)
+    agent.save_info(agent, outputPath + "/trained_agent-nmf")
+    agent.visualize()
 
     # generate study guide
     # What trained agent do you want to use? Also provide output file path to object constructor
