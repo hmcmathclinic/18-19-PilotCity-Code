@@ -18,8 +18,6 @@ if __name__ == "__main__":
 
             #Instantiate an LDA/NMF agent that uses LDA/NMF model to obtain topic distribution
 
-        numberOfWordsPerTopics = 20
-        numberOfTopics =  20
         agent = LdaAgent(documents)
         agent.construct_model()
         topics = agent.get_last_trained_results()
@@ -47,5 +45,4 @@ if __name__ == "__main__":
     topics = agent.get_last_trained_results()
     print(topics)
     agent.save_info(agent, outputPath + "/trained_agent-nmf")
-    print("Read SampleUsage.py for instructions")
     agent.visualize()
