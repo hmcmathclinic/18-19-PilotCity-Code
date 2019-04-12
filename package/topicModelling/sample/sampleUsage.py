@@ -40,7 +40,7 @@ if __name__ == "__main__":
         topics = agent.transform_unseen_document("computational complexity and algorithms make you a better computer scientist")
     
             # Generate a Study Guide
-        # What trained agent do you want to use?
+        # What trained agent do you want to use? Also provide output file path to object constructor
         trained_agent_filepath = outputPath + "/trained_agent-nmf"
         generator = StudyGuideGenerator(agent_fname=trained_agent_filepath)
 
@@ -53,23 +53,23 @@ if __name__ == "__main__":
         # Create the study guide
         generator.create_document(use_all_topics=False, image = logo, syllabus=syllabus)
     '''
-    parser = PDFTextExtractor()
-    documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
-    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
-    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
-    # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
-    agent = NmfAgent(documents)
-    agent.construct_model()
-    topics = agent.get_last_trained_results()
-    print(topics)
-    agent.save_info(agent, outputPath + "/trained_agent-nmf")
-    print("Read SampleUsage.py for instructions")
-    agent.visualize()
+    # parser = PDFTextExtractor()
+    # documents = parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi1')
+    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi2')
+    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi3')
+    # # documents += parser.get_documents_from_pdf_folder_path('../syllabi/LasPositasSyllabi4')
+    # agent = NmfAgent(documents)
+    # agent.construct_model()
+    # topics = agent.get_last_trained_results()
+    # print(topics)
+    # agent.save_info(agent, outputPath + "/trained_agent-nmf")
+    # print("Read SampleUsage.py for instructions")
+    # agent.visualize()
 
     # generate study guide
-    # What trained agent do you want to use?
+    # What trained agent do you want to use? Also provide output file path to object constructor
     trained_agent_filepath = outputPath + "/trained_agent-nmf"
-    generator = StudyGuideGenerator(agent_fname=trained_agent_filepath)
+    generator = StudyGuideGenerator(agent_fname=trained_agent_filepath, out_fname=outputPath +"/studyGuide_youJustMade.pdf")
     # For what syllabus do you want a study guide?
     syllabus = "../syllabi/LasPositasSyllabi1/course_outline_pdf - 2019-02-28T120643.112.pdf"
     # What image would you like to appear on the document?
