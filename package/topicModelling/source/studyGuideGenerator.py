@@ -113,19 +113,3 @@ class StudyGuideGenerator:
         self.create_layout(image)
         self.add_data_to_document(topics)
         
-def main():
-    # What trained agent do you want to use?
-    trained_agent_filepath = "../trained_models/16topics_agent_NMFTFIDF_laspositas.sav"
-    generator = StudyGuideGenerator(agent_fname=trained_agent_filepath)
-
-    # For what syllabus do you want a study guide?
-    syllabus = "../LasPositasSyllabi1/course_outline_pdf - 2019-02-28T120643.112.pdf"
-
-    # What image would you like to appear on the document?
-    logo = "images/logo.png"
-
-    # Create the study guide
-    generator.create_document(use_all_topics=False, image = logo, syllabus=syllabus)
-
-if __name__ == "__main__":
-    main()

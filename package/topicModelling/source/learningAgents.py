@@ -33,7 +33,7 @@ class LdaAgent(Model):
         else:
             tfidf = gensim.models.TfidfModel(self.bag_of_words_per_document)
             corpus_tfidf = tfidf[self.bag_of_words_per_document]
-            model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics, id2word=self.id2word, passes=50)
+            model = gensim.models.ldamodel.LdaModel(corpus_tfidf, num_topics, id2word=self.id2word, passes=10)
         self.trained_model = model
         return self.extract_topics_from_trained_model(num_topics, number_words_per_topic)
 
