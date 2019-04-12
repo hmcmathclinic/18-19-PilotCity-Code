@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: rankings-updater
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: matchmaker
+            image: "gcr.io/silver-osprey-217701/matching:latest"
+            imagePullPolicy: Always           
+            command: ["/bin/sh"]
+            args: ["-c", "python rankings_cron.py"]
+          restartPolicy: OnFailure

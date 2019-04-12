@@ -1,0 +1,16 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+service: backend
+
+handlers:
+- url: /.*
+  script: main.app
+
+libraries:
+- name: ssl
+  version: latest
+
+env_variables:
+  # Replace with your Firebase project ID.
+  FIREBASE_PROJECT_ID: 'users-94e00'

@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: update-rankings
+spec:
+  template:
+    metadata:
+      name: update-rankings
+    spec:
+      containers:
+      - name: matchmaker
+        image: "gcr.io/silver-osprey-217701/matching:latest"
+        imagePullPolicy: Always
+        command: ["/bin/sh"]
+        args: ["-c", "python rankings_cron.py"]
+      restartPolicy: Never
