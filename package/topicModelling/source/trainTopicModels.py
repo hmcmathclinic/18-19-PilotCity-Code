@@ -28,7 +28,9 @@ def trainModel(agent, type, use_tfidf=True):
         topics = agent.train(num_topics, use_tfidf=use_tfidf)
         score = calculate_coherence(topics)
         topic_coherence.append(score)
+        print("Topic coherence for ", num_topics, "topics is ", score)
     ymax = max(topic_coherence)
+    print("Max Topic Coherence", ymax)
     num_topics = topic_coherence.index(ymax) + 10
     topics = agent.train(num_topics, use_tfidf=use_tfidf)
 
