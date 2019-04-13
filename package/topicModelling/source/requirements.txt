@@ -3,3 +3,6 @@ gensim
 nltk
 wikipedia
 pyLDAvis
+sklearn
+paramiko
+matplotlib
