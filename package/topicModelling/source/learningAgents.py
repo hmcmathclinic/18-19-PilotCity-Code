@@ -56,8 +56,8 @@ class LdaAgent(Model):
             self.bag_of_words_per_document = [self.id2word.doc2bow(document) for document in self.cleaned_documents]
 
 
-    def construct_model(self):
-       trainTopicModels.trainModel(self,"LDA")
+    def construct_model(self, minTopics = 10, maxTopics = 100):
+       trainTopicModels.trainModel(self,"LDA",minTopics = 10, maxTopics = 100)
 
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
@@ -140,9 +140,9 @@ class NmfAgent(Model):
             self.xtfidf_norm = normalize(self.x_tfidf, norm='l1', axis=1)
 
 
-    def construct_model(self):
+    def construct_model(self,minTopics = 10, maxTopics = 100):
         print("Starting process of training model")
-        trainTopicModels.trainModel(self,"NMF")
+        trainTopicModels.trainModel(self,"NMF",minTopics = 10, maxTopics = 100)
 
 
     def train(self, num_topics, number_words_per_topic=20, use_tfidf=False):
