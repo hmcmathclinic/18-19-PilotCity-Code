@@ -6,3 +6,5 @@ pyLDAvis
 sklearn
 paramiko
 matplotlib
+seaborn
+reportlab
