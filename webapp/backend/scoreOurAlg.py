@@ -39,7 +39,7 @@ for employer_id in employer_ids:
             if (not(challenge_info is None) and 'classroom' in challenge_info \
                 and challenge_info['classroom'] != []):
                 classroom_id = challenge_info['classroom'][0]
-                print(thisEmployersIndices)
+                #print(thisEmployersIndices)
                 print(classroom_id)
                 classrooms_index_in_rank = thisEmployersIndices[classroom_id]
                 ranksOfThisEmployersClassrooms.append(classrooms_index_in_rank)
