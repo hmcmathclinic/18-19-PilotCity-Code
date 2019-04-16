@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: matchmaker
+spec:
+  type: LoadBalancer
+  selector:
+    app: matchmaker
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: http

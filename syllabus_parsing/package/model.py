@@ -31,6 +31,9 @@ class Model:
     def get_trained_model(self):
         return self.trained_model
 
+    def visualize(self):
+        pass
+
     @staticmethod
     def save_info(info, output_fname):
         with open(output_fname, "wb") as filehandle:

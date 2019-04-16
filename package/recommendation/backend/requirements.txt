@@ -1,0 +1,11 @@
+gunicorn==19.7.1
+Flask
+pyjwt==1.6.4
+flask-cors==3.0.6
+google-auth==1.5.1
+requests==2.19.1
+requests-toolbelt==0.8.0
+gcloud
+numpy
+firebase_admin
+google-cloud-firestore

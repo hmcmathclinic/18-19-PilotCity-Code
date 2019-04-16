@@ -1,0 +1,10 @@
+pdfminer.six
+gensim
+nltk
+wikipedia
+pyLDAvis
+sklearn
+paramiko
+matplotlib
+seaborn
+reportlab

@@ -1,0 +1,16 @@
+male	female
+brother	sister
+nephew	niece
+uncle	aunt
+man	woman
+sir	madam
+heir	heiress
+duke	duchess
+emperor	empress
+king	queen
+father	mother
+boy	girl
+he	she
+actor	actress
+boss	secretary
+doctor	nurse
